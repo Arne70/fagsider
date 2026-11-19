@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tysk II: Presens Perfektum (Das Perfekt)</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti for feiring -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Card Flip Style for Game 2 */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- TOP NAVIGATION & HEADER -->
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🇩🇪</span>
+                <div>
+                    <h1 class="font-extrabold text-lg text-amber-400">Das Perfekt</h1>
+                    <p class="text-xs text-slate-400">Tysk II – VG1 Framandspråk</p>
+                </div>
+            </div>
+
+            <!-- FRAMGANG INDIKATOR -->
+            <div class="flex items-center gap-4 bg-slate-900/60 px-4 py-2 rounded-xl border border-slate-700">
+                <div class="text-xs text-slate-300">
+                    <span class="block text-[10px] uppercase font-bold text-slate-400">Total Framgang</span>
+                    <span id="total-progress-text" class="font-bold text-amber-400">0 / 4 Spel</span>
+                </div>
+                <div class="w-24 bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                    <div id="total-progress-bar" class="bg-amber-400 h-full w-0 transition-all duration-500"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN NAVIGATION TABS -->
+        <nav class="max-w-6xl mx-auto px-4 flex space-x-1 overflow-x-auto pb-2 pt-1 border-t border-slate-700/50">
+            <button onclick="switchTab('grammar')" id="tab-grammar" class="tab-btn px-4 py-2 rounded-lg font-semibold text-sm whitespace-nowrap bg-slate-700 text-white hover:bg-slate-600 transition">
+                <i class="fa-solid fa-book-open mr-2 text-amber-400"></i>Grammatikk
+            </button>
+            <button onclick="switchTab('game1')" id="tab-game1" class="tab-btn px-4 py-2 rounded-lg font-semibold text-sm whitespace-nowrap text-slate-300 hover:bg-slate-700 transition">
+                <i class="fa-solid fa-shapes mr-2 text-sky-400"></i>1. Haben/Sein
+            </button>
+            <button onclick="switchTab('game2')" id="tab-game2" class="tab-btn px-4 py-2 rounded-lg font-semibold text-sm whitespace-nowrap text-slate-300 hover:bg-slate-700 transition">
+                <i class="fa-solid fa-clone mr-2 text-emerald-400"></i>2. Memory-Kort
+            </button>
+            <button onclick="switchTab('game3')" id="tab-game3" class="tab-btn px-4 py-2 rounded-lg font-semibold text-sm whitespace-nowrap text-slate-300 hover:bg-slate-700 transition">
+                <i class="fa-solid fa-pen-to-square mr-2 text-purple-400"></i>3. Setningsbyggjar
+            </button>
+            <button onclick="switchTab('game4')" id="tab-game4" class="tab-btn px-4 py-2 rounded-lg font-semibold text-sm whitespace-nowrap text-slate-300 hover:bg-slate-700 transition">
+                <i class="fa-solid fa-bolt mr-2 text-rose-400"></i>4. Lynquiz
+            </button>
+        </nav>
+    </header>
+
+    <!-- CONTENT CONTAINERS -->
+    <main class="flex-grow max-w-5xl w-full mx-auto p-4 md:p-6">
+
+        <!-- SECTION 0: GRAMMATIKK -->
+        <section id="grammar-section" class="tab-content space-y-6">
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-lg">
+                <h2 class="text-2xl font-bold text-amber-400 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap"></i> Korleis lagar ein presens perfektum på tysk?
+                </h2>
+                <p class="text-slate-300 mb-4 leading-relaxed">
+                    I tysk vert presens perfektum laga av to delar: 
+                    <strong class="text-white bg-slate-700 px-2 py-0.5 rounded">Hjulpeverb (haben eller sein)</strong> på 2. plass i setninga, og 
+                    <strong class="text-white bg-slate-700 px-2 py-0.5 rounded">Partizip II (perfektum partisipp)</strong> sist i setninga.
+                </p>
+
+                <div class="p-4 bg-slate-900/80 rounded-xl border border-amber-500/30 text-amber-200 font-mono text-center text-lg my-4">
+                    Setningsformel: <span class="text-sky-400">Subjekt</span> + <span class="text-emerald-400">haben / sein</span> + ... + <span class="text-rose-400">Partizip II</span>.
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 mt-6">
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
+                        <h3 class="font-bold text-sky-400 mb-2 border-b border-slate-700 pb-1">Døme med HABEN:</h3>
+                        <p class="text-sm text-slate-300 mb-1">Ich <strong>habe</strong> einen Kuchen <strong>gebacken</strong>.</p>
+                        <p class="text-xs text-slate-400 italic">Eg har bakt ei kake.</p>
+                    </div>
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
+                        <h3 class="font-bold text-emerald-400 mb-2 border-b border-slate-700 pb-1">Døme med SEIN:</h3>
+                        <p class="text-sm text-slate-300 mb-1">Er <strong>ist</strong> nach Berlin <strong>geflogen</strong>.</p>
+                        <p class="text-xs text-slate-400 italic">Han har floge til Berlin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEIN VS HABEN REGLAR -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <h3 class="text-xl font-bold text-sky-400 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-check"></i> Når bruker vi HABEN?
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-sky-400 mt-1"></i> Dei aller fleste verb på tysk bruker <strong>haben</strong>.</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-sky-400 mt-1"></i> Verb der ein held seg på same stad (f.eks. <em>spielen, machen, essen, wohnen</em>).</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-sky-400 mt-1"></i> Verb som tek direkte objekt (f.eks. <em>kaufen, trinken</em>).</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <h3 class="text-xl font-bold text-emerald-400 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-person-walking-luggage"></i> Når bruker vi SEIN?
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-emerald-400 mt-1"></i> <strong>Forflytning frå A til B:</strong> (f.eks. <em>gehen, fahren, fliegen, kommen, laufen</em>).</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-emerald-400 mt-1"></i> <strong>Endring av tilstand:</strong> (f.eks. <em>einschlafen, aufwachen</em>).</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-circle-dot text-emerald-400 mt-1"></i> <strong>Unntak:</strong> <em>sein</em> (gewesen) og <em>bleiben</em> (geblieben).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PARTIZIP II FORMING -->
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                <h3 class="text-xl font-bold text-rose-400 mb-4">Slik formar ein Partizip II (hovedreglar):</h3>
+                <div class="grid sm:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
+                        <span class="text-xs uppercase font-bold text-amber-400">Svake verb</span>
+                        <p class="font-bold text-white mt-1">ge- + stamme + -t</p>
+                        <p class="text-xs text-slate-400 mt-2">machen ➔ <span class="text-rose-300">gemacht</span></p>
+                        <p class="text-xs text-slate-400">lernen ➔ <span class="text-rose-300">gelernt</span></p>
+                    </div>
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
+                        <span class="text-xs uppercase font-bold text-amber-400">Sterke verb</span>
+                        <p class="font-bold text-white mt-1">ge- + vokalendring + -en</p>
+                        <p class="text-xs text-slate-400 mt-2">gehen ➔ <span class="text-rose-300">gegangen</span></p>
+                        <p class="text-xs text-slate-400">trinken ➔ <span class="text-rose-300">getrunken</span></p>
+                    </div>
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
+                        <span class="text-xs uppercase font-bold text-amber-400">Lause førestavelsar</span>
+                        <p class="font-bold text-white mt-1">forsats + ge- + stamme + -t/-en</p>
+                        <p class="text-xs text-slate-400 mt-2">einkaufen ➔ <span class="text-rose-300">eingekauft</span></p>
+                        <p class="text-xs text-slate-400">mitkommen ➔ <span class="text-rose-300">mitgekommen</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: GAME 1 (HABEN ODER SEIN) -->
+        <section id="game1-section" class="tab-content hidden space-y-6">
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-sky-400"><i class="fa-solid fa-shapes mr-2"></i>Spel 1: Haben oder Sein?</h2>
+                        <p class="text-xs text-slate-400">Sorter verba etter om dei brukar 'haben' eller 'sein' i perfektum.</p>
+                    </div>
+                    <button onclick="initG1()" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-lg text-xs font-semibold text-slate-200 transition">
+                        <i class="fa-solid fa-rotate-right mr-1"></i>Start på nytt
+                    </button>
+                </div>
+
+                <!-- AKTIVT VERB AVSNITT -->
+                <div id="g1-card-box" class="bg-slate-900 p-8 rounded-xl border border-slate-700 text-center mb-6">
+                    <span id="g1-current-verb" class="text-3xl font-extrabold text-amber-400 tracking-wide">--</span>
+                    <p id="g1-current-meaning" class="text-sm text-slate-400 mt-1">--</p>
+                    
+                    <div class="flex justify-center gap-4 mt-6">
+                        <button onclick="chooseG1('haben')" class="px-6 py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl shadow-lg transition transform active:scale-95">
+                            <i class="fa-solid fa-hand mr-2"></i>HABEN
+                        </button>
+                        <button onclick="chooseG1('sein')" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-lg transition transform active:scale-95">
+                            <i class="fa-solid fa-person-running mr-2"></i>SEIN
+                        </button>
+                    </div>
+                </div>
+
+                <div id="g1-feedback" class="text-center font-bold h-6 text-sm mb-4"></div>
+
+                <!-- POENG/STATUS -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-sky-500/30">
+                        <h4 class="text-xs font-bold text-sky-400 uppercase mb-2">Haben-verb (<span id="g1-haben-count">0</span>/6)</h4>
+                        <div id="g1-haben-list" class="flex flex-wrap gap-1.5"></div>
+                    </div>
+                    <div class="bg-slate-900/60 p-4 rounded-xl border border-emerald-500/30">
+                        <h4 class="text-xs font-bold text-emerald-400 uppercase mb-2">Sein-verb (<span id="g1-sein-count">0</span>/6)</h4>
+                        <div id="g1-sein-list" class="flex flex-wrap gap-1.5"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: GAME 2 (MEMORY KORT) -->
+        <section id="game2-section" class="tab-content hidden space-y-6">
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-emerald-400"><i class="fa-solid fa-clone mr-2"></i>Spel 2: Partizip II Memory</h2>
+                        <p class="text-xs text-slate-400">Finn para som høyrer saman: Infinitiv og Partizip II.</p>
+                    </div>
+                    <button onclick="initG2()" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 rounded-lg text-xs font-semibold text-slate-200 transition">
+                        <i class="fa-solid fa-rotate-right mr-1"></i>Nye kort
+                    </button>
+                </div>
+
+                <!-- FORKLARINGSBOKS OM KORLEIS EIN SPELER -->
+                <div class="bg-slate-900/90 border border-emerald-500/40 rounded-xl p-4 mb-6">
+                    <h3 class="text-sm font-bold text-emerald-400 flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-circle-info"></i> Korleis speler du?
+                    </h3>
+                    <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                        <li><strong>Mål:</strong> Kople saman eit verb i <em>Infinitiv</em> (f.eks. <span class="text-sky-300">machen</span>) med si korrekte <em>Perfektum-form</em> (f.eks. <span class="text-amber-300">gemacht</span>).</li>
+                        <li>Klikk på to kort for å snu dei. Dersom dei høyrer saman som eit par, vert dei grøne og blir verande opne!</li>
+                        <li><strong>Vellykka spel:</strong> Spelet er fullført når du har funne alle <strong>6 par</strong>.</li>
+                    </ul>
+                </div>
+
+                <div class="flex justify-between items-center text-xs text-slate-400 mb-3 px-1">
+                    <span>Forsøk: <strong id="g2-moves" class="text-white">0</strong></span>
+                    <span>Par funne: <strong id="g2-pairs" class="text-emerald-400">0 / 6</strong></span>
+                </div>
+
+                <!-- MEMORY GRID -->
+                <div id="g2-grid" class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                    <!-- Cards are injected dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: GAME 3 (SETNINGSBYGGJAR) -->
+        <section id="game3-section" class="tab-content hidden space-y-6">
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700" id="g3-card">
+                <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-purple-400"><i class="fa-solid fa-pen-to-square mr-2"></i>Spel 3: Setningsbyggjar</h2>
+                        <p class="text-xs text-slate-400">Fyll inn rett hjulpeverb (haben/sein) og rett Partizip II.</p>
+                    </div>
+                    <span id="g3-counter" class="text-xs font-bold bg-slate-700 px-3 py-1 rounded-full text-purple-300">Oppgåve 1 / 5</span>
+                </div>
+
+                <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 my-4 text-center">
+                    <p class="text-sm text-slate-400 mb-2" id="g3-translation">Norsk: Eg har kasta ballen.</p>
+                    <div class="text-lg md:text-xl font-semibold text-white flex flex-wrap items-center justify-center gap-2 my-4">
+                        <span id="g3-prefix">Ich</span>
+                        
+                        <!-- SELECT AUX VERB -->
+                        <select id="g3-aux-select" class="bg-slate-800 border-2 border-purple-500/50 text-purple-300 font-bold px-3 py-1.5 rounded-lg focus:outline-none focus:border-purple-400">
+                            <!-- Injected -->
+                        </select>
+
+                        <span id="g3-middle">den Ball</span>
+
+                        <!-- INPUT PARTIZIP II -->
+                        <input type="text" id="g3-partizip-input" placeholder="Partizip II" class="bg-slate-800 border-2 border-purple-500/50 text-amber-300 font-bold px-3 py-1.5 rounded-lg w-40 text-center focus:outline-none focus:border-purple-400" autocomplete="off" />
+                    </div>
+
+                    <p class="text-xs text-slate-400">Infinitiv i parentes: <strong id="g3-infinitive" class="text-slate-200">werfen</strong></p>
+                </div>
+
+                <div id="g3-feedback" class="text-center font-bold text-sm h-6 mb-4"></div>
+
+                <div class="flex justify-end gap-3">
+                    <button onclick="checkG3()" class="px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl shadow-lg transition">
+                        Sjekk svar <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: GAME 4 (LYNQUIZ) -->
+        <section id="game4-section" class="tab-content hidden space-y-6">
+            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700" id="g4-card">
+                <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-rose-400"><i class="fa-solid fa-bolt mr-2"></i>Spel 4: Lynquiz</h2>
+                        <p class="text-xs text-slate-400">Test kunnskapane dine under tidspress!</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+                            <i class="fa-solid fa-fire mr-1"></i>Streak: <span id="g4-streak">0</span>
+                        </span>
+                        <span id="g4-score" class="text-xs font-bold bg-slate-700 px-3 py-1 rounded-full text-rose-300">Poeng: 0</span>
+                    </div>
+                </div>
+
+                <!-- TIMER BAR -->
+                <div class="w-full bg-slate-700 h-2 rounded-full overflow-hidden mb-6">
+                    <div id="g4-timer-bar" class="bg-rose-500 h-full w-full transition-all duration-100 linear"></div>
+                </div>
+
+                <!-- QUESTION CARD -->
+                <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 text-center mb-6">
+                    <span class="text-xs uppercase font-bold text-slate-400 block mb-1" id="g4-category">Kategori</span>
+                    <h3 class="text-xl font-bold text-white mb-2" id="g4-question">Spørsmål her?</h3>
+                </div>
+
+                <!-- OPTIONS GRID -->
+                <div id="g4-options" class="grid sm:grid-cols-2 gap-3">
+                    <!-- Injected -->
+                </div>
+
+                <div id="g4-feedback" class="text-center font-bold text-sm h-6 mt-4"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-800 border-t border-slate-700 py-4 text-center text-xs text-slate-400 mt-auto">
+        <p>Tysk II – Interaktivt læremiddel i presens perfektum for VG1</p>
+    </footer>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // --- APPLIKASJON TILSTAND (STATE) ---
+        const completedGames = { game1: false, game2: false, game3: false, game4: false };
+
+        // --- TAB SWITCHER ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-700', 'text-white');
+                btn.classList.add('text-slate-300');
+            });
+
+            document.getElementById(`${tabId}-section`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            activeBtn.classList.add('bg-slate-700', 'text-white');
+            activeBtn.classList.remove('text-slate-300');
+
+            // Init games if entering
+            if (tabId === 'game1' && g1State.remaining.length === 0 && g1State.haben.length === 0) initG1();
+            if (tabId === 'game2' && g2State.matchedPairs === 0) initG2();
+            if (tabId === 'game3' && g3Index === 0) renderG3();
+            if (tabId === 'game4' && g4Index === 0 && !g4Active) initG4();
+        }
+
+        function updateGlobalProgress(gameKey) {
+            completedGames[gameKey] = true;
+            const count = Object.values(completedGames).filter(Boolean).length;
+            document.getElementById('total-progress-text').innerText = `${count} / 4 Spel`;
+            document.getElementById('total-progress-bar').style.width = `${(count / 4) * 100}%`;
+
+            if (count === 4) {
+                confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+            }
+        }
+
+        // ==========================================
+        // SPEL 1: HABEN ODER SEIN
+        // ==========================================
+        const g1Verbs = [
+            { verb: 'spielen', meaning: 'å spela', type: 'haben' },
+            { verb: 'gehen', meaning: 'å gå', type: 'sein' },
+            { verb: 'kaufen', meaning: 'å kjøpe', type: 'haben' },
+            { verb: 'fahren', meaning: 'å reise/kjøre', type: 'sein' },
+            { verb: 'trinken', meaning: 'å drikke', type: 'haben' },
+            { verb: 'fliegen', meaning: 'å fly', type: 'sein' },
+            { verb: 'wohnen', meaning: 'å bu', type: 'haben' },
+            { verb: 'kommen', meaning: 'å komme', type: 'sein' },
+            { verb: 'machen', meaning: 'å gjere/lage', type: 'haben' },
+            { verb: 'einschlafen', meaning: 'å somne', type: 'sein' },
+            { verb: 'essen', meaning: 'å ete', type: 'haben' },
+            { verb: 'laufen', meaning: 'å springe', type: 'sein' }
+        ];
+
+        let g1State = { remaining: [], haben: [], sein: [], current: null };
+
+        function initG1() {
+            g1State.remaining = [...g1Verbs].sort(() => Math.random() - 0.5);
+            g1State.haben = [];
+            g1State.sein = [];
+            updateG1UI();
+            nextG1Verb();
+        }
+
+        function nextG1Verb() {
+            if (g1State.remaining.length === 0) {
+                document.getElementById('g1-card-box').innerHTML = `
+                    <div class="text-emerald-400 font-bold text-xl py-4">
+                        <i class="fa-solid fa-trophy text-4xl block mb-2 text-amber-400"></i>
+                        Fantastisk! Du har sortert alle verba rett!
+                    </div>
+                `;
+                updateGlobalProgress('game1');
+                return;
+            }
+            g1State.current = g1State.remaining.pop();
+            document.getElementById('g1-current-verb').innerText = g1State.current.verb;
+            document.getElementById('g1-current-meaning').innerText = g1State.current.meaning;
+            document.getElementById('g1-feedback').innerText = '';
+        }
+
+        function chooseG1(choice) {
+            if (!g1State.current) return;
+            const fb = document.getElementById('g1-feedback');
+            if (choice === g1State.current.type) {
+                fb.className = 'text-emerald-400 font-bold text-center h-6 text-sm mb-4';
+                fb.innerText = `Rett! "${g1State.current.verb}" bruker ${choice.toUpperCase()}.`;
+                g1State[choice].push(g1State.current.verb);
+                updateG1UI();
+                nextG1Verb();
+            } else {
+                fb.className = 'text-rose-400 font-bold text-center h-6 text-sm mb-4';
+                fb.innerText = `Feil! "${g1State.current.verb}" skal ha ${g1State.current.type.toUpperCase()}. Prøv neste!`;
+                // Push back and shuffle
+                g1State.remaining.unshift(g1State.current);
+                g1State.remaining.sort(() => Math.random() - 0.5);
+                setTimeout(nextG1Verb, 1200);
+            }
+        }
+
+        function updateG1UI() {
+            document.getElementById('g1-haben-count').innerText = g1State.haben.length;
+            document.getElementById('g1-sein-count').innerText = g1State.sein.length;
+
+            document.getElementById('g1-haben-list').innerHTML = g1State.haben.map(v => 
+                `<span class="bg-sky-950 text-sky-300 text-xs px-2 py-1 rounded-md border border-sky-800">${v}</span>`
+            ).join('');
+
+            document.getElementById('g1-sein-list').innerHTML = g1State.sein.map(v => 
+                `<span class="bg-emerald-950 text-emerald-300 text-xs px-2 py-1 rounded-md border border-emerald-800">${v}</span>`
+            ).join('');
+        }
+
+
+        // ==========================================
+        // SPEL 2: MEMORY KORT
+        // ==========================================
+        const g2DataPairs = [
+            { inf: 'machen', part: 'gemacht' },
+            { inf: 'trinken', part: 'getrunken' },
+            { inf: 'gehen', part: 'gegangen' },
+            { inf: 'wohnen', part: 'gewohnt' },
+            { inf: 'einkaufen', part: 'eingekauft' },
+            { inf: 'sehen', part: 'gesehen' }
+        ];
+
+        let g2State = { cards: [], flipped: [], matchedPairs: 0, moves: 0, lock: false };
+
+        function initG2() {
+            let deck = [];
+            g2DataPairs.forEach((pair, idx) => {
+                deck.push({ id: idx, text: pair.inf, type: 'inf', pairId: idx });
+                deck.push({ id: idx + 100, text: pair.part, type: 'part', pairId: idx });
+            });
+            deck.sort(() => Math.random() - 0.5);
+
+            g2State = { cards: deck, flipped: [], matchedPairs: 0, moves: 0, lock: false };
+            document.getElementById('g2-moves').innerText = '0';
+            document.getElementById('g2-pairs').innerText = '0 / 6';
+
+            const grid = document.getElementById('g2-grid');
+            grid.innerHTML = deck.map((card, index) => `
+                <div onclick="flipG2Card(${index})" class="perspective-1000 h-24 cursor-pointer">
+                    <div id="g2-card-${index}" class="w-full h-full transform-style-3d transition-transform duration-300 rounded-xl relative">
+                        <!-- FRONT (SKJULDT) -->
+                        <div class="absolute inset-0 bg-slate-700 border-2 border-slate-600 rounded-xl flex items-center justify-center backface-hidden shadow-md hover:border-emerald-500/50">
+                            <i class="fa-solid fa-question text-slate-400 text-xl"></i>
+                        </div>
+                        <!-- BACK (OPP): Visar etikett Infinitiv vs Perfektum -->
+                        <div class="absolute inset-0 bg-slate-800 border-2 border-emerald-400 rounded-xl flex flex-col items-center justify-center backface-hidden rotate-y-180 p-2 text-center">
+                            <span class="text-[9px] uppercase tracking-wider font-bold ${card.type === 'inf' ? 'text-sky-400' : 'text-amber-400'} mb-1">
+                                ${card.type === 'inf' ? 'Infinitiv' : 'Perfektum'}
+                            </span>
+                            <span class="font-bold text-sm text-white">${card.text}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function flipG2Card(index) {
+            if (g2State.lock) return;
+            const cardEl = document.getElementById(`g2-card-${index}`);
+            if (g2State.flipped.includes(index) || cardEl.classList.contains('matched')) return;
+
+            cardEl.classList.add('rotate-y-180');
+            g2State.flipped.push(index);
+
+            if (g2State.flipped.length === 2) {
+                g2State.moves++;
+                document.getElementById('g2-moves').innerText = g2State.moves;
+                checkG2Match();
+            }
+        }
+
+        function checkG2Match() {
+            g2State.lock = true;
+            const [c1Idx, c2Idx] = g2State.flipped;
+            const card1 = g2State.cards[c1Idx];
+            const card2 = g2State.cards[c2Idx];
+
+            if (card1.pairId === card2.pairId && card1.type !== card2.type) {
+                // MATCH!
+                setTimeout(() => {
+                    document.getElementById(`g2-card-${c1Idx}`).querySelector('.rotate-y-180').classList.add('bg-emerald-900/80', 'border-emerald-500');
+                    document.getElementById(`g2-card-${c2Idx}`).querySelector('.rotate-y-180').classList.add('bg-emerald-900/80', 'border-emerald-500');
+                    document.getElementById(`g2-card-${c1Idx}`).classList.add('matched');
+                    document.getElementById(`g2-card-${c2Idx}`).classList.add('matched');
+
+                    g2State.matchedPairs++;
+                    document.getElementById('g2-pairs').innerText = `${g2State.matchedPairs} / 6`;
+                    g2State.flipped = [];
+                    g2State.lock = false;
+
+                    if (g2State.matchedPairs === 6) {
+                        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+                        updateGlobalProgress('game2');
+                    }
+                }, 400);
+            } else {
+                // FEIL MATCH
+                setTimeout(() => {
+                    document.getElementById(`g2-card-${c1Idx}`).classList.remove('rotate-y-180');
+                    document.getElementById(`g2-card-${c2Idx}`).classList.remove('rotate-y-180');
+                    g2State.flipped = [];
+                    g2State.lock = false;
+                }, 1000);
+            }
+        }
+
+
+        // ==========================================
+        // SPEL 3: SETNINGSBYGGJAR
+        // ==========================================
+        const g3Data = [
+            { translation: 'Norsk: Eg har kasta ballen.', prefix: 'Ich', middle: 'den Ball', infinitive: 'werfen', aux: 'habe', partizip: 'geworfen' },
+            { translation: 'Norsk: Han har reist til Berlin.', prefix: 'Er', middle: 'nach Berlin', infinitive: 'fahren', aux: 'ist', partizip: 'gefahren' },
+            { translation: 'Norsk: Vi har lært mykje.', prefix: 'Wir', middle: 'viel', infinitive: 'lernen', aux: 'haben', partizip: 'gelernt' },
+            { translation: 'Norsk: Har du somna?', prefix: 'Du', middle: 'schnell', infinitive: 'einschlafen', aux: 'bist', partizip: 'eingeschlafen' },
+            { translation: 'Norsk: Dei har drukke vatn.', prefix: 'Sie', middle: 'Wasser', infinitive: 'trinken', aux: 'haben', partizip: 'getrunken' }
+        ];
+
+        let g3Index = 0;
+
+        function renderG3() {
+            if (g3Index >= g3Data.length) {
+                document.getElementById('g3-card').innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fa-solid fa-circle-check text-5xl text-purple-400 mb-3"></i>
+                        <h3 class="text-2xl font-bold text-white mb-2">Gratulerer!</h3>
+                        <p class="text-slate-300 text-sm mb-4">Du mestrar å byggje tyske perfektum-setningar!</p>
+                        <button onclick="g3Index=0; renderG3();" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 rounded-lg font-bold text-sm">Prøv på nytt</button>
+                    </div>
+                `;
+                updateGlobalProgress('game3');
+                return;
+            }
+
+            const item = g3Data[g3Index];
+            document.getElementById('g3-counter').innerText = `Oppgåve ${g3Index + 1} / ${g3Data.length}`;
+            document.getElementById('g3-translation').innerText = item.translation;
+            document.getElementById('g3-prefix').innerText = item.prefix;
+            document.getElementById('g3-middle').innerText = item.middle;
+            document.getElementById('g3-infinitive').innerText = item.infinitive;
+            document.getElementById('g3-feedback').innerText = '';
+
+            const select = document.getElementById('g3-aux-select');
+            select.innerHTML = `
+                <option value="">-- Hjulpeverb --</option>
+                <option value="habe">habe</option>
+                <option value="hast">hast</option>
+                <option value="hat">hat</option>
+                <option value="haben">haben</option>
+                <option value="bin">bin</option>
+                <option value="bist">bist</option>
+                <option value="ist">ist</option>
+                <option value="sind">sind</option>
+            `;
+
+            const input = document.getElementById('g3-partizip-input');
+            input.value = '';
+            input.focus();
+        }
+
+        function checkG3() {
+            const item = g3Data[g3Index];
+            const auxUser = document.getElementById('g3-aux-select').value;
+            const partUser = document.getElementById('g3-partizip-input').value.trim().toLowerCase();
+            const fb = document.getElementById('g3-feedback');
+
+            if (auxUser === item.aux && partUser === item.partizip.toLowerCase()) {
+                fb.className = 'text-center font-bold text-sm h-6 mb-4 text-emerald-400';
+                fb.innerText = 'Riktig! Utmerkt grammatikk!';
+                setTimeout(() => {
+                    g3Index++;
+                    renderG3();
+                }, 1200);
+            } else {
+                fb.className = 'text-center font-bold text-sm h-6 mb-4 text-rose-400';
+                fb.innerText = `Nesten! Riktig svar: "${item.aux}" ... "${item.partizip}".`;
+            }
+        }
+
+
+        // ==========================================
+        // SPEL 4: LYNQUIZ
+        // ==========================================
+        const g4Data = [
+            { cat: 'Hjulpeverb', q: 'Kva hjulpeverb brukar verbet "schlafen" (å sova)?', opts: ['haben', 'sein'], ans: 0 },
+            { cat: 'Partizip II', q: 'Kva er perfektum partisipp av "kaufen"?', opts: ['gekaufen', 'gekauft', 'gekaufend'], ans: 1 },
+            { cat: 'Hjulpeverb', q: 'Kva hjulpeverb brukar verbet "kommen"?', opts: ['haben', 'sein'], ans: 1 },
+            { cat: 'Partizip II', q: 'Kva er perfektum partisipp av "gehen"?', opts: ['gegeht', 'gegangen', 'gegangt'], ans: 1 },
+            { cat: 'Lause førestavelsar', q: 'Kva er perfektum partisipp av "einkaufen"?', opts: ['geeinkauft', 'eingefragt', 'eingekauft'], ans: 2 },
+            { cat: 'Partizip II', q: 'Kva er perfektum partisipp av "essen"?', opts: ['gegessen', 'geesst', 'geassen'], ans: 0 }
+        ];
+
+        let g4Index = 0;
+        let g4Score = 0;
+        let g4Streak = 0;
+        let g4Timer = null;
+        let g4Active = false;
+
+        function initG4() {
+            g4Index = 0;
+            g4Score = 0;
+            g4Streak = 0;
+            document.getElementById('g4-score').innerText = 'Poeng: 0';
+            document.getElementById('g4-streak').innerText = '0';
+            renderG4();
+        }
+
+        function renderG4() {
+            if (g4Index >= g4Data.length) {
+                clearInterval(g4Timer);
+                document.getElementById('g4-card').innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fa-solid fa-bolt text-5xl text-rose-400 mb-3"></i>
+                        <h3 class="text-2xl font-bold text-white mb-2">Lynquiz Fullført!</h3>
+                        <p class="text-slate-300 text-sm mb-4">Du fekk <strong>${g4Score}</strong> poeng!</p>
+                        <button onclick="initG4()" class="px-4 py-2 bg-rose-600 hover:bg-rose-500 rounded-lg font-bold text-sm text-white">Spel på nytt</button>
+                    </div>
+                `;
+                updateGlobalProgress('game4');
+                return;
+            }
+
+            g4Active = true;
+            const item = g4Data[g4Index];
+            document.getElementById('g4-category').innerText = item.cat;
+            document.getElementById('g4-question').innerText = item.q;
+            document.getElementById('g4-feedback').innerText = '';
+
+            const optsDiv = document.getElementById('g4-options');
+            optsDiv.innerHTML = item.opts.map((opt, i) => `
+                <button onclick="checkG4(${i})" class="quiz-opt-btn p-4 bg-slate-900 hover:bg-slate-700 border border-slate-700 hover:border-rose-400 rounded-xl font-semibold text-white text-left transition flex items-center justify-between">
+                    <span>${opt}</span>
+                    <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
+                </button>
+            `).join('');
+
+            // Start Timer (5 sec per question)
+            let timeLeft = 100;
+            const timerBar = document.getElementById('g4-timer-bar');
+            clearInterval(g4Timer);
+            g4Timer = setInterval(() => {
+                timeLeft -= 2;
+                timerBar.style.width = `${timeLeft}%`;
+                if (timeLeft <= 0) {
+                    clearInterval(g4Timer);
+                    checkG4(-1); // Time out
+                }
+            }, 100);
+        }
+
+        function checkG4(selectedIdx) {
+            if (!g4Active) return;
+            g4Active = false;
+            clearInterval(g4Timer);
+
+            // Deaktiver alle svarknappar for å hindre fleire trykk
+            const buttons = document.querySelectorAll('.quiz-opt-btn');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+            });
+
+            const item = g4Data[g4Index];
+            const fb = document.getElementById('g4-feedback');
+
+            if (selectedIdx === item.ans) {
+                g4Score += 10 + g4Streak * 2;
+                g4Streak++;
+                fb.className = 'text-center font-bold text-sm h-6 mt-4 text-emerald-400';
+                fb.innerText = 'Rett svar! +10 poeng';
+            } else {
+                g4Streak = 0;
+                fb.className = 'text-center font-bold text-sm h-6 mt-4 text-rose-400';
+                fb.innerText = selectedIdx === -1 ? 'Tida ute!' : `Feil! Riktig var: ${item.opts[item.ans]}`;
+            }
+
+            document.getElementById('g4-score').innerText = `Poeng: ${g4Score}`;
+            document.getElementById('g4-streak').innerText = g4Streak;
+
+            setTimeout(() => {
+                g4Index++;
+                renderG4();
+            }, 1200);
+        }
+
+        // Start på grammattikfana når sida lastar
+        window.onload = function() {
+            switchTab('grammar');
+        };
+    </script>
+</body>
+</html>

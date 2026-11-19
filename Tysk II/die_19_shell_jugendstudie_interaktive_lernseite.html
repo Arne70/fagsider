@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die 19. Shell-Jugendstudie – Deutsch lernen (Tysk II)</title>
+    <!-- Tailwind CSS für modernes, responsives Design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome für klare Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Sanfte Animationen für interaktive Elemente */
+        @keyframes popIn {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: popIn 0.25s ease-out forwards;
+        }
+        /* Verhindert Textmarkierung bei Spielkarten */
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-100 selection:text-brand-900">
+
+    <!-- Sticky Header & Punkte-Tracker -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                    DE
+                </div>
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-brand-600 block">Tysk II • Lesetext & Spiele</span>
+                    <h1 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">19. Shell-Jugendstudie</h1>
+                </div>
+            </div>
+
+            <!-- Schnellnavigation -->
+            <nav class="hidden md:flex items-center gap-1 text-sm font-medium text-slate-600">
+                <a href="#lesetext" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-brand-600 transition">Lesetext</a>
+                <a href="#aufgabe-1" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-brand-600 transition">Richtig/Falsch</a>
+                <a href="#aufgabe-2" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-brand-600 transition">Zahlen-Quiz</a>
+                <a href="#spiel-1" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-brand-600 transition">Vokabel-Spiel</a>
+                <a href="#spiel-2" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-brand-600 transition">Lückentext</a>
+                <a href="#aufgabe-3" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 hover:text-brand-600 transition">Diskussion</a>
+            </nav>
+
+            <!-- Gesamtpunkte Anzeige -->
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-50 border border-amber-200 text-amber-800 px-3.5 py-1.5 rounded-full text-sm font-bold flex items-center gap-2 shadow-xs">
+                    <i class="fa-solid fa-star text-amber-500"></i>
+                    <span>Punkte: <span id="total-score">0</span> / <span id="max-score">26</span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hauptcontainer -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-12">
+
+        <!-- ========================================================= -->
+        <!-- TEIL 1: DER LESETEXT & VOKABELHILFE                       -->
+        <!-- ========================================================= -->
+        <section id="lesetext" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+            <!-- Hero Banner des Textes -->
+            <div class="bg-gradient-to-r from-brand-700 via-brand-600 to-indigo-700 px-6 sm:px-10 py-8 sm:py-10 text-white">
+                <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-xs px-3 py-1 rounded-full text-xs font-semibold tracking-wide mb-4">
+                    <i class="fa-solid fa-book-open"></i> Lesetext (Niveau B1)
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight mb-3">
+                    Die 19. Shell-Jugendstudie: Wie denken Jugendliche in Deutschland?
+                </h2>
+                <p class="text-brand-100 text-sm sm:text-base max-w-2xl">
+                    Lies den Text aufmerksam durch. Wenn du ein Wort nicht verstehst, kannst du unten die deutsch-norwegische Vokabelhilfe öffnen.
+                </p>
+
+                <!-- Toggle Button für Vokabelliste -->
+                <div class="mt-6">
+                    <button id="toggle-vocab-btn" onclick="toggleVocabDrawer()" class="inline-flex items-center gap-2.5 bg-white text-brand-700 hover:bg-brand-50 font-semibold px-4 py-2.5 rounded-xl text-sm shadow-sm transition cursor-pointer">
+                        <i class="fa-solid fa-language text-lg"></i>
+                        <span id="toggle-vocab-text">Vokabelhilfe anzeigen (Deutsch – Norwegisch)</span>
+                        <i id="toggle-vocab-icon" class="fa-solid fa-chevron-down text-xs transition-transform duration-200"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ausklappbare Vokabelhilfe (Deutsch - Norwegisch) -->
+            <div id="vocab-drawer" class="hidden bg-indigo-50/80 border-b border-indigo-100 px-6 sm:px-10 py-6 animate-pop">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-indigo-950 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-spell-check text-indigo-600"></i> Wichtige Vokabeln (Ordliste)
+                    </h3>
+                    <span class="text-xs text-indigo-700 font-medium">Tysk → Norsk</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-sm">
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">die Umfrage</span>
+                        <span class="text-indigo-700 font-medium">undersøkelsen</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">die Sorge / die Angst</span>
+                        <span class="text-indigo-700 font-medium">bekymringen / frykten</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">der Alltag</span>
+                        <span class="text-indigo-700 font-medium">hverdagen</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">die Wirtschaft</span>
+                        <span class="text-indigo-700 font-medium">økonomien</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">der Klimawandel</span>
+                        <span class="text-indigo-700 font-medium">klimaendringene</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">zuversichtlich</span>
+                        <span class="text-indigo-700 font-medium">optimistisk / tillitsfull</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">die Gesellschaft</span>
+                        <span class="text-indigo-700 font-medium">samfunnet</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">das Vertrauen</span>
+                        <span class="text-indigo-700 font-medium">tilliten</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">das Ansehen</span>
+                        <span class="text-indigo-700 font-medium">omdømmet / anseelsen</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">Spuren hinterlassen</span>
+                        <span class="text-indigo-700 font-medium">sette spor</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">einsam</span>
+                        <span class="text-indigo-700 font-medium">ensom</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-indigo-100 flex justify-between items-center">
+                        <span class="font-semibold text-slate-800">die Teilzeit</span>
+                        <span class="text-indigo-700 font-medium">deltid</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inhalt des Lesetextes in 6 übersichtlichen Karten -->
+            <div class="p-6 sm:p-10 space-y-8 text-slate-700 leading-relaxed text-base sm:text-[17px]">
+                
+                <!-- Abschnitt 1 -->
+                <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-100">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-brand-100 text-brand-700 text-sm font-extrabold flex items-center justify-center">1</span>
+                        Was ist die Shell-Jugendstudie?
+                    </h3>
+                    <p>
+                        Die <strong>Shell-Jugendstudie</strong> ist eine große Umfrage in Deutschland. Sie wird alle vier Jahre gemacht. Forscher fragen dafür junge Menschen zwischen <strong>12 und 25 Jahren</strong> nach ihren Sorgen, Wünschen, ihrer Politik-Meinung und ihrem Alltag.
+                    </p>
+                </div>
+
+                <!-- Abschnitt 2 -->
+                <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-100">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-3 flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-brand-100 text-brand-700 text-sm font-extrabold flex items-center justify-center">2</span>
+                        Große Sorgen, aber auch Optimismus
+                    </h3>
+                    <div class="space-y-3">
+                        <p>
+                            <strong class="text-slate-900">Die größten Ängste:</strong> Weil es weltweit viele Krisen gibt, machen sich Jugendliche große Sorgen. Auf Platz 1 stehen die <strong>Angst vor einem Krieg in Europa (81 %)</strong> und <strong>Sorgen um die Wirtschaft (67 %)</strong>. Auch Klimawandel und Umweltverschmutzung machen vielen Angst.
+                        </p>
+                        <p>
+                            <strong class="text-slate-900">Trotzdem optimistisch:</strong> Obwohl die Zeiten schwer sind, schauen mehr als die Hälfte der Jugendlichen (<strong>56 %</strong>) zuversichtlich in die Zukunft der Gesellschaft. Viele glauben, dass Deutschland ihnen gute Chancen für das eigene Leben bietet.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Abschnitt 3 -->
+                <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-100">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-3 flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-brand-100 text-brand-700 text-sm font-extrabold flex items-center justify-center">3</span>
+                        Politik und Demokratie
+                    </h3>
+                    <div class="space-y-3">
+                        <p>
+                            <strong class="text-slate-900">Vertrauen in die Demokratie:</strong> <strong>75 %</strong> der Jugendlichen in Deutschland vertrauen der Demokratie und staatlichen Institutionen wie der Polizei oder dem Verfassungsgericht.
+                        </p>
+                        <p>
+                            <strong class="text-slate-900">Weniger Vertrauen in Parteien:</strong> Politiker und politische Parteien haben dagegen ein viel schlechteres Ansehen. Außerdem gibt es heute etwas mehr Zustimmung zu strengen oder autoritären politischen Ideen als vor fünf Jahren.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Abschnitt 4 -->
+                <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-100">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-brand-100 text-brand-700 text-sm font-extrabold flex items-center justify-center">4</span>
+                        Einsamkeit nach Corona
+                    </h3>
+                    <p>
+                        Die Corona-Pandemie hat Spuren hinterlassen. Mehr als ein Viertel der jungen Frauen (<strong>27 %</strong>) und über ein Fünftel der jungen Männer (<strong>21 %</strong>) sagen, dass sie sich <strong>oft einsam fühlen</strong>.
+                    </p>
+                </div>
+
+                <!-- Abschnitt 5 -->
+                <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-100">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-3 flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-brand-100 text-brand-700 text-sm font-extrabold flex items-center justify-center">5</span>
+                        Wie sich Jugendliche informieren
+                    </h3>
+                    <div class="space-y-3">
+                        <p>
+                            Klassische Nachrichten im Fernsehen (wie ARD und ZDF) und große Tageszeitungen sind bei jungen Leuten weiterhin sehr vertrauenswürdig (<strong>über 80 %</strong>).
+                        </p>
+                        <p>
+                            Aber <strong>Social Media</strong> wird immer wichtiger: <strong>YouTube (53 %)</strong>, TikTok, <strong>Instagram (36 %)</strong> und <strong>X (29 %)</strong> nutzen sehr viele Jugendliche, um sich zu informieren.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Abschnitt 6 -->
+                <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-100">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-3 flex items-center gap-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-brand-100 text-brand-700 text-sm font-extrabold flex items-center justify-center">6</span>
+                        Familie und Arbeit der Zukunft
+                    </h3>
+                    <div class="space-y-3">
+                        <p>
+                            Viele junge Männer wünschen sich, später in <strong>Teilzeit</strong> (zum Beispiel eine 30-Stunden-Woche) zu arbeiten, wenn sie Kinder haben – genauso wie viele junge Frauen (<strong>um 42 %</strong>).
+                        </p>
+                        <p>
+                            Fast die Hälfte findet aber auch das klassische Modell gut, bei dem der Mann das Hauptgeld für die Familie verdient.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Trenner zu den Aufgaben & Spielen -->
+        <div class="text-center space-y-2 pt-2">
+            <span class="inline-block px-3.5 py-1 rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-wider">Interaktiver Trainingsteil</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Aufgaben & Spiele zum Text</h2>
+            <p class="text-slate-600 text-sm sm:text-base max-w-xl mx-auto">Teste dein Textverständnis, trainiere die wichtigsten Vokabeln und sammle alle 26 Punkte!</p>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- AUFGABE 1: LESEVERSTEHEN (RICHTIG ODER FALSCH?)           -->
+        <!-- ========================================================= -->
+        <section id="aufgabe-1" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-100">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Aufgabe 1 • Leseverstehen (6 Punkte)</span>
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Richtig oder Falsch?</h3>
+                    <p class="text-sm text-slate-600 mt-1">Lies die Sätze. Stimmt die Aussage mit dem Text überein? Klicke auf <strong>Richtig</strong> oder <strong>Falsch</strong>.</p>
+                </div>
+                <button onclick="resetTask1()" class="text-sm font-semibold text-slate-500 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 px-3.5 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate-right"></i> Neu starten
+                </button>
+            </div>
+
+            <div id="tf-container" class="mt-6 space-y-4">
+                <!-- Wird dynamisch per JS gefüllt -->
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- AUFGABE 2: ZAHLEN-QUIZ (MULTIPLE CHOICE)                  -->
+        <!-- ========================================================= -->
+        <section id="aufgabe-2" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-100">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Aufgabe 2 • Statistik-Check (6 Punkte)</span>
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Zahlen-Quiz: Was bedeuten die Prozentzahlen?</h3>
+                    <p class="text-sm text-slate-600 mt-1">Wähle zu jeder Zahl aus dem Text die richtige Aussage aus.</p>
+                </div>
+                <button onclick="resetTask2()" class="text-sm font-semibold text-slate-500 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 px-3.5 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate-right"></i> Neu starten
+                </button>
+            </div>
+
+            <div id="numbers-container" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Wird dynamisch per JS gefüllt -->
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SPIEL 1: VOKABEL-ZUORDNUNGSSPIEL (DEUTSCH - NORWEGISCH)   -->
+        <!-- ========================================================= -->
+        <section id="spiel-1" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-100">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-purple-600">Spiel 1 • Vokabel-Trainer (8 Punkte)</span>
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Wortpaare finden (Deutsch – Norwegisch)</h3>
+                    <p class="text-sm text-slate-600 mt-1">Klicke zuerst auf ein <strong>deutsches Wort</strong> (links) und danach auf die passende <strong>norwegische Übersetzung</strong> (rechts).</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span id="vocab-match-status" class="text-sm font-bold text-purple-700 bg-purple-50 px-3 py-1.5 rounded-xl border border-purple-200">
+                        0 / 8 Paare
+                    </span>
+                    <button onclick="initVocabGame()" class="text-sm font-semibold text-slate-500 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 px-3.5 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5">
+                        <i class="fa-solid fa-shuffle"></i> Mischen
+                    </button>
+                </div>
+            </div>
+
+            <!-- Feedback Banner für Spiel 1 -->
+            <div id="vocab-game-banner" class="hidden mt-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 font-semibold text-sm flex items-center gap-3 animate-pop">
+                <i class="fa-solid fa-trophy text-xl text-amber-500"></i>
+                <span>Fantastisch! Du hast alle 8 deutschen und norwegischen Wortpaare richtig verbunden!</span>
+            </div>
+
+            <div class="mt-6 grid grid-cols-2 gap-4 sm:gap-8">
+                <!-- Linke Spalte: Deutsch -->
+                <div class="space-y-2.5">
+                    <div class="text-xs font-bold uppercase tracking-wider text-slate-400 text-center mb-2">🇩🇪 Deutsch</div>
+                    <div id="vocab-de-col" class="space-y-2.5"></div>
+                </div>
+                <!-- Rechte Spalte: Norwegisch -->
+                <div class="space-y-2.5">
+                    <div class="text-xs font-bold uppercase tracking-wider text-slate-400 text-center mb-2">🇳🇴 Norsk</div>
+                    <div id="vocab-no-col" class="space-y-2.5"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SPIEL 2: LÜCKENTEXT-CHALLENGE                             -->
+        <!-- ========================================================= -->
+        <section id="spiel-2" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-100">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600">Spiel 2 • Lückentext-Challenge (6 Punkte)</span>
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Zusammenfassung vervollständigen</h3>
+                    <p class="text-sm text-slate-600 mt-1">Klicke auf ein Wort aus der Wortbank (oder ziehe es in die Lücke). Um eine Lücke zu leeren, klicke einfach wieder darauf.</p>
+                </div>
+                <button onclick="resetClozeGame()" class="text-sm font-semibold text-slate-500 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 px-3.5 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate-right"></i> Zurücksetzen
+                </button>
+            </div>
+
+            <!-- Wortbank -->
+            <div class="mt-6 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <div class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Wortbank (Ord-bank):</div>
+                <div id="word-bank" class="flex flex-wrap gap-2.5">
+                    <!-- Wörter werden per JS gerendert -->
+                </div>
+            </div>
+
+            <!-- Lückentext Absatz -->
+            <div class="mt-6 p-5 sm:p-7 rounded-2xl bg-amber-50/40 border border-amber-200/80 text-slate-800 text-base sm:text-lg leading-loose">
+                Alle vier Jahre befragt die Shell-Jugendstudie junge Menschen in Deutschland. Viele Jugendliche haben heute große Angst vor einem 
+                <button type="button" data-blank="0" onclick="handleBlankClick(0)" ondragover="allowDrop(event)" ondrop="handleDrop(event, 0)" class="cloze-slot inline-flex items-center justify-center min-w-[115px] h-9 px-3 mx-1 align-middle rounded-lg border-2 border-dashed border-brand-400 bg-white text-brand-700 font-bold text-sm sm:text-base transition hover:bg-brand-50 cursor-pointer">
+                    [ 1 ]
+                </button>
+                in Europa. Trotz der Krisen schauen 56 % der Jugendlichen 
+                <button type="button" data-blank="1" onclick="handleBlankClick(1)" ondragover="allowDrop(event)" ondrop="handleDrop(event, 1)" class="cloze-slot inline-flex items-center justify-center min-w-[135px] h-9 px-3 mx-1 align-middle rounded-lg border-2 border-dashed border-brand-400 bg-white text-brand-700 font-bold text-sm sm:text-base transition hover:bg-brand-50 cursor-pointer">
+                    [ 2 ]
+                </button>
+                in die Zukunft. Außerdem haben 75 % großes 
+                <button type="button" data-blank="2" onclick="handleBlankClick(2)" ondragover="allowDrop(event)" ondrop="handleDrop(event, 2)" class="cloze-slot inline-flex items-center justify-center min-w-[120px] h-9 px-3 mx-1 align-middle rounded-lg border-2 border-dashed border-brand-400 bg-white text-brand-700 font-bold text-sm sm:text-base transition hover:bg-brand-50 cursor-pointer">
+                    [ 3 ]
+                </button>
+                in die Demokratie, finden aber Politiker oft nicht so gut. Seit der Corona-Pandemie fühlen sich leider viele junge Menschen oft 
+                <button type="button" data-blank="3" onclick="handleBlankClick(3)" ondragover="allowDrop(event)" ondrop="handleDrop(event, 3)" class="cloze-slot inline-flex items-center justify-center min-w-[110px] h-9 px-3 mx-1 align-middle rounded-lg border-2 border-dashed border-brand-400 bg-white text-brand-700 font-bold text-sm sm:text-base transition hover:bg-brand-50 cursor-pointer">
+                    [ 4 ]
+                </button>. 
+                Für Nachrichten nutzen viele Jugendliche heute 
+                <button type="button" data-blank="4" onclick="handleBlankClick(4)" ondragover="allowDrop(event)" ondrop="handleDrop(event, 4)" class="cloze-slot inline-flex items-center justify-center min-w-[140px] h-9 px-3 mx-1 align-middle rounded-lg border-2 border-dashed border-brand-400 bg-white text-brand-700 font-bold text-sm sm:text-base transition hover:bg-brand-50 cursor-pointer">
+                    [ 5 ]
+                </button>
+                wie YouTube oder Instagram. Für ihre Zukunft wünschen sich viele junge Väter und Mütter, in 
+                <button type="button" data-blank="5" onclick="handleBlankClick(5)" ondragover="allowDrop(event)" ondrop="handleDrop(event, 5)" class="cloze-slot inline-flex items-center justify-center min-w-[115px] h-9 px-3 mx-1 align-middle rounded-lg border-2 border-dashed border-brand-400 bg-white text-brand-700 font-bold text-sm sm:text-base transition hover:bg-brand-50 cursor-pointer">
+                    [ 6 ]
+                </button>
+                zu arbeiten.
+            </div>
+
+            <!-- Kontroll-Button & Feedback -->
+            <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
+                <button onclick="checkClozeGame()" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-6 py-3 rounded-xl shadow-sm transition cursor-pointer flex items-center gap-2">
+                    <i class="fa-solid fa-check-double"></i> Antworten überprüfen
+                </button>
+                <div id="cloze-feedback" class="text-sm font-semibold"></div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- AUFGABE 3: DISKUSSIONSFRAGEN (SPRECHEN / SCHREIBEN)        -->
+        <!-- ========================================================= -->
+        <section id="aufgabe-3" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-slate-200 p-6 sm:p-8">
+            <div class="pb-6 border-b border-slate-100">
+                <span class="text-xs font-bold uppercase tracking-wider text-rose-600">Aufgabe 3 • Sprechen & Schreiben (Deutschland ↔ Norwegen)</span>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Diskussionsfragen für die Klasse</h3>
+                <p class="text-sm text-slate-600 mt-1">Diskutiert zu zweit auf Deutsch oder schreibt kurze Antworten in das Notizfeld. Nutzt die <strong>Redemittel</strong> als Hilfe!</p>
+            </div>
+
+            <!-- Redemittel Box -->
+            <div class="mt-6 bg-rose-50/70 border border-rose-200 rounded-2xl p-5">
+                <h4 class="font-bold text-rose-950 text-sm uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-comments text-rose-600"></i> Nützliche Redemittel (Hjelpesetninger)
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm text-slate-800">
+                    <div class="bg-white/90 px-3.5 py-2 rounded-xl border border-rose-100">
+                        <span class="font-semibold text-rose-700">Meiner Meinung nach ...</span> <span class="text-slate-500 text-xs">(Etter min mening ...)</span>
+                    </div>
+                    <div class="bg-white/90 px-3.5 py-2 rounded-xl border border-rose-100">
+                        <span class="font-semibold text-rose-700">Ich glaube, dass Jugendliche in Norwegen ...</span> <span class="text-slate-500 text-xs">(Jeg tror at ungdom i Norge ...)</span>
+                    </div>
+                    <div class="bg-white/90 px-3.5 py-2 rounded-xl border border-rose-100">
+                        <span class="font-semibold text-rose-700">Genau wie in Deutschland ...</span> <span class="text-slate-500 text-xs">(Akkurat som i Tyskland ...)</span>
+                    </div>
+                    <div class="bg-white/90 px-3.5 py-2 rounded-xl border border-rose-100">
+                        <span class="font-semibold text-rose-700">Ein großer Unterschied ist, dass ...</span> <span class="text-slate-500 text-xs">(En stor forskjell er at ...)</span>
+                    </div>
+                    <div class="bg-white/90 px-3.5 py-2 rounded-xl border border-rose-100">
+                        <span class="font-semibold text-rose-700">Ich informiere mich meistens über ...</span> <span class="text-slate-500 text-xs">(Jeg oppdaterer meg som regel via ...)</span>
+                    </div>
+                    <div class="bg-white/90 px-3.5 py-2 rounded-xl border border-rose-100">
+                        <span class="font-semibold text-rose-700">Für meine Zukunft wünsche ich mir ...</span> <span class="text-slate-500 text-xs">(For framtiden min ønsker jeg meg ...)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 Diskussionsfragen mit optionalen Schreibfeldern -->
+            <div class="mt-6 space-y-5">
+                <!-- Frage 1 -->
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="flex items-start gap-3">
+                        <span class="w-7 h-7 rounded-full bg-rose-600 text-white font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">1</span>
+                        <div class="w-full">
+                            <h4 class="font-bold text-slate-900 text-base sm:text-lg">Haben Jugendliche in Norwegen die gleichen Sorgen wie in Deutschland?</h4>
+                            <p class="text-sm text-slate-600 mt-1">Denk an Krieg in Europa, Wirtschaft und Klimawandel. Wovor haben junge Menschen in Norwegen am meisten Angst?</p>
+                            <textarea rows="2" placeholder="Schreibe hier deine Stichpunkte oder Sätze auf Deutsch..." class="mt-3 w-full rounded-xl border border-slate-300 bg-white p-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frage 2 -->
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="flex items-start gap-3">
+                        <span class="w-7 h-7 rounded-full bg-rose-600 text-white font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">2</span>
+                        <div class="w-full">
+                            <h4 class="font-bold text-slate-900 text-base sm:text-lg">Wo informierst du dich über Nachrichten – und wem vertraust du?</h4>
+                            <p class="text-sm text-slate-600 mt-1">In Deutschland vertrauen über 80 % dem Fernsehen (ARD/ZDF), aber viele nutzen YouTube, TikTok und Instagram. Wie ist das bei dir und deinen Freunden (z. B. NRK, VG, TikTok)?</p>
+                            <textarea rows="2" placeholder="Schreibe hier deine Stichpunkte oder Sätze auf Deutsch..." class="mt-3 w-full rounded-xl border border-slate-300 bg-white p-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frage 3 -->
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="flex items-start gap-3">
+                        <span class="w-7 h-7 rounded-full bg-rose-600 text-white font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">3</span>
+                        <div class="w-full">
+                            <h4 class="font-bold text-slate-900 text-base sm:text-lg">Wie stellst du dir deine Arbeit und Familie in der Zukunft vor?</h4>
+                            <p class="text-sm text-slate-600 mt-1">42 % der jungen Männer und Frauen in Deutschland möchten mit Kindern gerne in Teilzeit arbeiten. Was denkst du über Teilzeitarbeit und Gleichberechtigung in Norwegen?</p>
+                            <textarea rows="2" placeholder="Schreibe hier deine Stichpunkte oder Sätze auf Deutsch..." class="mt-3 w-full rounded-xl border border-slate-300 bg-white p-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-5xl mx-auto px-4 sm:px-6 py-8 text-center text-xs text-slate-500 border-t border-slate-200 mt-12">
+        <p>Quelle der Daten: 19. Shell-Jugendstudie (BMBFSFJ / Shell Deutschland) • Didaktisch aufbereitet für den Deutschunterricht (Tysk II).</p>
+    </footer>
+
+    <!-- ========================================================= -->
+    <!-- JAVASCRIPT LOGIK FÜR ALLE INTERAKTIVEN AUFGABEN & SPIELE  -->
+    <!-- ========================================================= -->
+    <script>
+        // Punktestand-Verwaltung
+        const scores = {
+            task1: 0, // max 6
+            task2: 0, // max 6
+            game1: 0, // max 8
+            game2: 0  // max 6
+        };
+
+        function updateTotalScore() {
+            const total = scores.task1 + scores.task2 + scores.game1 + scores.game2;
+            document.getElementById('total-score').textContent = total;
+        }
+
+        // Toggle Vokabelliste im Lesetext
+        function toggleVocabDrawer() {
+            const drawer = document.getElementById('vocab-drawer');
+            const text = document.getElementById('toggle-vocab-text');
+            const icon = document.getElementById('toggle-vocab-icon');
+            const isHidden = drawer.classList.contains('hidden');
+
+            if (isHidden) {
+                drawer.classList.remove('hidden');
+                text.textContent = 'Vokabelhilfe ausblenden';
+                icon.classList.add('rotate-180');
+            } else {
+                drawer.classList.add('hidden');
+                text.textContent = 'Vokabelhilfe anzeigen (Deutsch – Norwegisch)';
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // =========================================================
+        // AUFGABE 1: RICHTIG ODER FALSCH
+        // =========================================================
+        const tfData = [
+            {
+                statement: "1. Die Shell-Jugendstudie wird jedes Jahr in Deutschland gemacht.",
+                answer: false,
+                explanation: "Falsch! Im Text steht: Sie wird alle vier Jahre gemacht."
+            },
+            {
+                statement: "2. Die größte Angst der Jugendlichen ist die Angst vor einem Krieg in Europa (81 %).",
+                answer: true,
+                explanation: "Richtig! Auf Platz 1 steht die Angst vor einem Krieg in Europa mit 81 %."
+            },
+            {
+                statement: "3. Alle Jugendlichen schauen wegen der Krisen pessimistisch in die Zukunft.",
+                answer: false,
+                explanation: "Falsch! Mehr als die Hälfte (56 %) schaut trotzdem zuversichtlich in die Zukunft."
+            },
+            {
+                statement: "4. Jugendliche vertrauen der Demokratie viel mehr als politischen Parteien.",
+                answer: true,
+                explanation: "Richtig! 75 % vertrauen der Demokratie, aber Politiker und Parteien haben ein schlechteres Ansehen."
+            },
+            {
+                statement: "5. Nach der Corona-Pandemie sagen mehr junge Männer als junge Frauen, dass sie sich oft einsam fühlen.",
+                answer: false,
+                explanation: "Falsch! Es sind 27 % der jungen Frauen und 21 % der jungen Männer."
+            },
+            {
+                statement: "6. Über 80 % der Jugendlichen finden klassische Nachrichten im Fernsehen und in Tageszeitungen vertrauenswürdig.",
+                answer: true,
+                explanation: "Richtig! ARD, ZDF und große Zeitungen gelten weiterhin als sehr vertrauenswürdig."
+            }
+        ];
+
+        let tfAnswered = new Array(tfData.length).fill(null);
+
+        function renderTask1() {
+            const container = document.getElementById('tf-container');
+            container.innerHTML = '';
+
+            tfData.forEach((item, idx) => {
+                const userChoice = tfAnswered[idx];
+                const isAnswered = userChoice !== null;
+                const isCorrect = userChoice === item.answer;
+
+                const card = document.createElement('div');
+                card.className = `p-4 sm:p-5 rounded-2xl border transition ${
+                    !isAnswered
+                        ? 'bg-slate-50 border-slate-200'
+                        : isCorrect
+                        ? 'bg-emerald-50/70 border-emerald-300'
+                        : 'bg-rose-50/70 border-rose-300'
+                }`;
+
+                card.innerHTML = `
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <p class="font-semibold text-slate-800 text-sm sm:text-base">${item.statement}</p>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button onclick="answerTask1(${idx}, true)" ${isAnswered ? 'disabled' : ''} class="px-4 py-2 rounded-xl text-sm font-bold transition cursor-pointer ${
+                                isAnswered && item.answer === true
+                                    ? 'bg-emerald-600 text-white shadow-xs'
+                                    : isAnswered && userChoice === true && !isCorrect
+                                    ? 'bg-rose-600 text-white'
+                                    : isAnswered
+                                    ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                                    : 'bg-white border border-slate-300 text-slate-700 hover:border-emerald-500 hover:text-emerald-700'
+                            }">
+                                <i class="fa-solid fa-check mr-1"></i> Richtig
+                            </button>
+                            <button onclick="answerTask1(${idx}, false)" ${isAnswered ? 'disabled' : ''} class="px-4 py-2 rounded-xl text-sm font-bold transition cursor-pointer ${
+                                isAnswered && item.answer === false
+                                    ? 'bg-emerald-600 text-white shadow-xs'
+                                    : isAnswered && userChoice === false && !isCorrect
+                                    ? 'bg-rose-600 text-white'
+                                    : isAnswered
+                                    ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                                    : 'bg-white border border-slate-300 text-slate-700 hover:border-rose-500 hover:text-rose-700'
+                            }">
+                                <i class="fa-solid fa-xmark mr-1"></i> Falsch
+                            </button>
+                        </div>
+                    </div>
+                    ${
+                        isAnswered
+                            ? `<div class="mt-3 text-sm font-medium flex items-center gap-2 animate-pop ${
+                                  isCorrect ? 'text-emerald-800' : 'text-rose-800'
+                              }">
+                                <i class="fa-solid ${isCorrect ? 'fa-circle-check text-emerald-600' : 'fa-circle-exclamation text-rose-600'}"></i>
+                                <span>${item.explanation}</span>
+                               </div>`
+                            : ''
+                    }
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function answerTask1(index, choice) {
+            if (tfAnswered[index] !== null) return;
+            tfAnswered[index] = choice;
+            if (choice === tfData[index].answer) {
+                scores.task1++;
+                updateTotalScore();
+            }
+            renderTask1();
+        }
+
+        function resetTask1() {
+            tfAnswered = new Array(tfData.length).fill(null);
+            scores.task1 = 0;
+            updateTotalScore();
+            renderTask1();
+        }
+
+        // =========================================================
+        // AUFGABE 2: ZAHLEN-QUIZ (MULTIPLE CHOICE)
+        // =========================================================
+        const numbersData = [
+            {
+                stat: "81 %",
+                options: [
+                    "haben Angst vor einem Krieg in Europa",
+                    "nutzen jeden Tag TikTok für Nachrichten",
+                    "möchten später in Teilzeit arbeiten"
+                ],
+                correctIndex: 0
+            },
+            {
+                stat: "75 %",
+                options: [
+                    "haben Sorgen um die Wirtschaft",
+                    "vertrauen der Demokratie und Institutionen",
+                    "fühlen sich nach Corona oft einsam"
+                ],
+                correctIndex: 1
+            },
+            {
+                stat: "56 %",
+                options: [
+                    "finden politische Parteien sehr gut",
+                    "nutzen X (früher Twitter)",
+                    "schauen zuversichtlich in die Zukunft"
+                ],
+                correctIndex: 2
+            },
+            {
+                stat: "27 %",
+                options: [
+                    "der jungen Frauen fühlen sich oft einsam",
+                    "der jungen Männer haben Angst vor dem Klima",
+                    "der Jugendlichen lesen keine Zeitungen"
+                ],
+                correctIndex: 0
+            },
+            {
+                stat: "53 %",
+                options: [
+                    "vertrauen dem Verfassungsgericht",
+                    "nutzen YouTube, um sich zu informieren",
+                    "wollen eine 40-Stunden-Woche"
+                ],
+                correctIndex: 1
+            },
+            {
+                stat: "42 %",
+                options: [
+                    "der Jugendlichen sind unter 15 Jahre alt",
+                    "informieren sich über Instagram",
+                    "wünschen sich Teilzeitarbeit mit Kindern"
+                ],
+                correctIndex: 2
+            }
+        ];
+
+        let numbersAnswered = new Array(numbersData.length).fill(null);
+
+        function renderTask2() {
+            const container = document.getElementById('numbers-container');
+            container.innerHTML = '';
+
+            numbersData.forEach((item, qIdx) => {
+                const chosen = numbersAnswered[qIdx];
+                const isAnswered = chosen !== null;
+
+                const card = document.createElement('div');
+                card.className = 'p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between';
+
+                let optionsHtml = item.options.map((opt, oIdx) => {
+                    let btnClass = 'bg-white border-slate-200 text-slate-700 hover:border-brand-400 hover:bg-brand-50/50';
+                    let iconHtml = '<span class="w-5 h-5 rounded-full border border-slate-300 inline-block shrink-0"></span>';
+
+                    if (isAnswered) {
+                        if (oIdx === item.correctIndex) {
+                            btnClass = 'bg-emerald-100 border-emerald-500 text-emerald-900 font-semibold';
+                            iconHtml = '<i class="fa-solid fa-circle-check text-emerald-600 text-lg shrink-0"></i>';
+                        } else if (oIdx === chosen && chosen !== item.correctIndex) {
+                            btnClass = 'bg-rose-100 border-rose-400 text-rose-900';
+                            iconHtml = '<i class="fa-solid fa-circle-xmark text-rose-600 text-lg shrink-0"></i>';
+                        } else {
+                            btnClass = 'bg-slate-100 border-slate-200 text-slate-400 opacity-70';
+                        }
+                    }
+
+                    return `
+                        <button onclick="answerTask2(${qIdx}, ${oIdx})" ${isAnswered ? 'disabled' : ''} class="w-full text-left p-3 rounded-xl border text-sm transition flex items-center gap-3 cursor-pointer ${btnClass}">
+                            ${iconHtml}
+                            <span>${opt}</span>
+                        </button>
+                    `;
+                }).join('');
+
+                card.innerHTML = `
+                    <div>
+                        <div class="inline-block px-3.5 py-1.5 rounded-xl bg-brand-600 text-white font-extrabold text-xl tracking-tight mb-4 shadow-xs">
+                            ${item.stat}
+                        </div>
+                        <div class="space-y-2">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function answerTask2(qIdx, oIdx) {
+            if (numbersAnswered[qIdx] !== null) return;
+            numbersAnswered[qIdx] = oIdx;
+            if (oIdx === numbersData[qIdx].correctIndex) {
+                scores.task2++;
+                updateTotalScore();
+            }
+            renderTask2();
+        }
+
+        function resetTask2() {
+            numbersAnswered = new Array(numbersData.length).fill(null);
+            scores.task2 = 0;
+            updateTotalScore();
+            renderTask2();
+        }
+
+        // =========================================================
+        // SPIEL 1: VOKABEL-ZUORDNUNGSSPIEL (DEUTSCH - NORWEGISCH)
+        // =========================================================
+        const vocabPairs = [
+            { id: 1, de: "die Umfrage", no: "undersøkelsen" },
+            { id: 2, de: "die Angst", no: "frykten" },
+            { id: 3, de: "die Wirtschaft", no: "økonomien" },
+            { id: 4, de: "der Klimawandel", no: "klimaendringene" },
+            { id: 5, de: "zuversichtlich", no: "optimistisk / tillitsfull" },
+            { id: 6, de: "das Vertrauen", no: "tilliten" },
+            { id: 7, de: "einsam", no: "ensom" },
+            { id: 8, de: "die Teilzeit", no: "deltid" }
+        ];
+
+        let selectedDeId = null;
+        let selectedNoId = null;
+        let matchedIds = new Set();
+        let wrongPair = false;
+        let shuffledDe = [];
+        let shuffledNo = [];
+
+        function shuffleArray(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        function initVocabGame() {
+            selectedDeId = null;
+            selectedNoId = null;
+            matchedIds.clear();
+            wrongPair = false;
+            scores.game1 = 0;
+            updateTotalScore();
+            document.getElementById('vocab-game-banner').classList.add('hidden');
+            shuffledDe = shuffleArray(vocabPairs);
+            shuffledNo = shuffleArray(vocabPairs);
+            renderVocabGame();
+        }
+
+        function renderVocabGame() {
+            const deCol = document.getElementById('vocab-de-col');
+            const noCol = document.getElementById('vocab-no-col');
+            document.getElementById('vocab-match-status').textContent = `${matchedIds.size} / ${vocabPairs.length} Paare`;
+
+            deCol.innerHTML = shuffledDe.map(item => {
+                const isMatched = matchedIds.has(item.id);
+                const isSelected = selectedDeId === item.id;
+                const isWrong = wrongPair && isSelected;
+
+                let cls = 'bg-white border-slate-200 text-slate-800 hover:border-purple-400 hover:bg-purple-50/50';
+                if (isMatched) {
+                    cls = 'bg-emerald-100 border-emerald-400 text-emerald-800 opacity-75 cursor-default';
+                } else if (isWrong) {
+                    cls = 'bg-rose-100 border-rose-500 text-rose-900 scale-[0.98]';
+                } else if (isSelected) {
+                    cls = 'bg-purple-600 border-purple-600 text-white shadow-md scale-[1.02]';
+                }
+
+                return `
+                    <button onclick="selectVocabDe(${item.id})" ${isMatched ? 'disabled' : ''} class="no-select w-full p-3.5 rounded-xl border-2 font-bold text-sm sm:text-base transition cursor-pointer flex items-center justify-between ${cls}">
+                        <span>${item.de}</span>
+                        ${isMatched ? '<i class="fa-solid fa-check text-emerald-600"></i>' : ''}
+                    </button>
+                `;
+            }).join('');
+
+            noCol.innerHTML = shuffledNo.map(item => {
+                const isMatched = matchedIds.has(item.id);
+                const isSelected = selectedNoId === item.id;
+                const isWrong = wrongPair && isSelected;
+
+                let cls = 'bg-white border-slate-200 text-slate-800 hover:border-indigo-400 hover:bg-indigo-50/50';
+                if (isMatched) {
+                    cls = 'bg-emerald-100 border-emerald-400 text-emerald-800 opacity-75 cursor-default';
+                } else if (isWrong) {
+                    cls = 'bg-rose-100 border-rose-500 text-rose-900 scale-[0.98]';
+                } else if (isSelected) {
+                    cls = 'bg-indigo-600 border-indigo-600 text-white shadow-md scale-[1.02]';
+                }
+
+                return `
+                    <button onclick="selectVocabNo(${item.id})" ${isMatched ? 'disabled' : ''} class="no-select w-full p-3.5 rounded-xl border-2 font-semibold text-sm sm:text-base transition cursor-pointer flex items-center justify-between ${cls}">
+                        <span>${item.no}</span>
+                        ${isMatched ? '<i class="fa-solid fa-check text-emerald-600"></i>' : ''}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectVocabDe(id) {
+            if (matchedIds.has(id) || wrongPair) return;
+            selectedDeId = (selectedDeId === id) ? null : id;
+            checkVocabMatch();
+            renderVocabGame();
+        }
+
+        function selectVocabNo(id) {
+            if (matchedIds.has(id) || wrongPair) return;
+            selectedNoId = (selectedNoId === id) ? null : id;
+            checkVocabMatch();
+            renderVocabGame();
+        }
+
+        function checkVocabMatch() {
+            if (selectedDeId !== null && selectedNoId !== null) {
+                if (selectedDeId === selectedNoId) {
+                    matchedIds.add(selectedDeId);
+                    selectedDeId = null;
+                    selectedNoId = null;
+                    scores.game1 = matchedIds.size;
+                    updateTotalScore();
+                    if (matchedIds.size === vocabPairs.length) {
+                        document.getElementById('vocab-game-banner').classList.remove('hidden');
+                    }
+                } else {
+                    wrongPair = true;
+                    setTimeout(() => {
+                        selectedDeId = null;
+                        selectedNoId = null;
+                        wrongPair = false;
+                        renderVocabGame();
+                    }, 600);
+                }
+            }
+        }
+
+        // =========================================================
+        // SPIEL 2: LÜCKENTEXT-CHALLENGE
+        // =========================================================
+        const clozeAnswers = ["Krieg", "zuversichtlich", "Vertrauen", "einsam", "Social Media", "Teilzeit"];
+        const clozeBankWords = ["Social Media", "Krieg", "Teilzeit", "zuversichtlich", "einsam", "Vertrauen"];
+        let userBlanks = new Array(clozeAnswers.length).fill(null);
+        let selectedBankWord = null;
+        let clozeChecked = false;
+
+        function renderClozeGame() {
+            const bankEl = document.getElementById('word-bank');
+            bankEl.innerHTML = clozeBankWords.map(word => {
+                const isUsed = userBlanks.includes(word);
+                const isSelected = selectedBankWord === word;
+
+                if (isUsed) {
+                    return `<span class="px-3.5 py-2 rounded-xl bg-slate-200/70 text-slate-400 font-semibold text-sm border border-slate-200 line-through select-none">${word}</span>`;
+                }
+
+                return `
+                    <button type="button" draggable="true" ondragstart="handleDragStart(event, '${word}')" onclick="selectWordFromBank('${word}')" class="px-4 py-2 rounded-xl font-bold text-sm border-2 transition cursor-pointer shadow-2xs ${
+                        isSelected
+                            ? 'bg-brand-600 text-white border-brand-600 scale-105'
+                            : 'bg-white text-slate-800 border-slate-300 hover:border-brand-500 hover:text-brand-700'
+                    }">
+                        ${word}
+                    </button>
+                `;
+            }).join('');
+
+            // Lücken aktualisieren
+            const slots = document.querySelectorAll('.cloze-slot');
+            slots.forEach((slot, idx) => {
+                const val = userBlanks[idx];
+                slot.className = 'cloze-slot inline-flex items-center justify-center min-w-[115px] h-9 px-3 mx-1 align-middle rounded-lg border-2 font-bold text-sm sm:text-base transition cursor-pointer';
+
+                if (!val) {
+                    slot.textContent = `[ ${idx + 1} ]`;
+                    slot.classList.add('border-dashed', 'border-brand-400', 'bg-white', 'text-brand-600', 'hover:bg-brand-50');
+                } else {
+                    slot.textContent = val;
+                    if (clozeChecked) {
+                        if (val === clozeAnswers[idx]) {
+                            slot.classList.add('border-solid', 'border-emerald-500', 'bg-emerald-100', 'text-emerald-900');
+                        } else {
+                            slot.classList.add('border-solid', 'border-rose-500', 'bg-rose-100', 'text-rose-900');
+                        }
+                    } else {
+                        slot.classList.add('border-solid', 'border-brand-600', 'bg-brand-100', 'text-brand-900');
+                    }
+                }
+            });
+        }
+
+        function selectWordFromBank(word) {
+            clozeChecked = false;
+            document.getElementById('cloze-feedback').textContent = '';
+            if (selectedBankWord === word) {
+                selectedBankWord = null;
+            } else {
+                selectedBankWord = word;
+                // Wenn genau eine Lücke frei ist oder wir automatisch die erste freie füllen wollen?
+                // Besser: Wenn ein Wort gewählt ist, füllt ein Klick auf eine Lücke diese.
+                // Komfort-Feature: Wenn keine Lücke angeklickt wird, kann man auch direkt klicken.
+            }
+            renderClozeGame();
+        }
+
+        function handleBlankClick(blankIdx) {
+            clozeChecked = false;
+            document.getElementById('cloze-feedback').textContent = '';
+
+            // Wenn ein Wort in der Wortbank ausgewählt ist -> in diese Lücke setzen
+            if (selectedBankWord) {
+                userBlanks[blankIdx] = selectedBankWord;
+                selectedBankWord = null;
+            } else if (userBlanks[blankIdx] !== null) {
+                // Wenn die Lücke bereits voll ist -> Wort zurück in die Bank legen
+                userBlanks[blankIdx] = null;
+            } else {
+                // Falls kein Wort ausgewählt war, nimm das erste verfügbare Wort aus der Bank
+                const nextAvailable = clozeBankWords.find(w => !userBlanks.includes(w));
+                if (nextAvailable) {
+                    userBlanks[blankIdx] = nextAvailable;
+                }
+            }
+            renderClozeGame();
+        }
+
+        // Drag & Drop Unterstützung
+        function handleDragStart(ev, word) {
+            selectedBankWord = word;
+            ev.dataTransfer.setData("text/plain", word);
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function handleDrop(ev, blankIdx) {
+            ev.preventDefault();
+            const word = ev.dataTransfer.getData("text/plain") || selectedBankWord;
+            if (word && !userBlanks.includes(word)) {
+                clozeChecked = false;
+                document.getElementById('cloze-feedback').textContent = '';
+                userBlanks[blankIdx] = word;
+                selectedBankWord = null;
+                renderClozeGame();
+            }
+        }
+
+        function checkClozeGame() {
+            const feedback = document.getElementById('cloze-feedback');
+            if (userBlanks.includes(null)) {
+                feedback.className = 'text-sm font-semibold text-amber-700';
+                feedback.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> Bitte fülle zuerst alle 6 Lücken aus!';
+                return;
+            }
+
+            clozeChecked = true;
+            let correctCount = 0;
+            userBlanks.forEach((val, idx) => {
+                if (val === clozeAnswers[idx]) correctCount++;
+            });
+
+            scores.game2 = correctCount;
+            updateTotalScore();
+            renderClozeGame();
+
+            if (correctCount === clozeAnswers.length) {
+                feedback.className = 'text-sm font-bold text-emerald-700 animate-pop';
+                feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Perfekt! Alle 6 Wörter sind an der richtigen Stelle!';
+            } else {
+                feedback.className = 'text-sm font-semibold text-rose-700 animate-pop';
+                feedback.innerHTML = `<i class="fa-solid fa-circle-info mr-1"></i> ${correctCount} von 6 richtig. Klicke auf die roten Wörter, um sie zu korrigieren!`;
+            }
+        }
+
+        function resetClozeGame() {
+            userBlanks = new Array(clozeAnswers.length).fill(null);
+            selectedBankWord = null;
+            clozeChecked = false;
+            scores.game2 = 0;
+            updateTotalScore();
+            document.getElementById('cloze-feedback').textContent = '';
+            renderClozeGame();
+        }
+
+        // Initialisierung beim Laden der Seite
+        window.addEventListener('DOMContentLoaded', () => {
+            renderTask1();
+            renderTask2();
+            initVocabGame();
+            renderClozeGame();
+        });
+    </script>
+</body>
+</html>
