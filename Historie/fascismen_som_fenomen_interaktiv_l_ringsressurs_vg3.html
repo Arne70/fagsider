@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="nn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fascismen som fenomen: Ideologi, makt og psykologi</title>
+    <!-- Lastar inn Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lastar inn Google Fonts: Merriweather (overskrifter) og Inter (brødtekst) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        ochre: {
+                            50: '#fdf8f3',
+                            100: '#faeee1',
+                            200: '#f4d9be',
+                            500: '#c86d3b',
+                            600: '#b3592b',
+                            700: '#924421',
+                        },
+                        paper: '#faf9f6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Eigne tilpassingar for lesbarheit og jamne overgangar */
+        body {
+            background-color: #faf9f6;
+            color: #1e293b;
+        }
+        .prose-text p {
+            line-height: 1.75;
+            margin-bottom: 1.25rem;
+        }
+        .task-card {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .pulse-success {
+            animation: pulseGreen 0.5s ease-in-out;
+        }
+        @keyframes pulseGreen {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-ochre-200 selection:text-slate-900">
+
+    <!-- Topp-navigasjon med framdriftslinje (NDLA / Aschehoug-inspirert) -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-800 text-white tracking-wide uppercase">
+                    Historie &amp; Politikk • VG3
+                </span>
+                <span class="hidden sm:inline-block text-sm font-medium text-slate-600">
+                    Mellomkrigstida og totalitære ideologiar
+                </span>
+            </div>
+            
+            <!-- Poengteljar for interaktive oppgåver -->
+            <div class="flex items-center space-x-4">
+                <div class="text-right">
+                    <span class="text-xs text-slate-500 block">Oppgåvepoeng</span>
+                    <span id="global-score" class="text-sm font-bold text-ochre-600">0 / 12 poeng</span>
+                </div>
+                <nav class="hidden md:flex space-x-1 text-xs font-medium">
+                    <a href="#del-1" class="px-2.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 transition">1. Definisjonar</a>
+                    <a href="#del-2" class="px-2.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 transition">2. Fascisme vs. Nazisme</a>
+                    <a href="#del-3" class="px-2.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 transition">3. Kjelder &amp; Refleksjon</a>
+                </nav>
+            </div>
+        </div>
+        <!-- Leseframdrift -->
+        <div class="w-full bg-slate-100 h-1">
+            <div id="reading-progress" class="bg-ochre-500 h-1 transition-all duration-150" style="width: 0%"></div>
+        </div>
+    </header>
+
+    <!-- Hovudinnhald -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+
+        <!-- Artikkel-header -->
+        <article>
+            <header class="mb-10 pb-8 border-b border-slate-200">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-medium text-slate-500 mb-4">
+                    <span class="flex items-center gap-1.5 bg-ochre-100 text-ochre-700 px-3 py-1 rounded-full">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        Fagartikkel med interaktive oppgåver
+                    </span>
+                    <span>•</span>
+                    <span>Lesetid: ca. 12–15 minutt</span>
+                    <span>•</span>
+                    <span>Målgruppe: VG3</span>
+                </div>
+
+                <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight mb-5">
+                    Fascismen som fenomen: Ideologi, makt og psykologi
+                </h1>
+
+                <p class="text-lg sm:text-xl text-slate-600 leading-relaxed font-normal">
+                    I kjølvatnet av den første verdskrigen (1914–1918) kollapsa gamle imperium, og unge demokrati kom under sterkt press. Frå ruinane vaks fascismen fram – ei politisk rørsle som forkasta både liberalisme og kommunisme. Men kva er eigentleg fascisme, kvifor lokkar han menneske til autoritær underkasting, og kva skil den italienske fascismen frå den tyske nazismen?
+                </p>
+
+                <!-- Læringsmål-boks (typisk norsk lærebok-layout) -->
+                <div class="mt-8 bg-white border-l-4 border-slate-800 rounded-r-xl p-5 shadow-sm">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Kompetansemål og læringsmål</h2>
+                    <ul class="space-y-1.5 text-sm text-slate-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-ochre-600 font-bold">✓</span>
+                            <span>Kunne gjere greie for ulike teoretiske definisjonar av fascisme (Griffin, Eco og Eva von Redecker).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-ochre-600 font-bold">✓</span>
+                            <span>Kunne samanlikne fellestrekk og avgjerande skilnader mellom italiensk fascisme og tysk nasjonalsosialisme.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-ochre-600 font-bold">✓</span>
+                            <span>Kunne analysere historiske kjeldemateriale og drøfte kvifor autoritære idear oppstår i krisetider.</span>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- SEKSJON 1: Kva er fascisme? -->
+            <section id="del-1" class="mb-14 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 text-white font-serif font-bold text-sm">1</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">Kva er fascisme? Ulike definisjonar</h2>
+                </div>
+
+                <div class="prose-text text-slate-700 text-base sm:text-lg">
+                    <p>
+                        I dag vert ordet «fascist» ofte brukt som eit reint skjellsord i politiske debattar. I historiefaget og statsvitskapen er det derimot eit presist omgrep, sjølv om forskarar lenge har diskutert korleis ein best kan ringe inn fenomenet. Til skilnad frå marxismen, som byggjer på skriftene til Karl Marx, har ikkje fascismen éin enkelt teoretisk grunnleggjar. Han er meir ei haldning, ein politisk stil og ei maktform.
+                    </p>
+
+                    <p>
+                        Den britiske historikaren <strong>Roger Griffin</strong> har formulert ein av dei mest brukte definisjonane i moderne forsking. Han skildrar fascismen som <em>«palingenetisk ultranasjonalisme»</em>. Ordet <em>palingenese</em> tyder gjenføding. Kjernen i ideologien er altså ein myte om at nasjonen er i ferd med å rotne innanfrå på grunn av demokrati, dekadanse og framande element, men at han kan reisast opp att gjennom ei valdeleg og reinsande gjenføding.
+                    </p>
+
+                    <p>
+                        Den italienske forfattaren og filosofen <strong>Umberto Eco</strong>, som sjølv vaks opp under Mussolini sitt regime, peika på at fascismen ikkje treng ein samanhengande filosofi for å verke. I essayet <em>Ur-fascisme</em> (1995) skildrar han fascismen som ei samling av 14 psykologiske og kulturelle kjenneteikn – mellom anna kulten rundt tradisjon, frykt for alt som er annleis, forakt for dei svake, og ein besettelse av konspirasjonar der fienden vert framstilt som både overmektig og ynkeleg på same tid.
+                    </p>
+                </div>
+
+                <!-- Fokusboks: Eva von Redecker -->
+                <div class="my-8 bg-ochre-50 border border-ochre-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    <div class="flex items-center gap-2 text-ochre-700 font-bold text-xs uppercase tracking-wider mb-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        Filosofisk perspektiv: Eva von Redecker
+                    </div>
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-slate-900 mb-3">
+                        «Denne trongen til hardheit» (<em>Dieser Drang nach Härte</em>)
+                    </h3>
+                    <div class="space-y-3 text-slate-700 text-sm sm:text-base leading-relaxed">
+                        <p>
+                            Den tyske filosofen <strong>Eva von Redecker</strong> nærmar seg ikkje fascismen berre som ein historisk ideologi frå 1920-talet, men som ein djup psykologisk og eksistensiell reaksjon. I bøker som <em>Bleibefreiheit</em> og <em>Dieser Drang nach Härte</em> («Denne trongen til hardheit») undersøkjer ho kvifor menneske lengtar etter autoritære leiarar, strenge grenser og brutalitet i tider prega av kriser og uvisse.
+                        </p>
+                        <p>
+                            Ifølgje von Redecker oppstår fascisme når menneske opplever at verda vert for sårbar, uoversiktleg og krevjande – til dømes ved økonomiske kriser, tap av status eller klima- og samfunnsendringar. I staden for å tole si eiga sårbarheit og gå inn i demokratisk samarbeid, utviklar individet eit <strong>kjenslemessig panser</strong>.
+                        </p>
+                        <p>
+                            Denne «trongen til hardheit» handlar om å gjere seg sjølv ufølsam og dyrke styrke, reinleik og kontroll. Ved å underkaste seg ein sterk leiar og sparke nedover mot utpeikte syndebukkar, slepp ein å kjenne på eigen avmakt. Slik vert fascismen ein destruktiv flukt frå menneskeleg sårbarheit og gjensidig avhengnad.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- INTERAKTIV OPPGÅVE 1: Omgrepskopling -->
+                <div class="my-10 bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-md">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-4 border-b border-slate-100">
+                        <div>
+                            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-ochre-100 text-ochre-700 uppercase tracking-wide mb-1">
+                                Oppgåve 1 • Omgrepsspelet
+                            </span>
+                            <h3 class="font-serif text-xl font-bold text-slate-900">Kopla tenkjar og kjerneomgrep</h3>
+                        </div>
+                        <button onclick="resetTask1()" class="text-xs font-medium text-slate-500 hover:text-slate-800 underline px-2 py-1">
+                            Nullstill oppgåve
+                        </button>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-6">
+                        Klikk først på eit omgrep eller ein tenkjar til venstre, og deretter på den forklaringa til høgre som passar best. (4 poeng)
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="matching-game-container">
+                        <!-- Venstre kolonne: Omgrep -->
+                        <div class="space-y-3" id="match-terms">
+                            <!-- Fyllast ut av JS -->
+                        </div>
+                        <!-- Høgre kolonne: Forklaringar -->
+                        <div class="space-y-3" id="match-defs">
+                            <!-- Fyllast ut av JS -->
+                        </div>
+                    </div>
+
+                    <div id="task1-feedback" class="mt-5 hidden p-4 rounded-xl text-sm font-medium"></div>
+                </div>
+            </section>
+
+            <!-- SEKSJON 2: Italiensk fascisme vs. Tysk nazisme -->
+            <section id="del-2" class="mb-14 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 text-white font-serif font-bold text-sm">2</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">Italiensk fascisme vs. Tysk nazisme</h2>
+                </div>
+
+                <div class="prose-text text-slate-700 text-base sm:text-lg">
+                    <p>
+                        I daglegtale vert «fascisme» ofte brukt som ei fellesnemning for både Benito Mussolini sitt styre i Italia (1922–1943) og Adolf Hitler sitt regime i Tyskland (1933–1945). Dei to rørslene hadde mykje til felles: Begge var fanatisk <strong>anti-demokratiske</strong> og <strong>anti-kommunistiske</strong>, dyrka krig og vald som politiske verkemiddel, og samla all makt hos éin ufeilbarleg leiar (<em>Il Duce</em> og <em>Der Führer</em>). Begge brukte òg moderne massepropaganda, uniformer og store marsjar for å skape kjensla av fellesskap.
+                    </p>
+
+                    <p>
+                        Likevel er det avgjerande for historikarar å skilje mellom <strong>italiensk fascisme</strong> og <strong>tysk nasjonalsosialisme (nazisme)</strong>. Skilnadene ligg særleg i synet på <em>staten</em>, <em>rasen</em> og målet med politikken.
+                    </p>
+
+                    <h3 class="font-serif text-xl font-bold text-slate-900 mt-6 mb-2">Italiensk fascisme: Staten som guddom</h3>
+                    <p>
+                        For Mussolini var <strong>staten</strong> sjølve målet. Han formulerte det berømte slagordet: <em>«Alt i staten, ingenting utanfor staten, ingenting mot staten.»</em> I den italienske fascismen var det staten som skapte nasjonen. Målet var å gjenreise storheita til det gamle Romarriket gjennom militær ekspansjon i Middelhavet og Afrika (som invasjonen av Etiopia i 1935). Økonomisk satsa Mussolini på <strong>korporativisme</strong>, der arbeidarar og arbeidsgjevarar vart tvinga inn i statskontrollerte bransjeorganisasjonar for å hindre klassekamp. Biologisk rasisme og antisemittisme var ikkje sentralt i den tidlege italienske fascismen, sjølv om regimet innførte raselover i 1938 etter sterkt press frå Hitler-Tyskland.
+                    </p>
+
+                    <h3 class="font-serif text-xl font-bold text-slate-900 mt-6 mb-2">Tysk nazisme: Rase og «Lebensraum»</h3>
+                    <p>
+                        For Hitler og nazistane var ikkje staten eit mål i seg sjølv, men berre eit reiskap for å tene <strong>den ariske rasen</strong> og det tyske <em>Volk</em> (folkefellesskapet). Heile verdsbiletet til nazismen bygde på ei ekstrem sosialdarwinistisk rasetenking: Verda var ein nådelaus kamp mellom rasar, der jødane vart framstilte som den ultimate fienden som truga eksistensen til det tyske folket. Nazismen sitt hovudmål var å skaffe tyskarane <em>Lebensraum</em> («livsrom») i Aust-Europa gjennom utryddingskrig, slavebinding av slaviske folk og den industrielle tilinkjegjeringa av europeiske jødar (Holocaust).
+                    </p>
+                </div>
+
+                <!-- Samanlikningstabell -->
+                <div class="my-8 overflow-x-auto rounded-2xl border border-slate-200 shadow-sm bg-white">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-slate-850 text-white">
+                                <th class="py-3.5 px-4 font-semibold w-1/4">Kjenneteikn</th>
+                                <th class="py-3.5 px-4 font-semibold w-3/8 border-l border-slate-700">Italiensk fascisme (Mussolini)</th>
+                                <th class="py-3.5 px-4 font-semibold w-3/8 border-l border-slate-700">Tysk nazisme (Hitler)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700">
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-3.5 px-4 font-semibold text-slate-900">Hovudprinsipp</td>
+                                <td class="py-3.5 px-4 border-l border-slate-200"><strong>Statolatry (statsdyrking):</strong> Den totalitære staten er det høgaste målet.</td>
+                                <td class="py-3.5 px-4 border-l border-slate-200"><strong>Rase og Volk:</strong> Staten er berre eit middel for å sikre og reinse den ariske rasen.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-3.5 px-4 font-semibold text-slate-900">Syn på rase &amp; antisemittisme</td>
+                                <td class="py-3.5 px-4 border-l border-slate-200">Kulturell nasjonalisme; jødar var medlemmer i partiet fram til raselovene i 1938.</td>
+                                <td class="py-3.5 px-4 border-l border-slate-200">Biologisk rasisme og radikal antisemittisme er sjølve kjernen i ideologien frå dag éin.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-3.5 px-4 font-semibold text-slate-900">Historisk forbilde</td>
+                                <td class="py-3.5 px-4 border-l border-slate-200">Det antikke Romarriket (<em>Mare Nostrum</em>).</td>
+                                <td class="py-3.5 px-4 border-l border-slate-200">Eit mytisk, germansk urfolk og det tyske keisarriket.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-3.5 px-4 font-semibold text-slate-900">Utanrikspolitisk mål</td>
+                                <td class="py-3.5 px-4 border-l border-slate-200">Koloniimperium rundt Middelhavet og i Afrika.</td>
+                                <td class="py-3.5 px-4 border-l border-slate-200"><em>Lebensraum</em> (livsrom) i Aust-Europa og total rasekrig.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- INTERAKTIV OPPGÅVE 2: Sorteringsspel -->
+                <div class="my-10 bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-md">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-4 border-b border-slate-100">
+                        <div>
+                            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-ochre-100 text-ochre-700 uppercase tracking-wide mb-1">
+                                Oppgåve 2 • Sorteringsspelet
+                            </span>
+                            <h3 class="font-serif text-xl font-bold text-slate-900">Kva høyrer til kvar?</h3>
+                        </div>
+                        <button onclick="resetTask2()" class="text-xs font-medium text-slate-500 hover:text-slate-800 underline px-2 py-1">
+                            Start spelet på nytt
+                        </button>
+                    </div>
+
+                    <p class="text-sm text-slate-600 mb-6">
+                        Les påstanden på kortet nedanfor, og avgjer om han skildrar <strong>Italiensk fascisme</strong>, <strong>Tysk nazisme</strong> eller noko som er <strong>Felles for begge</strong>. (6 poeng)
+                    </p>
+
+                    <div id="sorter-game-area" class="bg-slate-50 border border-slate-200 rounded-xl p-6 text-center">
+                        <div class="flex justify-between items-center text-xs font-semibold text-slate-500 mb-4">
+                            <span id="sorter-progress">Kort 1 av 6</span>
+                            <span id="sorter-score-badge" class="text-ochre-600">Rette: 0 / 6</span>
+                        </div>
+
+                        <!-- Påstandskort -->
+                        <div class="min-h-[110px] flex items-center justify-center bg-white border border-slate-200 rounded-xl p-5 shadow-sm mb-6">
+                            <p id="sorter-statement" class="font-serif text-base sm:text-lg font-bold text-slate-900">
+                                <!-- Fyllast ut av JS -->
+                            </p>
+                        </div>
+
+                        <!-- Svarknappar -->
+                        <div id="sorter-buttons" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <button onclick="answerSorter('italy')" class="p-3.5 rounded-xl bg-white border-2 border-slate-200 hover:border-slate-800 hover:bg-slate-800 hover:text-white font-semibold text-sm transition shadow-sm">
+                                Italiensk fascisme
+                            </button>
+                            <button onclick="answerSorter('both')" class="p-3.5 rounded-xl bg-white border-2 border-slate-200 hover:border-ochre-600 hover:bg-ochre-600 hover:text-white font-semibold text-sm transition shadow-sm">
+                                Felles for begge
+                            </button>
+                            <button onclick="answerSorter('germany')" class="p-3.5 rounded-xl bg-white border-2 border-slate-200 hover:border-slate-800 hover:bg-slate-800 hover:text-white font-semibold text-sm transition shadow-sm">
+                                Tysk nazisme
+                            </button>
+                        </div>
+
+                        <!-- Tilbakemelding per kort -->
+                        <div id="sorter-feedback" class="hidden mt-5 p-4 rounded-xl text-left text-sm"></div>
+                        
+                        <button id="sorter-next-btn" onclick="nextSorterCard()" class="hidden mt-4 px-6 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-slate-700 transition">
+                            Neste kort →
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEKSJON 3: Kjeldekritikk og refleksjon -->
+            <section id="del-3" class="mb-10 scroll-mt-24">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 text-white font-serif font-bold text-sm">3</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">Kjeldeanalyse og kritisk refleksjon</h2>
+                </div>
+
+                <p class="text-slate-700 text-base sm:text-lg leading-relaxed mb-6">
+                    For å forstå korleis fascismen argumenterer, må vi lese både historiske primærkjelder og filosofiske analysar. Undersøk dei to tekstutdraga nedanfor og svar på oppgåvene.
+                </p>
+
+                <!-- Kjeldeboksar side om side -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Kjelde A -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded bg-slate-100 text-slate-700 text-xs font-bold mb-3">
+                                Kjelde A • Historisk primærkjelde (1932)
+                            </span>
+                            <blockquote class="font-serif italic text-slate-800 text-sm sm:text-base leading-relaxed border-l-2 border-ochre-500 pl-4 mb-4">
+                                «Fascismen er mot pasifismen, som gøymer ei flukt frå kampen og ei feigheit framfor offeret. Berre krigen løftar all menneskeleg energi til sitt høgaste spenningsnivå og set eit adelsmerke på dei folka som har mot til å møte han.»
+                            </blockquote>
+                        </div>
+                        <p class="text-xs text-slate-500">
+                            — Benito Mussolini &amp; Giovanni Gentile, <em>La dottrina del fascismo</em> (1932)
+                        </p>
+                    </div>
+
+                    <!-- Kjelde B -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded bg-ochre-100 text-ochre-700 text-xs font-bold mb-3">
+                                Kjelde B • Filosofisk analyse (2020-talet)
+                            </span>
+                            <blockquote class="font-serif italic text-slate-800 text-sm sm:text-base leading-relaxed border-l-2 border-slate-800 pl-4 mb-4">
+                                «Den autoritære trongen til hardheit er ikkje eit teikn på ekte styrke, men eit forsvar mot redsla for å miste kontroll. Når ein herdar seg sjølv mot medkjensle, vert vald og utestenging lettare å rettferdiggjere som 'nødvendig'.»
+                            </blockquote>
+                        </div>
+                        <p class="text-xs text-slate-500">
+                            — Omskriving basert på Eva von Redecker, <em>Dieser Drang nach Härte</em>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- INTERAKTIV OPPGÅVE 3: Kjeldeanalyse + Refleksjon -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-md space-y-8">
+                    <div>
+                        <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-ochre-100 text-ochre-700 uppercase tracking-wide mb-1">
+                            Oppgåve 3 • Kjeldeanalyse &amp; drøfting
+                        </span>
+                        <h3 class="font-serif text-xl font-bold text-slate-900">Analyser kjeldene</h3>
+                    </div>
+
+                    <!-- Spørsmål 3A -->
+                    <div class="space-y-3" id="q3a-box">
+                        <p class="font-semibold text-slate-900 text-sm sm:text-base">
+                            1. Korleis grunngjev Mussolini (Kjelde A) at krig er positivt for eit folk? (1 poeng)
+                        </p>
+                        <div class="space-y-2">
+                            <button onclick="checkMCQ('q3a', 0, false, 'Feil. Mussolini avviser pasifisme og fred som feigheit, ikkje som eit middel for fred.')" class="q3a-opt w-full text-left p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-sm transition">
+                                A) Han meiner krig er nødvendig for å skape varig verdshandel og pasifistisk samarbeid.
+                            </button>
+                            <button onclick="checkMCQ('q3a', 1, true, 'Rett! Mussolini dyrkar krigen som ein moralsk og eksistensiell prøve som foredlar folket og avviser medkjensle/pasifisme som feigheit.')" class="q3a-opt w-full text-left p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-sm transition">
+                                B) Han meiner krig tvingar fram det beste i mennesket og skil modige, «edle» folk frå dei feige.
+                            </button>
+                            <button onclick="checkMCQ('q3a', 2, false, 'Feil. I 1932 var ikkje rasebiologisk utrydding hovudargumentet til Mussolini, men heltemot og statsstyrke.')" class="q3a-opt w-full text-left p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-sm transition">
+                                C) Han meiner krig er nødvendig for å gjennomføre biologisk rasehygiene i Europa.
+                            </button>
+                        </div>
+                        <div id="q3a-feedback" class="hidden p-3.5 rounded-xl text-sm"></div>
+                    </div>
+
+                    <!-- Spørsmål 3B -->
+                    <div class="space-y-3 pt-4 border-t border-slate-100" id="q3b-box">
+                        <p class="font-semibold text-slate-900 text-sm sm:text-base">
+                            2. Kva samanheng kan vi sjå mellom Kjelde A og Eva von Redecker si analyse i Kjelde B? (1 poeng)
+                        </p>
+                        <div class="space-y-2">
+                            <button onclick="checkMCQ('q3b', 0, true, 'Heilt rett! Von Redecker peikar på at når ein dyrkar hardheit og ser på medkjensle som «feigheit» (slik Mussolini gjer), byggjer ein eit kjenslemessig panser som gjer vald legitimt.')" class="q3b-opt w-full text-left p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-sm transition">
+                                A) Von Redecker forklarer den psykologiske mekanismen bak Mussolini sitt ideal: Å forakte sårbarheit og dyrke «hardheit» gjer det mogleg å rettferdiggjere vald.
+                            </button>
+                            <button onclick="checkMCQ('q3b', 1, false, 'Feil. Von Redecker støttar ikkje Mussolini, ho analyserer kritisk kvifor autoritære idear får fotfeste.')" class="q3b-opt w-full text-left p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-sm transition">
+                                B) Begge forfattarane er samde om at demokrati gjer menneske svake og at hardheit er nødvendig.
+                            </button>
+                            <button onclick="checkMCQ('q3b', 2, false, 'Feil. Begge tekstane handlar om haldningar til styrke, sårbarheit og vald.')" class="q3b-opt w-full text-left p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-sm transition">
+                                C) Det finst ingen samanheng, fordi fascismen berre fanst i Italia på 1930-talet.
+                            </button>
+                        </div>
+                        <div id="q3b-feedback" class="hidden p-3.5 rounded-xl text-sm"></div>
+                    </div>
+
+                    <!-- Refleksjonsoppgåve med mønstersvar -->
+                    <div class="pt-6 border-t border-slate-200">
+                        <label for="reflection-input" class="block font-serif text-lg font-bold text-slate-900 mb-2">
+                            Drøftingsoppgåve (til klassediskusjon eller notat)
+                        </label>
+                        <p class="text-sm text-slate-600 mb-3">
+                            Kvifor trur du Eva von Redecker sitt omgrep «trong til hardheit» kan vere relevant for å forstå politiske polariseringar i vår eiga tid? Skriv nokre setningar og samanlikn med momenter frå fagteksten.
+                        </p>
+                        <textarea id="reflection-input" rows="3" placeholder="Skriv tankane dine her..." class="w-full rounded-xl border border-slate-300 p-3.5 text-sm focus:border-ochre-500 focus:ring-2 focus:ring-ochre-200 outline-none transition"></textarea>
+                        
+                        <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
+                            <button onclick="toggleModelAnswer()" class="px-4 py-2 rounded-xl bg-slate-800 text-white text-xs sm:text-sm font-semibold hover:bg-slate-700 transition">
+                                Vis døme på relevante moment
+                            </button>
+                            <span class="text-xs text-slate-400">Notatet ditt vert lagra lokalt i nettlesaren medan du arbeider.</span>
+                        </div>
+
+                        <div id="model-answer" class="hidden mt-4 bg-ochre-50 border border-ochre-200 rounded-xl p-4 text-sm text-slate-800 space-y-2">
+                            <p class="font-bold text-ochre-800">Momenter du kan ta med i drøftinga:</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>I tider med raske endringar (klimaendringar, økonomisk uvisse, krig i Europa) kan mange kjenne på maktesløyse og uro.</li>
+                                <li>Autoritære rørsler tilbyr enkle svar, syndebukkar og ein «sterk leiar» som lovar orden og tryggleik.</li>
+                                <li>Når «hardheit» vert sett på som eit ideal, vert empati, kompromiss og demokratisk samtale ofte stempla som svakheit.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <!-- Botntekst -->
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <p class="font-semibold text-slate-200">Historie og politikk – Digital læringsressurs (Nynorsk)</p>
+                <p class="mt-1">Utforma for VG3-elevar • Fagleg forankra i historisk og filosofisk forsking.</p>
+            </div>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 hover:bg-slate-700 transition">
+                Til toppen ↑
+            </button>
+        </div>
+    </footer>
+
+    <!-- Interaktiv JavaScript-logikk -->
+    <script>
+        // Globale poengvariablar (maks 12 poeng: 4 i oppg 1 + 6 i oppg 2 + 2 i oppg 3)
+        let scoreTask1 = 0;
+        let scoreTask2 = 0;
+        let scoreTask3 = 0;
+        const answeredMCQs = new Set();
+
+        function updateGlobalScore() {
+            const total = scoreTask1 + scoreTask2 + scoreTask3;
+            const el = document.getElementById('global-score');
+            el.textContent = `${total} / 12 poeng`;
+            el.classList.add('pulse-success');
+            setTimeout(() => el.classList.remove('pulse-success'), 500);
+        }
+
+        // Leseframdrift ved rulling
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+            document.getElementById('reading-progress').style.width = scrolled + '%';
+        });
+
+        // ==========================================
+        // OPPGÅVE 1: Omgrepskopling (Matching Game)
+        // ==========================================
+        const matchData = [
+            {
+                id: 'griffin',
+                term: 'Roger Griffin: Palingenetisk ultranasjonalisme',
+                def: 'Ideen om at nasjonen er i forfall, men kan gjenfødast gjennom ei valdeleg og reinsande reising.'
+            },
+            {
+                id: 'redecker',
+                term: 'Eva von Redecker: Trongen til hardheit',
+                def: 'Eit kjenslemessig panser mot eiga sårbarheit og uvisse, der styrke og dominans erstattar empati.'
+            },
+            {
+                id: 'eco',
+                term: 'Umberto Eco: Ur-fascisme',
+                def: 'Ei samling av kulturelle og psykologiske kjenneteikn, som tradisjonsdyrking, konspirasjonstenking og frykt for det framande.'
+            },
+            {
+                id: 'statolatry',
+                term: 'Statolatry (Statsdyrking)',
+                def: 'Prinsippet om at staten er det høgaste målet i seg sjølv, og at individet berre har verdi innanfor staten.'
+            }
+        ];
+
+        let selectedTermId = null;
+        let matchedIds = new Set();
+
+        function initTask1() {
+            const termsContainer = document.getElementById('match-terms');
+            const defsContainer = document.getElementById('match-defs');
+            termsContainer.innerHTML = '';
+            defsContainer.innerHTML = '';
+            selectedTermId = null;
+            matchedIds.clear();
+
+            // Bland rekkjefølgja på forklaringane
+            const shuffledDefs = [...matchData].sort(() => Math.random() - 0.5);
+
+            matchData.forEach(item => {
+                const btn = document.createElement('button');
+                btn.id = `term-${item.id}`;
+                btn.className = 'w-full text-left p-4 rounded-xl border-2 border-slate-200 bg-slate-50 hover:border-slate-400 font-semibold text-sm text-slate-900 transition';
+                btn.textContent = item.term;
+                btn.onclick = () => selectTerm(item.id);
+                termsContainer.appendChild(btn);
+            });
+
+            shuffledDefs.forEach(item => {
+                const btn = document.createElement('button');
+                btn.id = `def-${item.id}`;
+                btn.className = 'w-full text-left p-4 rounded-xl border-2 border-slate-200 bg-white hover:border-ochre-400 text-xs sm:text-sm text-slate-700 leading-relaxed transition';
+                btn.textContent = item.def;
+                btn.onclick = () => selectDef(item.id);
+                defsContainer.appendChild(btn);
+            });
+        }
+
+        function selectTerm(id) {
+            if (matchedIds.has(id)) return;
+            // Fjern markering frå tidlegare valt omgrep
+            matchData.forEach(item => {
+                if (!matchedIds.has(item.id)) {
+                    const el = document.getElementById(`term-${item.id}`);
+                    el.classList.remove('border-ochre-500', 'bg-ochre-50', 'ring-2', 'ring-ochre-200');
+                }
+            });
+            selectedTermId = id;
+            const activeEl = document.getElementById(`term-${id}`);
+            activeEl.classList.add('border-ochre-500', 'bg-ochre-50', 'ring-2', 'ring-ochre-200');
+        }
+
+        function selectDef(defId) {
+            const feedback = document.getElementById('task1-feedback');
+            if (!selectedTermId) {
+                feedback.className = 'mt-5 p-3.5 rounded-xl text-sm font-medium bg-amber-50 text-amber-800 border border-amber-200 block';
+                feedback.textContent = 'Tips: Klikk først på eit omgrep i venstre kolonne før du vel forklaring.';
+                return;
+            }
+            if (matchedIds.has(defId)) return;
+
+            const termEl = document.getElementById(`term-${selectedTermId}`);
+            const defEl = document.getElementById(`def-${defId}`);
+
+            if (selectedTermId === defId) {
+                // Rett kopling!
+                matchedIds.add(defId);
+                termEl.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold text-sm cursor-default';
+                defEl.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 text-xs sm:text-sm leading-relaxed cursor-default';
+                selectedTermId = null;
+
+                scoreTask1 = matchedIds.size;
+                updateGlobalScore();
+
+                if (matchedIds.size === matchData.length) {
+                    feedback.className = 'mt-5 p-4 rounded-xl text-sm font-semibold bg-emerald-100 text-emerald-900 border border-emerald-300 block';
+                    feedback.textContent = 'Strålande! Du har kopla alle fire teoretiske omgrepa rett (4 av 4 poeng).';
+                } else {
+                    feedback.className = 'mt-5 p-3 rounded-xl text-sm font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 block';
+                    feedback.textContent = `Rett kopling! (${matchedIds.size} av 4 fullført)`;
+                }
+            } else {
+                // Feil kopling
+                defEl.classList.add('border-rose-500', 'bg-rose-50');
+                feedback.className = 'mt-5 p-3.5 rounded-xl text-sm font-medium bg-rose-50 text-rose-800 border border-rose-200 block';
+                feedback.textContent = 'Ikkje heilt! Les forklaringa nøye og prøv ein annan kombinasjon.';
+                setTimeout(() => {
+                    defEl.classList.remove('border-rose-500', 'bg-rose-50');
+                }, 800);
+            }
+        }
+
+        function resetTask1() {
+            scoreTask1 = 0;
+            updateGlobalScore();
+            document.getElementById('task1-feedback').classList.add('hidden');
+            initTask1();
+        }
+
+        // ==========================================
+        // OPPGÅVE 2: Sorteringsspel (Italiensk vs Tysk vs Felles)
+        // ==========================================
+        const sorterCards = [
+            {
+                text: '«Alt i staten, ingenting utanfor staten, ingenting mot staten.»',
+                category: 'italy',
+                explanation: 'Rett! Dette er Mussolini sitt kjende slagord som uttrykkjer den italienske statsdyrkinga (statolatry).'
+            },
+            {
+                text: 'Biologisk rasisme og utryddinga av jødane er sjølve kjernen i verdsbiletet.',
+                category: 'germany',
+                explanation: 'Rett! For Hitler og nazistane var rasekamp og antisemittisme hovuddrivkrafta i all politikk.'
+            },
+            {
+                text: 'Kompromisslaus motstand mot både parlamentarisk demokrati og kommunisme.',
+                category: 'both',
+                explanation: 'Rett! Både italiensk fascisme og tysk nazisme knuste fagforeiningar, venstresida og demokratiske institusjonar.'
+            },
+            {
+                text: 'Krav om «Lebensraum» (livsrom) i Aust-Europa gjennom erobrings- og utryddingskrig.',
+                category: 'germany',
+                explanation: 'Rett! Lebensraum var eit sentralt omgrep i Hitler si bok Mein Kampf og i tysk krigføring.'
+            },
+            {
+                text: 'Korporativisme der staten organiserer arbeidsgjevarar og arbeidarar i felles bransjeråd.',
+                category: 'italy',
+                explanation: 'Rett! Mussolini innførte eit korporativt system for å erstatte frie fagforeiningar og streikerett.'
+            },
+            {
+                text: 'Dyrking av éin ufeilbarleg leiar (førarprinsippet), militarisme og massepropaganda.',
+                category: 'both',
+                explanation: 'Rett! Både Il Duce (Mussolini) og Der Führer (Hitler) bygde opp ein ekstrem personkult rundt leiaren.'
+            }
+        ];
+
+        let currentCardIdx = 0;
+        let sorterAnsweredCurrent = false;
+
+        function renderSorterCard() {
+            const card = sorterCards[currentCardIdx];
+            document.getElementById('sorter-progress').textContent = `Kort ${currentCardIdx + 1} av ${sorterCards.length}`;
+            document.getElementById('sorter-score-badge').textContent = `Rette: ${scoreTask2} / ${sorterCards.length}`;
+            document.getElementById('sorter-statement').textContent = card.text;
+            document.getElementById('sorter-feedback').classList.add('hidden');
+            document.getElementById('sorter-next-btn').classList.add('hidden');
+            document.getElementById('sorter-buttons').classList.remove('pointer-events-none', 'opacity-60');
+            sorterAnsweredCurrent = false;
+        }
+
+        function answerSorter(choice) {
+            if (sorterAnsweredCurrent) return;
+            sorterAnsweredCurrent = true;
+
+            const card = sorterCards[currentCardIdx];
+            const feedback = document.getElementById('sorter-feedback');
+            const nextBtn = document.getElementById('sorter-next-btn');
+            document.getElementById('sorter-buttons').classList.add('pointer-events-none', 'opacity-60');
+
+            if (choice === card.category) {
+                scoreTask2++;
+                updateGlobalScore();
+                document.getElementById('sorter-score-badge').textContent = `Rette: ${scoreTask2} / ${sorterCards.length}`;
+                feedback.className = 'mt-5 p-4 rounded-xl text-left text-sm bg-emerald-50 text-emerald-900 border border-emerald-300 block';
+                feedback.textContent = card.explanation;
+            } else {
+                const labelMap = { italy: 'Italiensk fascisme', germany: 'Tysk nazisme', both: 'Felles for begge' };
+                feedback.className = 'mt-5 p-4 rounded-xl text-left text-sm bg-rose-50 text-rose-900 border border-rose-300 block';
+                feedback.innerHTML = `<strong>Ikkje heilt.</strong> Rett kategori er <em>${labelMap[card.category]}</em>. ${card.explanation.replace('Rett! ', '')}`;
+            }
+
+            if (currentCardIdx < sorterCards.length - 1) {
+                nextBtn.textContent = 'Neste kort →';
+                nextBtn.classList.remove('hidden');
+            } else {
+                nextBtn.textContent = 'Sjå sluttresultat i spelet';
+                nextBtn.classList.remove('hidden');
+            }
+        }
+
+        function nextSorterCard() {
+            if (currentCardIdx < sorterCards.length - 1) {
+                currentCardIdx++;
+                renderSorterCard();
+            } else {
+                const feedback = document.getElementById('sorter-feedback');
+                feedback.className = 'mt-5 p-4 rounded-xl text-left text-sm bg-slate-800 text-white block';
+                feedback.innerHTML = `<strong>Spelet er fullført!</strong> Du fekk <strong>${scoreTask2} av ${sorterCards.length} poeng</strong>. Bruk tabellen ovanfor om du vil repetere skilnadene mellom Mussolini og Hitler.`;
+                document.getElementById('sorter-next-btn').classList.add('hidden');
+            }
+        }
+
+        function resetTask2() {
+            currentCardIdx = 0;
+            scoreTask2 = 0;
+            updateGlobalScore();
+            renderSorterCard();
+        }
+
+        // ==========================================
+        // OPPGÅVE 3: Kjeldeanalyse & Refleksjon
+        // ==========================================
+        function checkMCQ(qId, optIndex, isCorrect, message) {
+            const options = document.querySelectorAll(`.${qId}-opt`);
+            const feedback = document.getElementById(`${qId}-feedback`);
+
+            options.forEach((btn, idx) => {
+                btn.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-500', 'bg-rose-50');
+                if (idx === optIndex) {
+                    btn.classList.add(isCorrect ? 'border-emerald-500' : 'border-rose-500', isCorrect ? 'bg-emerald-50' : 'bg-rose-50');
+                }
+            });
+
+            feedback.className = `p-3.5 rounded-xl text-sm block ${isCorrect ? 'bg-emerald-50 text-emerald-900 border border-emerald-200' : 'bg-rose-50 text-rose-900 border border-rose-200'}`;
+            feedback.textContent = message;
+
+            if (isCorrect && !answeredMCQs.has(qId)) {
+                answeredMCQs.add(qId);
+                scoreTask3++;
+                updateGlobalScore();
+            }
+        }
+
+        function toggleModelAnswer() {
+            const box = document.getElementById('model-answer');
+            box.classList.toggle('hidden');
+        }
+
+        // Lagre og hent refleksjonsnotat automatisk i nettlesaren
+        const reflectionInput = document.getElementById('reflection-input');
+        try {
+            const savedNote = localStorage.getItem('fascisme_vg3_refleksjon');
+            if (savedNote) reflectionInput.value = savedNote;
+            reflectionInput.addEventListener('input', (e) => {
+                localStorage.setItem('fascisme_vg3_refleksjon', e.target.value);
+            });
+        } catch (e) {
+            // Ignorer dersom localStorage er blokkert i iframe
+        }
+
+        // Start interaktive modular ved innlasting
+        window.addEventListener('DOMContentLoaded', () => {
+            initTask1();
+            renderSorterCard();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="nn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politiske konsekvensar av den første verdskrigen (1914–1918) – Historie VGS</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Merriweather for historiske overskrifter & Inter for lesbar brødtekst -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    colors: {
+                        parchment: {
+                            50: '#faf8f5',
+                            100: '#f3efe6',
+                            200: '#e6dec8',
+                            300: '#d5c7a3',
+                        },
+                        burgundy: {
+                            600: '#881337',
+                            700: '#70102d',
+                            800: '#580c23',
+                            900: '#42091a',
+                        },
+                        slatehist: {
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadePop {
+            0% { transform: scale(0.97); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: fadePop 0.25s ease-out forwards;
+        }
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; }
+            textarea { border: 1px solid #cbd5e1 !important; min-height: 90px; }
+        }
+    </style>
+</head>
+<body class="bg-parchment-50 text-slatehist-800 font-sans antialiased selection:bg-burgundy-600/15 selection:text-burgundy-900">
+
+    <!-- Toppbar med navigasjon og poengteljar -->
+    <header class="sticky top-0 z-50 bg-parchment-50/95 backdrop-blur-md border-b border-parchment-200 shadow-xs no-print">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-burgundy-700 text-parchment-50 flex items-center justify-center font-serif font-bold text-lg shadow-xs">
+                    <i class="fa-solid fa-landmark"></i>
+                </div>
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-widest text-burgundy-700 block">Historie VGS • Mellomkrigstida</span>
+                    <h1 class="text-sm sm:text-base font-serif font-bold text-slatehist-900 leading-tight">Første verdskrig: Politiske følgjer</h1>
+                </div>
+            </div>
+
+            <!-- Hurtiglenkjer -->
+            <nav class="hidden lg:flex items-center gap-1 text-xs font-semibold text-slatehist-700">
+                <a href="#fagtekst" class="px-2.5 py-1.5 rounded-lg hover:bg-parchment-200/70 hover:text-burgundy-700 transition">Fagtekst</a>
+                <a href="#oppgave-1" class="px-2.5 py-1.5 rounded-lg hover:bg-parchment-200/70 hover:text-burgundy-700 transition">Sant/Usant</a>
+                <a href="#spel-1" class="px-2.5 py-1.5 rounded-lg hover:bg-parchment-200/70 hover:text-burgundy-700 transition">Koplingsspel</a>
+                <a href="#spel-2" class="px-2.5 py-1.5 rounded-lg hover:bg-parchment-200/70 hover:text-burgundy-700 transition">Gåter</a>
+                <a href="#oppgave-2" class="px-2.5 py-1.5 rounded-lg hover:bg-parchment-200/70 hover:text-burgundy-700 transition">Luketekst</a>
+                <a href="#kjeldeoppgaver" class="px-2.5 py-1.5 rounded-lg bg-burgundy-700/10 text-burgundy-800 hover:bg-burgundy-700/20 transition">SNL-oppgåver</a>
+            </nav>
+
+            <!-- Poengteljar -->
+            <div class="bg-white border border-parchment-300 text-slatehist-900 px-3.5 py-1.5 rounded-full text-sm font-bold flex items-center gap-2 shadow-2xs">
+                <i class="fa-solid fa-award text-burgundy-700"></i>
+                <span>Poeng: <span id="total-score" class="text-burgundy-700">0</span> / <span id="max-score">18</span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hovudinnhald -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-12">
+
+        <!-- ========================================================= -->
+        <!-- DEL 0: FAGTEKST (5 OVERSIKTLEGE SEKSJONAR)                 -->
+        <!-- ========================================================= -->
+        <section id="fagtekst" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-parchment-200 overflow-hidden">
+            <!-- Hero Header -->
+            <div class="bg-gradient-to-br from-slatehist-900 via-slatehist-800 to-burgundy-900 px-6 sm:px-10 py-9 sm:py-12 text-parchment-50 border-b-4 border-burgundy-600">
+                <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-4 text-parchment-200">
+                    <i class="fa-solid fa-scroll"></i> Fagtekst • Europa etter 1918
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-serif font-black tracking-tight leading-snug mb-4">
+                    Politiske konsekvensar av den første verdskrigen (1914–1918)
+                </h2>
+                <p class="text-parchment-200 text-sm sm:text-base max-w-3xl leading-relaxed">
+                    Den første verdskrigen markerte slutten på det gamle Europa. Då våpna tagna i november 1918, var det politiske kartet endra for alltid, og nye ideologiar og samfunnsgrupper kravde sin plass.
+                </p>
+            </div>
+
+            <!-- 5 Fagtekst-kort -->
+            <div class="p-6 sm:p-10 space-y-6 text-slatehist-800 leading-relaxed text-base">
+
+                <!-- Seksjon 1 -->
+                <article class="bg-parchment-50 rounded-2xl p-6 border border-parchment-200/90 shadow-2xs">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-8 h-8 rounded-lg bg-burgundy-700 text-white font-serif font-bold text-sm flex items-center justify-center shrink-0">I</span>
+                        <h3 class="text-lg sm:text-xl font-serif font-bold text-slatehist-900">Imperia fell og nye nasjonalstatar oppstår</h3>
+                    </div>
+                    <p>
+                        Fire store keisarrike braut saman som følgje av krigen: <strong>Tyskland</strong>, <strong>Austerrike-Ungarn</strong>, <strong>Russland</strong> og <strong>Det osmanske riket</strong>. Ut av ruinane voks det fram ei rekkje nye, sjølvstendige nasjonalstatar, som <strong>Polen</strong>, <strong>Tsjekkoslovakia</strong>, <strong>Jugoslavia</strong>, <strong>Finland</strong> og dei <strong>baltiske landa</strong> (Estland, Latvia og Litauen). Mange av desse landa fekk demokratiske grunnlover, inspirert av den amerikanske presidenten <strong>Woodrow Wilson</strong> sitt prinsipp om <em>folkesuverenitet</em> og nasjonal sjølvråderett.
+                    </p>
+                </article>
+
+                <!-- Seksjon 2 -->
+                <article class="bg-parchment-50 rounded-2xl p-6 border border-parchment-200/90 shadow-2xs">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-8 h-8 rounded-lg bg-burgundy-700 text-white font-serif font-bold text-sm flex items-center justify-center shrink-0">II</span>
+                        <h3 class="text-lg sm:text-xl font-serif font-bold text-slatehist-900">Fredsløysingar og Folkeforbundet</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <p>
+                            Krigen vart avslutta gjennom fleire fredsavtalar. På austfronten hadde Russland allereie trekt seg ut gjennom den harde <strong>Brest-Litovsk-freden (1918)</strong>, der landet mista store landområde til Tyskland. For vestmaktene vart <strong>Versaillestraktaten (1919)</strong> den viktigaste avtalen. Her fekk Tyskland eineansvaret for krigen (<em>krigsskuldparagrafen</em>), måtte betala enorme <strong>krigserstatningar</strong>, miste koloniar og landområde, og gjennomføra ei kraftig <strong>nedrusting</strong>.
+                        </p>
+                        <p>
+                            For å hindra ein ny storkrig tok president Wilson initiativ til å oppretta <strong>Folkeforbundet (1920)</strong> – ein internasjonal organisasjon som skulle løysa konfliktar mellom statar gjennom diplomati og forhandlingar i staden for våpen.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Seksjon 3 -->
+                <article class="bg-parchment-50 rounded-2xl p-6 border border-parchment-200/90 shadow-2xs">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-8 h-8 rounded-lg bg-burgundy-700 text-white font-serif font-bold text-sm flex items-center justify-center shrink-0">III</span>
+                        <h3 class="text-lg sm:text-xl font-serif font-bold text-slatehist-900">Frå keisarrike til Weimarrepublikk</h3>
+                    </div>
+                    <p>
+                        I Tyskland førte det militære nederlaget til revolusjon hausten 1918. <strong>Keisar Wilhelm II abdiserte</strong> og flykta i eksil, og Tyskland vart ein parlamentarisk og demokratisk republikk – kjend som <strong>Weimarrepublikken</strong>. Det unge tyske demokratiet fekk ein svært vanskeleg start, prega av djup økonomisk krise, politisk gatevald og bittert sinne over krava i Versaillestraktaten.
+                    </p>
+                </article>
+
+                <!-- Seksjon 4 -->
+                <article class="bg-parchment-50 rounded-2xl p-6 border border-parchment-200/90 shadow-2xs">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-8 h-8 rounded-lg bg-burgundy-700 text-white font-serif font-bold text-sm flex items-center justify-center shrink-0">IV</span>
+                        <h3 class="text-lg sm:text-xl font-serif font-bold text-slatehist-900">Nytt syn på krig, kvinner og arbeidarar</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <p>
+                            Dei enorme menneskelege tapa i skyttargravene førte til eit nytt syn på krig: Krig vart ikkje lenger sett på som ærefullt og heroisk, men som meiningslaust barbari. Dette gav grobunn for ei sterk internasjonal <strong>fredsrørsle</strong> og <strong>pasifisme</strong>.
+                        </p>
+                        <p>
+                            Samstundes hadde krigen endra maktbalansen internt i landa. Medan mennene var ved fronten, hadde <strong>kvinner</strong> teke over jobbar i industrien, transporten og samfunnslivet. Som anerkjenning for innsatsen – og etter lang politisk kamp – fekk kvinner <strong>røysterett</strong> i ei rekkje land rett etter krigen (mellom anna i <strong>Tyskland</strong>, <strong>Storbritannia</strong> og <strong>USA</strong>). Også <strong>arbeidarklassen</strong> stod sterkare; fagforeiningar og sosialdemokratiske parti fekk auka politisk innverknad og gjennomslag for sosiale reformer som <strong>åtte timars arbeidsdag</strong>.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Seksjon 5 -->
+                <article class="bg-parchment-50 rounded-2xl p-6 border border-parchment-200/90 shadow-2xs">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span class="w-8 h-8 rounded-lg bg-burgundy-700 text-white font-serif font-bold text-sm flex items-center justify-center shrink-0">V</span>
+                        <h3 class="text-lg sm:text-xl font-serif font-bold text-slatehist-900">Kommunisme og høgrenasjonalisme</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <p>
+                            Den <strong>russiske revolusjonen i 1917</strong> skapte verdas første kommunistiske stat (seinare <strong>Sovjetunionen</strong>). For mange fattige arbeidarar rundt om i Europa framstod <strong>kommunismen som eit håp</strong> om ei meir rettferdig verd utan klasseskilje. For borgarskapet, kyrkja og dei gamle elitane vart den derimot opplevd som eit eksistensielt <strong>trugsmål</strong> mot eigedomsrett og samfunnsorden.
+                        </p>
+                        <p>
+                            Frykta for kommunismen, kombinert med nasjonal audmjuking og økonomisk uro, gav næring til <strong>antidemokratiske, høgrenasjonalistiske rørsler</strong> – særleg <strong>fascismen</strong> i Italia (under <strong>Benito Mussolini</strong>) og <strong>nazismen</strong> i Tyskland (under <strong>Adolf Hitler</strong>). Demokratiet i mellomkrigstida stod difor under hardt press frå både ytste venstre og ytste høgre.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Overgang til Del 1 -->
+        <div class="text-center space-y-2 pt-2">
+            <span class="inline-block px-3.5 py-1 rounded-full bg-burgundy-700/10 text-burgundy-800 text-xs font-bold uppercase tracking-wider">Del 1 • Interaktiv trening</span>
+            <h2 class="text-2xl sm:text-3xl font-serif font-bold text-slatehist-900">Oppgåver og spel basert på fagteksten</h2>
+            <p class="text-slatehist-700 text-sm sm:text-base max-w-2xl mx-auto">Test kunnskapane dine frå teksten over og samla alle 18 poenga før du går vidare til kjeldeoppgåvene.</p>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- OPPGÅVE 1: SANT ELLER USANT? (5 POENG)                    -->
+        <!-- ========================================================= -->
+        <section id="oppgave-1" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-parchment-200 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-parchment-200">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-burgundy-700">Oppgåve 1 • Tekstforståing (5 poeng)</span>
+                    <h3 class="text-xl sm:text-2xl font-serif font-bold text-slatehist-900 mt-1">Sant eller usant?</h3>
+                    <p class="text-sm text-slatehist-700 mt-1">Vurder om påstandane nedanfor er sanne eller usanne ut frå fagteksten.</p>
+                </div>
+                <button onclick="resetTask1()" class="no-print text-sm font-semibold text-slatehist-700 hover:text-slatehist-900 bg-parchment-100 hover:bg-parchment-200 px-3.5 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate-right"></i> Nullstill
+                </button>
+            </div>
+
+            <div id="tf-container" class="mt-6 space-y-4">
+                <!-- Generert av JS -->
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SPEL 1: KOBLE SAMAN OMGREP OG FORKLARING (5 POENG)        -->
+        <!-- ========================================================= -->
+        <section id="spel-1" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-parchment-200 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-parchment-200">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-burgundy-700">Spel 1 • Omgrepsforståing (5 poeng)</span>
+                    <h3 class="text-xl sm:text-2xl font-serif font-bold text-slatehist-900 mt-1">Koble saman omgrep og forklaring</h3>
+                    <p class="text-sm text-slatehist-700 mt-1">Klikk først på eit <strong>omgrep til venstre</strong>, og deretter på den <strong>rette forklaringa til høgre</strong>.</p>
+                </div>
+                <div class="flex items-center gap-3 no-print">
+                    <span id="match-counter" class="text-sm font-bold text-burgundy-800 bg-burgundy-700/10 px-3.5 py-1.5 rounded-xl">
+                        0 / 5 kopla
+                    </span>
+                    <button onclick="initMatchGame()" class="text-sm font-semibold text-slatehist-700 hover:text-slatehist-900 bg-parchment-100 hover:bg-parchment-200 px-3.5 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5">
+                        <i class="fa-solid fa-shuffle"></i> Nullstill og bland
+                    </button>
+                </div>
+            </div>
+
+            <!-- Suksessmelding -->
+            <div id="match-success-banner" class="hidden mt-5 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 font-semibold text-sm flex items-center gap-3 animate-pop">
+                <i class="fa-solid fa-circle-check text-xl text-emerald-600"></i>
+                <span>Utmerkt! Du har kopla alle dei fem historiske omgrepa til rett forklaring.</span>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-start">
+                <!-- Venstre kolonne: Omgrep -->
+                <div class="md:col-span-5 space-y-2.5">
+                    <div class="text-xs font-bold uppercase tracking-wider text-slatehist-700/70 px-1 mb-1">Historiske omgrep</div>
+                    <div id="match-terms-col" class="space-y-2.5"></div>
+                </div>
+
+                <!-- Høgre kolonne: Forklaringar -->
+                <div class="md:col-span-7 space-y-2.5">
+                    <div class="text-xs font-bold uppercase tracking-wider text-slatehist-700/70 px-1 mb-1">Forklaringar</div>
+                    <div id="match-defs-col" class="space-y-2.5"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SPEL 2: KVEN ELLER KVA ER EG? (3 POENG)                   -->
+        <!-- ========================================================= -->
+        <section id="spel-2" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-parchment-200 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-parchment-200">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-burgundy-700">Spel 2 • Historiske gåter (3 poeng)</span>
+                    <h3 class="text-xl sm:text-2xl font-serif font-bold text-slatehist-900 mt-1">Kven eller kva er eg?</h3>
+                    <p class="text-sm text-slatehist-700 mt-1">Les leietrådane nøye og skriv inn svaret ditt i feltet (eller klikk «Vis fasit» dersom du står fast).</p>
+                </div>
+                <button onclick="resetRiddles()" class="no-print text-sm font-semibold text-slatehist-700 hover:text-slatehist-900 bg-parchment-100 hover:bg-parchment-200 px-3.5 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate-right"></i> Nullstill
+                </button>
+            </div>
+
+            <div id="riddles-container" class="mt-6 space-y-5">
+                <!-- Generert av JS -->
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- OPPGÅVE 2: FYLL INN ORDA SOM MANGLAR (5 POENG)            -->
+        <!-- ========================================================= -->
+        <section id="oppgave-2" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-parchment-200 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-parchment-200">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-burgundy-700">Oppgåve 2 • Luketekst (5 poeng)</span>
+                    <h3 class="text-xl sm:text-2xl font-serif font-bold text-slatehist-900 mt-1">Fyll inn orda som manglar</h3>
+                    <p class="text-sm text-slatehist-700 mt-1">Klikk på eit ord i ordbanken for å setja det inn i ei luke. Klikk på ei utfylt luke for å tømma ho att.</p>
+                </div>
+                <button onclick="resetCloze()" class="no-print text-sm font-semibold text-slatehist-700 hover:text-slatehist-900 bg-parchment-100 hover:bg-parchment-200 px-3.5 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate-right"></i> Nullstill
+                </button>
+            </div>
+
+            <!-- Klikkbar Ordbank -->
+            <div class="mt-6 bg-parchment-50 p-4 rounded-2xl border border-parchment-200">
+                <div class="text-xs font-bold uppercase tracking-wider text-slatehist-700 mb-3">Ordbank:</div>
+                <div id="cloze-bank" class="flex flex-wrap gap-2.5">
+                    <!-- Generert av JS -->
+                </div>
+            </div>
+
+            <!-- Luketekst -->
+            <div class="mt-6 p-6 sm:p-7 rounded-2xl bg-parchment-100/60 border border-parchment-200 text-slatehist-900 text-base sm:text-lg leading-loose">
+                Etter den første verdskrigen braut fire gamle
+                <button type="button" onclick="handleSlotClick(0)" class="cloze-slot inline-flex items-center justify-center min-w-[130px] h-9 px-3 mx-1 align-middle rounded-lg border-2 border-dashed border-burgundy-600/60 bg-white text-burgundy-800 font-bold text-sm sm:text-base transition hover:bg-burgundy-700/5 cursor-pointer">
+                    [ 1 ]
+                </button>
+                saman. Tyskland vart tvinga til å betala store
+                <button type="button" onclick="handleSlotClick(1)" class="cloze-slot inline-flex items-center justify-center min-w-[165px] h-9 px-3 mx-1 align-middle rounded-lg border-2 border-dashed border-burgundy-600/60 bg-white text-burgundy-800 font-bold text-sm sm:text-base transition hover:bg-burgundy-700/5 cursor-pointer">
+                    [ 2 ]
+                </button>
+                til sigerherrane. Mange unge menneske vende seg mot krig og slutta seg til fredsrørsler og
+                <button type="button" onclick="handleSlotClick(2)" class="cloze-slot inline-flex items-center justify-center min-w-[125px] h-9 px-3 mx-1 align-middle rounded-lg border-2 border-dashed border-burgundy-600/60 bg-white text-burgundy-800 font-bold text-sm sm:text-base transition hover:bg-burgundy-700/5 cursor-pointer">
+                    [ 3 ]
+                </button>.
+                Samstundes opplevde kvinner ei ny tid og fekk
+                <button type="button" onclick="handleSlotClick(3)" class="cloze-slot inline-flex items-center justify-center min-w-[125px] h-9 px-3 mx-1 align-middle rounded-lg border-2 border-dashed border-burgundy-600/60 bg-white text-burgundy-800 font-bold text-sm sm:text-base transition hover:bg-burgundy-700/5 cursor-pointer">
+                    [ 4 ]
+                </button>
+                i mange land. Likevel var demokratiet sårbart, og i Italia voks den antidemokratiske rørsla
+                <button type="button" onclick="handleSlotClick(4)" class="cloze-slot inline-flex items-center justify-center min-w-[120px] h-9 px-3 mx-1 align-middle rounded-lg border-2 border-dashed border-burgundy-600/60 bg-white text-burgundy-800 font-bold text-sm sm:text-base transition hover:bg-burgundy-700/5 cursor-pointer">
+                    [ 5 ]
+                </button>
+                fram.
+            </div>
+
+            <!-- Sjekk svar -->
+            <div class="mt-6 flex flex-wrap items-center justify-between gap-4 no-print">
+                <button onclick="checkCloze()" class="bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold px-6 py-3 rounded-xl shadow-xs transition cursor-pointer flex items-center gap-2">
+                    <i class="fa-solid fa-check-double"></i> Sjekk svar
+                </button>
+                <div id="cloze-feedback" class="text-sm font-semibold"></div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- DEL 2: KJELDEOPPGÅVER MED STORE NORSKE LEKSIKON (SNL)      -->
+        <!-- ========================================================= -->
+        <section id="kjeldeoppgaver" class="scroll-mt-24 bg-white rounded-3xl shadow-sm border border-parchment-200 overflow-hidden">
+            <!-- Header for SNL-del -->
+            <div class="bg-slatehist-900 px-6 sm:px-10 py-8 text-parchment-50 border-b-4 border-burgundy-600">
+                <span class="inline-flex items-center gap-2 bg-burgundy-700/40 border border-burgundy-500/40 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-parchment-100 mb-3">
+                    <i class="fa-solid fa-book-atlas"></i> Del 2 • Kjeldearbeid og fordjuping
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-serif font-bold tracking-tight">Kjeldeoppgåver med Store norske leksikon (SNL)</h2>
+                <p class="text-parchment-200 text-sm sm:text-base mt-2 max-w-3xl leading-relaxed">
+                    Gå inn på <a href="https://snl.no" target="_blank" rel="noopener noreferrer" class="underline font-bold text-white hover:text-parchment-200">snl.no</a> og bruk søkjefeltet eller direktelenkjene under for å finna svar på spørsmåla. Skriv svara dine med eigne ord i skrivefelta. Svara dine blir lagra automatisk i nettlesaren medan du jobbar.
+                </p>
+
+                <!-- Hurtiglenkjer til SNL-artiklar -->
+                <div class="mt-5 pt-5 border-t border-white/15">
+                    <span class="text-xs font-bold uppercase tracking-wider text-parchment-300 block mb-2.5">Direktelenkjer til oppslagsord på snl.no:</span>
+                    <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                        <a href="https://snl.no/Woodrow_Wilson" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Woodrow Wilson
+                        </a>
+                        <a href="https://snl.no/fjorten_punkter" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Fjorten punkter
+                        </a>
+                        <a href="https://snl.no/Versailles-traktaten" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Versaillestraktaten
+                        </a>
+                        <a href="https://snl.no/dolkestøtlegenden" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Dolkestøtlegenden
+                        </a>
+                        <a href="https://snl.no/Det_osmanske_riket" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Det osmanske riket
+                        </a>
+                        <a href="https://snl.no/Sykes-Picot-avtalen" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Sykes–Picot-avtalen
+                        </a>
+                        <a href="https://snl.no/Kvinners_kamp_for_stemmerett_internasjonalt" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Kvinners stemmerett
+                        </a>
+                        <a href="https://snl.no/første_verdenskrig" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Første verdenskrig
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Kjeldeoppgåver (A, B, C, D) -->
+            <div class="p-6 sm:p-10 space-y-8">
+
+                <!-- Oppgåve A -->
+                <div class="bg-parchment-50 rounded-2xl p-6 border border-parchment-200">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h3 class="text-lg sm:text-xl font-serif font-bold text-slatehist-900 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-slatehist-800 text-white font-sans font-bold text-sm flex items-center justify-center">A</span>
+                            Woodrow Wilson og dei 14 punkta
+                        </h3>
+                        <a href="https://snl.no/Woodrow_Wilson" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-burgundy-700 hover:underline flex items-center gap-1">
+                            Opne «Woodrow Wilson» på SNL <i class="fa-solid fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="snl-a1" class="block text-sm font-semibold text-slatehist-800 mb-1.5">
+                                1. Kva var hovudtanken bak Wilson sine «14 punkt» frå januar 1918?
+                            </label>
+                            <textarea id="snl-a1" rows="3" oninput="saveNotes()" placeholder="Skriv svaret ditt her..." class="w-full rounded-xl border border-parchment-300 bg-white p-3.5 text-sm text-slatehist-900 focus:outline-none focus:ring-2 focus:ring-burgundy-600"></textarea>
+                        </div>
+                        <div>
+                            <label for="snl-a2" class="block text-sm font-semibold text-slatehist-800 mb-1.5">
+                                2. Kvifor vart ikkje USA sjølv medlem av Folkeforbundet, sjølv om det var Wilson som tok initiativet til det?
+                            </label>
+                            <textarea id="snl-a2" rows="3" oninput="saveNotes()" placeholder="Skriv svaret ditt her..." class="w-full rounded-xl border border-parchment-300 bg-white p-3.5 text-sm text-slatehist-900 focus:outline-none focus:ring-2 focus:ring-burgundy-600"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Oppgåve B -->
+                <div class="bg-parchment-50 rounded-2xl p-6 border border-parchment-200">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h3 class="text-lg sm:text-xl font-serif font-bold text-slatehist-900 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-slatehist-800 text-white font-sans font-bold text-sm flex items-center justify-center">B</span>
+                            Versaillestraktaten og «dolkestøtlegenden»
+                        </h3>
+                        <div class="flex gap-3 text-xs font-bold text-burgundy-700">
+                            <a href="https://snl.no/Versailles-traktaten" target="_blank" rel="noopener noreferrer" class="hover:underline flex items-center gap-1">
+                                Versaillestraktaten <i class="fa-solid fa-external-link-alt"></i>
+                            </a>
+                            <span>•</span>
+                            <a href="https://snl.no/dolkestøtlegenden" target="_blank" rel="noopener noreferrer" class="hover:underline flex items-center gap-1">
+                                Dolkestøtlegenden <i class="fa-solid fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="snl-b1" class="block text-sm font-semibold text-slatehist-800 mb-1.5">
+                                1. Nemn tre konkrete område (geografisk) som Tyskland måtte gi frå seg etter Versaillestraktaten.
+                            </label>
+                            <textarea id="snl-b1" rows="3" oninput="saveNotes()" placeholder="Skriv svaret ditt her..." class="w-full rounded-xl border border-parchment-300 bg-white p-3.5 text-sm text-slatehist-900 focus:outline-none focus:ring-2 focus:ring-burgundy-600"></textarea>
+                        </div>
+                        <div>
+                            <label for="snl-b2" class="block text-sm font-semibold text-slatehist-800 mb-1.5">
+                                2. Kva gjekk <em>dolkestøtlegenden</em> ut på, og korleis brukte høgrenasjonalistiske krefter (som nazistane) denne myten til å svekkja Weimarrepublikken?
+                            </label>
+                            <textarea id="snl-b2" rows="3" oninput="saveNotes()" placeholder="Skriv svaret ditt her..." class="w-full rounded-xl border border-parchment-300 bg-white p-3.5 text-sm text-slatehist-900 focus:outline-none focus:ring-2 focus:ring-burgundy-600"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Oppgåve C -->
+                <div class="bg-parchment-50 rounded-2xl p-6 border border-parchment-200">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h3 class="text-lg sm:text-xl font-serif font-bold text-slatehist-900 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-slatehist-800 text-white font-sans font-bold text-sm flex items-center justify-center">C</span>
+                            Det osmanske riket og Midtausten
+                        </h3>
+                        <div class="flex gap-3 text-xs font-bold text-burgundy-700">
+                            <a href="https://snl.no/Det_osmanske_riket" target="_blank" rel="noopener noreferrer" class="hover:underline flex items-center gap-1">
+                                Det osmanske riket <i class="fa-solid fa-external-link-alt"></i>
+                            </a>
+                            <span>•</span>
+                            <a href="https://snl.no/Sykes-Picot-avtalen" target="_blank" rel="noopener noreferrer" class="hover:underline flex items-center gap-1">
+                                Sykes–Picot-avtalen <i class="fa-solid fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="snl-c1" class="block text-sm font-semibold text-slatehist-800 mb-1.5">
+                                1. Kva skjedde med dei arabiske områda som tidlegare hadde høyrt til Det osmanske riket etter krigen?
+                            </label>
+                            <textarea id="snl-c1" rows="3" oninput="saveNotes()" placeholder="Skriv svaret ditt her..." class="w-full rounded-xl border border-parchment-300 bg-white p-3.5 text-sm text-slatehist-900 focus:outline-none focus:ring-2 focus:ring-burgundy-600"></textarea>
+                        </div>
+                        <div>
+                            <label for="snl-c2" class="block text-sm font-semibold text-slatehist-800 mb-1.5">
+                                2. Korleis la stormaktene (Storbritannia og Frankrike) grunnlaget for seinare konfliktar i Midtausten då dei teikna opp nye grenser etter krigen?
+                            </label>
+                            <textarea id="snl-c2" rows="3" oninput="saveNotes()" placeholder="Skriv svaret ditt her..." class="w-full rounded-xl border border-parchment-300 bg-white p-3.5 text-sm text-slatehist-900 focus:outline-none focus:ring-2 focus:ring-burgundy-600"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Oppgåve D -->
+                <div class="bg-parchment-50 rounded-2xl p-6 border border-parchment-200">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h3 class="text-lg sm:text-xl font-serif font-bold text-slatehist-900 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-slatehist-800 text-white font-sans font-bold text-sm flex items-center justify-center">D</span>
+                            Kvinner og arbeid etter krigen
+                        </h3>
+                        <div class="flex gap-3 text-xs font-bold text-burgundy-700">
+                            <a href="https://snl.no/Kvinners_kamp_for_stemmerett_internasjonalt" target="_blank" rel="noopener noreferrer" class="hover:underline flex items-center gap-1">
+                                Kvinners stemmerett <i class="fa-solid fa-external-link-alt"></i>
+                            </a>
+                            <span>•</span>
+                            <a href="https://snl.no/første_verdenskrig" target="_blank" rel="noopener noreferrer" class="hover:underline flex items-center gap-1">
+                                Første verdenskrig <i class="fa-solid fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="snl-d1" class="block text-sm font-semibold text-slatehist-800 mb-1.5">
+                                1. Kva typar arbeid tok kvinner over under krigen som tidlegare berre hadde vore utført av menn?
+                            </label>
+                            <textarea id="snl-d1" rows="3" oninput="saveNotes()" placeholder="Skriv svaret ditt her..." class="w-full rounded-xl border border-parchment-300 bg-white p-3.5 text-sm text-slatehist-900 focus:outline-none focus:ring-2 focus:ring-burgundy-600"></textarea>
+                        </div>
+                        <div>
+                            <label for="snl-d2" class="block text-sm font-semibold text-slatehist-800 mb-1.5">
+                                2. Nemn tre europeiske land som innførte røysterett for kvinner i perioden 1918–1920.
+                            </label>
+                            <textarea id="snl-d2" rows="3" oninput="saveNotes()" placeholder="Skriv svaret ditt her..." class="w-full rounded-xl border border-parchment-300 bg-white p-3.5 text-sm text-slatehist-900 focus:outline-none focus:ring-2 focus:ring-burgundy-600"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verktøylinje for innlevering / eksport av svar -->
+                <div class="bg-parchment-100 rounded-2xl p-6 border border-parchment-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4 no-print">
+                    <div>
+                        <h4 class="font-serif font-bold text-slatehist-900 text-base">Ferdig med kjeldeoppgåvene?</h4>
+                        <p class="text-xs sm:text-sm text-slatehist-700 mt-0.5">Kopier alle svara dine til utklippstavla eller last dei ned som ei tekstfil for innlevering til læraren.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+                        <button onclick="copyAllAnswers()" class="bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-xs transition cursor-pointer flex items-center gap-2">
+                            <i class="fa-solid fa-copy"></i> Kopier alle svara mine
+                        </button>
+                        <button onclick="downloadAnswersTxt()" class="bg-slatehist-800 hover:bg-slatehist-900 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-xs transition cursor-pointer flex items-center gap-2">
+                            <i class="fa-solid fa-file-arrow-down"></i> Last ned (.txt)
+                        </button>
+                        <button onclick="window.print()" class="bg-white hover:bg-parchment-50 text-slatehist-800 border border-parchment-300 font-bold px-4 py-2.5 rounded-xl text-sm transition cursor-pointer flex items-center gap-2">
+                            <i class="fa-solid fa-print"></i> Skriv ut
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Meldingsboks for kopiering (erstattar alert) -->
+                <div id="export-status" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm font-semibold flex items-center gap-2.5 animate-pop no-print">
+                    <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+                    <span id="export-status-text"></span>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Botntekst -->
+    <footer class="max-w-5xl mx-auto px-4 sm:px-6 py-8 text-center text-xs text-slatehist-700/80 border-t border-parchment-200 mt-10">
+        <p>Undervisningsressurs i historie (VGS) • Politiske konsekvensar av den første verdskrigen (1914–1918) • Kjeldearbeid knytt til Store norske leksikon (snl.no).</p>
+    </footer>
+
+    <!-- ========================================================= -->
+    <!-- JAVASCRIPT LOGIKK                                         -->
+    <!-- ========================================================= -->
+    <script>
+        // Samla poengoversikt (maks 18 poeng: 5 + 5 + 3 + 5)
+        const scores = {
+            task1: 0,
+            game1: 0,
+            game2: 0,
+            task2: 0
+        };
+
+        function updateTotalScore() {
+            const total = scores.task1 + scores.game1 + scores.game2 + scores.task2;
+            document.getElementById('total-score').textContent = total;
+        }
+
+        // =========================================================
+        // OPPGÅVE 1: SANT ELLER USANT? (5 POENG)
+        // =========================================================
+        const tfQuestions = [
+            {
+                text: "1. Austerrike-Ungarn og Det osmanske riket overlevde den første verdskrigen, men mista litt landområde.",
+                answer: false,
+                explanation: "Usant! Begge imperia braut fullstendig saman som følgje av krigen."
+            },
+            {
+                text: "2. Brest-Litovsk-freden var ein avtale mellom Russland og Tyskland før krigen var slutt på vestfronten.",
+                answer: true,
+                explanation: "Sant! Russland trekte seg ut av krigen gjennom Brest-Litovsk-freden i 1918."
+            },
+            {
+                text: "3. Versaillestraktaten gav Tyskland og Austerrike-Ungarn lik skuld for utbrotet av krigen.",
+                answer: false,
+                explanation: "Usant! Gjennom krigsskuldparagrafen i Versaillestraktaten fekk Tyskland eineansvaret for krigen."
+            },
+            {
+                text: "4. Kvinner fekk røysterett i fleire land etter krigen, delvis på grunn av arbeidsinnsatsen dei gjorde medan mennene var i krig.",
+                answer: true,
+                explanation: "Sant! Kvinner fekk røysterett i mellom anna Tyskland, Storbritannia og USA rett etter krigen."
+            },
+            {
+                text: "5. Etter krigen vart krig sett på som meir ærefullt enn tidlegare.",
+                answer: false,
+                explanation: "Usant! Krigen vart tvert imot sett på som meiningslaust barbari, noko som styrkte fredsrørsla og pasifismen."
+            }
+        ];
+
+        let tfUserAnswers = new Array(tfQuestions.length).fill(null);
+
+        function renderTask1() {
+            const container = document.getElementById('tf-container');
+            container.innerHTML = '';
+
+            tfQuestions.forEach((q, idx) => {
+                const chosen = tfUserAnswers[idx];
+                const isAnswered = chosen !== null;
+                const isCorrect = chosen === q.answer;
+
+                const div = document.createElement('div');
+                div.className = `p-4 sm:p-5 rounded-2xl border transition ${
+                    !isAnswered
+                        ? 'bg-parchment-50 border-parchment-200'
+                        : isCorrect
+                        ? 'bg-emerald-50/80 border-emerald-300'
+                        : 'bg-rose-50/80 border-rose-300'
+                }`;
+
+                div.innerHTML = `
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <p class="font-semibold text-slatehist-900 text-sm sm:text-base">${q.text}</p>
+                        <div class="flex items-center gap-2 shrink-0 no-print">
+                            <button onclick="answerTask1(${idx}, true)" ${isAnswered ? 'disabled' : ''} class="px-4 py-2 rounded-xl text-sm font-bold transition cursor-pointer ${
+                                isAnswered && q.answer === true
+                                    ? 'bg-emerald-700 text-white'
+                                    : isAnswered && chosen === true && !isCorrect
+                                    ? 'bg-rose-700 text-white'
+                                    : isAnswered
+                                    ? 'bg-parchment-200/70 text-slatehist-700/50 cursor-not-allowed'
+                                    : 'bg-white border border-parchment-300 text-slatehist-800 hover:border-emerald-600 hover:text-emerald-700'
+                            }">
+                                <i class="fa-solid fa-check mr-1"></i> Sant
+                            </button>
+                            <button onclick="answerTask1(${idx}, false)" ${isAnswered ? 'disabled' : ''} class="px-4 py-2 rounded-xl text-sm font-bold transition cursor-pointer ${
+                                isAnswered && q.answer === false
+                                    ? 'bg-emerald-700 text-white'
+                                    : isAnswered && chosen === false && !isCorrect
+                                    ? 'bg-rose-700 text-white'
+                                    : isAnswered
+                                    ? 'bg-parchment-200/70 text-slatehist-700/50 cursor-not-allowed'
+                                    : 'bg-white border border-parchment-300 text-slatehist-800 hover:border-rose-600 hover:text-rose-700'
+                            }">
+                                <i class="fa-solid fa-xmark mr-1"></i> Usant
+                            </button>
+                        </div>
+                    </div>
+                    ${
+                        isAnswered
+                            ? `<div class="mt-3 text-sm font-medium flex items-center gap-2 animate-pop ${
+                                  isCorrect ? 'text-emerald-900' : 'text-rose-900'
+                              }">
+                                <i class="fa-solid ${isCorrect ? 'fa-circle-check text-emerald-600' : 'fa-circle-exclamation text-rose-600'}"></i>
+                                <span>${q.explanation}</span>
+                               </div>`
+                            : ''
+                    }
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function answerTask1(idx, val) {
+            if (tfUserAnswers[idx] !== null) return;
+            tfUserAnswers[idx] = val;
+            if (val === tfQuestions[idx].answer) {
+                scores.task1++;
+                updateTotalScore();
+            }
+            renderTask1();
+        }
+
+        function resetTask1() {
+            tfUserAnswers = new Array(tfQuestions.length).fill(null);
+            scores.task1 = 0;
+            updateTotalScore();
+            renderTask1();
+        }
+
+        // =========================================================
+        // SPEL 1: KOBLE SAMAN OMGREP OG FORKLARING (5 POENG)
+        // =========================================================
+        const matchData = [
+            { id: 1, term: "Weimarrepublikken", def: "Det nye tyske demokratiet som oppstod då keisaren gjekk av i 1918." },
+            { id: 2, term: "Folkeforbundet", def: "Internasjonal organisasjon oppretta for å sikra verdsfreden etter 1918." },
+            { id: 3, term: "Brest-Litovsk-freden", def: "Avtalen som trekte Russland ut av den første verdskrigen i mars 1918." },
+            { id: 4, term: "Versaillestraktaten", def: "Fredsavtalen der Tyskland fekk skulda for krigen og måtte betala erstatningar." },
+            { id: 5, term: "Folkesuverenitet", def: "Prinsippet om at nasjonar sjølve skal få styra over eige land." }
+        ];
+
+        let selectedTermId = null;
+        let selectedDefId = null;
+        let matchedSet = new Set();
+        let isMatchError = false;
+        let shuffledTerms = [];
+        let shuffledDefs = [];
+
+        function shuffle(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function initMatchGame() {
+            selectedTermId = null;
+            selectedDefId = null;
+            matchedSet.clear();
+            isMatchError = false;
+            scores.game1 = 0;
+            updateTotalScore();
+            document.getElementById('match-success-banner').classList.add('hidden');
+            shuffledTerms = shuffle(matchData);
+            shuffledDefs = shuffle(matchData);
+            renderMatchGame();
+        }
+
+        function renderMatchGame() {
+            const termsCol = document.getElementById('match-terms-col');
+            const defsCol = document.getElementById('match-defs-col');
+            document.getElementById('match-counter').textContent = `${matchedSet.size} / ${matchData.length} kopla`;
+
+            termsCol.innerHTML = shuffledTerms.map(item => {
+                const done = matchedSet.has(item.id);
+                const selected = selectedTermId === item.id;
+                const wrong = isMatchError && selected;
+
+                let cls = 'bg-parchment-50 border-parchment-300 text-slatehist-900 hover:border-burgundy-600 hover:bg-burgundy-700/5';
+                if (done) {
+                    cls = 'bg-emerald-50 border-emerald-400 text-emerald-900 opacity-75 cursor-default';
+                } else if (wrong) {
+                    cls = 'bg-rose-100 border-rose-500 text-rose-900';
+                } else if (selected) {
+                    cls = 'bg-burgundy-700 border-burgundy-700 text-white shadow-sm';
+                }
+
+                return `
+                    <button onclick="pickTerm(${item.id})" ${done ? 'disabled' : ''} class="no-select w-full text-left p-4 rounded-xl border-2 font-serif font-bold text-sm sm:text-base transition cursor-pointer flex items-center justify-between gap-2 ${cls}">
+                        <span>${item.term}</span>
+                        ${done ? '<i class="fa-solid fa-check text-emerald-600"></i>' : '<i class="fa-solid fa-circle-dot text-xs opacity-40"></i>'}
+                    </button>
+                `;
+            }).join('');
+
+            defsCol.innerHTML = shuffledDefs.map(item => {
+                const done = matchedSet.has(item.id);
+                const selected = selectedDefId === item.id;
+                const wrong = isMatchError && selected;
+
+                let cls = 'bg-parchment-50 border-parchment-300 text-slatehist-800 hover:border-slatehist-700 hover:bg-parchment-100';
+                if (done) {
+                    cls = 'bg-emerald-50 border-emerald-400 text-emerald-900 opacity-75 cursor-default';
+                } else if (wrong) {
+                    cls = 'bg-rose-100 border-rose-500 text-rose-900';
+                } else if (selected) {
+                    cls = 'bg-slatehist-800 border-slatehist-800 text-white shadow-sm';
+                }
+
+                return `
+                    <button onclick="pickDef(${item.id})" ${done ? 'disabled' : ''} class="no-select w-full text-left p-4 rounded-xl border-2 font-medium text-sm transition cursor-pointer flex items-center justify-between gap-3 ${cls}">
+                        <span>${item.def}</span>
+                        ${done ? '<i class="fa-solid fa-check text-emerald-600 shrink-0"></i>' : ''}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function pickTerm(id) {
+            if (matchedSet.has(id) || isMatchError) return;
+            selectedTermId = (selectedTermId === id) ? null : id;
+            evaluateMatch();
+            renderMatchGame();
+        }
+
+        function pickDef(id) {
+            if (matchedSet.has(id) || isMatchError) return;
+            selectedDefId = (selectedDefId === id) ? null : id;
+            evaluateMatch();
+            renderMatchGame();
+        }
+
+        function evaluateMatch() {
+            if (selectedTermId !== null && selectedDefId !== null) {
+                if (selectedTermId === selectedDefId) {
+                    matchedSet.add(selectedTermId);
+                    selectedTermId = null;
+                    selectedDefId = null;
+                    scores.game1 = matchedSet.size;
+                    updateTotalScore();
+                    if (matchedSet.size === matchData.length) {
+                        document.getElementById('match-success-banner').classList.remove('hidden');
+                    }
+                } else {
+                    isMatchError = true;
+                    setTimeout(() => {
+                        selectedTermId = null;
+                        selectedDefId = null;
+                        isMatchError = false;
+                        renderMatchGame();
+                    }, 600);
+                }
+            }
+        }
+
+        // =========================================================
+        // SPEL 2: KVEN ELLER KVA ER EG? (GÅTER - 3 POENG)
+        // =========================================================
+        const riddlesData = [
+            {
+                clue: "«Eg var amerikansk president, og eg hadde ein plan for varig fred. Eg ville at folkeslag skulle få styra seg sjølve, og eg tok initiativ til ein ny internasjonal fredsorganisasjon.»",
+                question: "Kven er eg?",
+                accepted: ["woodrow wilson", "wilson", "president wilson", "president woodrow wilson"],
+                canonical: "Woodrow Wilson"
+            },
+            {
+                clue: "«Eg er ei politisk retning som fekk makta i Russland i 1917. Nokre såg på meg som redninga for arbeidarklassen, medan andre frykta at eg skulle ta frå dei eigedom og makt.»",
+                question: "Kva er eg?",
+                accepted: ["kommunismen", "kommunisme"],
+                canonical: "Kommunismen"
+            },
+            {
+                clue: "«Eg vart grunnlagd på ruinane av Det austerriksk-ungarske riket og samla fleire slaviske folkeslag på Balkan i éin ny stat.»",
+                question: "Kva land er eg?",
+                accepted: ["jugoslavia"],
+                canonical: "Jugoslavia"
+            }
+        ];
+
+        let riddleStates = riddlesData.map(() => ({ solved: false, revealed: false, input: "", feedback: null }));
+
+        function renderRiddles() {
+            const container = document.getElementById('riddles-container');
+            container.innerHTML = '';
+
+            riddlesData.forEach((item, idx) => {
+                const st = riddleStates[idx];
+                const div = document.createElement('div');
+                div.className = `p-5 rounded-2xl border transition ${
+                    st.solved
+                        ? 'bg-emerald-50/70 border-emerald-300'
+                        : st.revealed
+                        ? 'bg-parchment-100 border-parchment-300'
+                        : 'bg-parchment-50 border-parchment-200'
+                }`;
+
+                div.innerHTML = `
+                    <div class="flex items-start gap-3.5">
+                        <span class="w-8 h-8 rounded-full bg-burgundy-700 text-white font-serif font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">${idx + 1}</span>
+                        <div class="w-full space-y-3">
+                            <p class="italic font-serif text-slatehist-900 text-sm sm:text-base leading-relaxed">${item.clue}</p>
+                            <p class="font-bold text-burgundy-800 text-sm">${item.question}</p>
+                            <div class="flex flex-wrap items-center gap-2.5 no-print">
+                                <input type="text" id="riddle-input-${idx}" value="${st.input}" ${st.solved || st.revealed ? 'disabled' : ''} onkeydown="if(event.key==='Enter') checkRiddle(${idx})" placeholder="Skriv svaret ditt her..." class="flex-1 min-w-[200px] rounded-xl border border-parchment-300 bg-white px-3.5 py-2 text-sm font-semibold text-slatehist-900 focus:outline-none focus:ring-2 focus:ring-burgundy-600 disabled:bg-parchment-100">
+                                <button onclick="checkRiddle(${idx})" ${st.solved || st.revealed ? 'disabled' : ''} class="bg-burgundy-700 hover:bg-burgundy-800 disabled:opacity-50 text-white font-bold px-4 py-2 rounded-xl text-sm transition cursor-pointer">
+                                    Sjekk svar
+                                </button>
+                                <button onclick="revealRiddle(${idx})" ${st.solved || st.revealed ? 'disabled' : ''} class="bg-white hover:bg-parchment-100 disabled:opacity-50 text-slatehist-700 border border-parchment-300 font-semibold px-3.5 py-2 rounded-xl text-sm transition cursor-pointer">
+                                    Vis fasit
+                                </button>
+                            </div>
+                            ${
+                                st.feedback
+                                    ? `<div class="text-sm font-semibold flex items-center gap-2 animate-pop ${
+                                          st.solved ? 'text-emerald-800' : st.revealed ? 'text-slatehist-800' : 'text-rose-700'
+                                      }">
+                                        <i class="fa-solid ${st.solved ? 'fa-circle-check text-emerald-600' : st.revealed ? 'fa-lightbulb text-amber-600' : 'fa-circle-xmark text-rose-600'}"></i>
+                                        <span>${st.feedback}</span>
+                                       </div>`
+                                    : ''
+                            }
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function checkRiddle(idx) {
+            const st = riddleStates[idx];
+            if (st.solved || st.revealed) return;
+            const inputEl = document.getElementById(`riddle-input-${idx}`);
+            const rawVal = inputEl.value.trim();
+            st.input = rawVal;
+
+            if (!rawVal) {
+                st.feedback = "Skriv inn eit forslag først!";
+                renderRiddles();
+                return;
+            }
+
+            const normalized = rawVal.toLowerCase().replace(/[.!?]/g, '').trim();
+            if (riddlesData[idx].accepted.includes(normalized)) {
+                st.solved = true;
+                st.input = riddlesData[idx].canonical;
+                st.feedback = `Rett svar! Fasit: ${riddlesData[idx].canonical}. (+1 poeng)`;
+                scores.game2++;
+                updateTotalScore();
+            } else {
+                st.feedback = "Ikkje heilt rett – prøv igjen, eller sjå i fagteksten!";
+            }
+            renderRiddles();
+        }
+
+        function revealRiddle(idx) {
+            const st = riddleStates[idx];
+            if (st.solved || st.revealed) return;
+            st.revealed = true;
+            st.input = riddlesData[idx].canonical;
+            st.feedback = `Fasit: ${riddlesData[idx].canonical}.`;
+            renderRiddles();
+        }
+
+        function resetRiddles() {
+            riddleStates = riddlesData.map(() => ({ solved: false, revealed: false, input: "", feedback: null }));
+            scores.game2 = 0;
+            updateTotalScore();
+            renderRiddles();
+        }
+
+        // =========================================================
+        // OPPGÅVE 2: FYLL INN ORDA SOM MANGLAR (LUKETEKST - 5 POENG)
+        // =========================================================
+        const clozeCorrect = ["keisarrike", "krigserstatningar", "pasifisme", "røysterett", "fascisme"];
+        const clozeBankList = ["røysterett", "keisarrike", "fascisme", "pasifisme", "krigserstatningar"];
+        let slotValues = new Array(clozeCorrect.length).fill(null);
+        let clozeEvaluated = false;
+
+        function renderCloze() {
+            const bankEl = document.getElementById('cloze-bank');
+            bankEl.innerHTML = clozeBankList.map(word => {
+                const used = slotValues.includes(word);
+                if (used) {
+                    return `<span class="px-3.5 py-2 rounded-xl bg-parchment-200/70 text-slatehist-700/40 font-semibold text-sm border border-parchment-200 line-through select-none">${word}</span>`;
+                }
+                return `
+                    <button type="button" onclick="insertWordFromBank('${word}')" class="px-4 py-2 rounded-xl bg-white hover:bg-burgundy-700 hover:text-white text-slatehist-900 font-bold text-sm border border-parchment-300 shadow-2xs transition cursor-pointer">
+                        ${word}
+                    </button>
+                `;
+            }).join('');
+
+            const slots = document.querySelectorAll('.cloze-slot');
+            slots.forEach((slot, idx) => {
+                const val = slotValues[idx];
+                slot.className = 'cloze-slot inline-flex items-center justify-center min-w-[125px] h-9 px-3 mx-1 align-middle rounded-lg border-2 font-bold text-sm sm:text-base transition cursor-pointer';
+
+                if (!val) {
+                    slot.textContent = `[ ${idx + 1} ]`;
+                    slot.classList.add('border-dashed', 'border-burgundy-600/60', 'bg-white', 'text-burgundy-800', 'hover:bg-burgundy-700/5');
+                } else {
+                    slot.textContent = val;
+                    if (clozeEvaluated) {
+                        if (val === clozeCorrect[idx]) {
+                            slot.classList.add('border-solid', 'border-emerald-600', 'bg-emerald-100', 'text-emerald-950');
+                        } else {
+                            slot.classList.add('border-solid', 'border-rose-600', 'bg-rose-100', 'text-rose-950');
+                        }
+                    } else {
+                        slot.classList.add('border-solid', 'border-burgundy-700', 'bg-burgundy-700/10', 'text-burgundy-900');
+                    }
+                }
+            });
+        }
+
+        function insertWordFromBank(word) {
+            const firstEmptyIdx = slotValues.findIndex(v => v === null);
+            if (firstEmptyIdx === -1) return;
+            clozeEvaluated = false;
+            document.getElementById('cloze-feedback').textContent = '';
+            slotValues[firstEmptyIdx] = word;
+            renderCloze();
+        }
+
+        function handleSlotClick(idx) {
+            if (slotValues[idx] !== null) {
+                clozeEvaluated = false;
+                document.getElementById('cloze-feedback').textContent = '';
+                slotValues[idx] = null;
+                renderCloze();
+            }
+        }
+
+        function checkCloze() {
+            const fb = document.getElementById('cloze-feedback');
+            if (slotValues.includes(null)) {
+                fb.className = 'text-sm font-semibold text-amber-800';
+                fb.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> Fyll inn alle dei fem lukene før du sjekkar svara!';
+                return;
+            }
+
+            clozeEvaluated = true;
+            let right = 0;
+            slotValues.forEach((v, i) => {
+                if (v === clozeCorrect[i]) right++;
+            });
+
+            scores.task2 = right;
+            updateTotalScore();
+            renderCloze();
+
+            if (right === clozeCorrect.length) {
+                fb.className = 'text-sm font-bold text-emerald-800 animate-pop';
+                fb.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Helt rett! Alle 5 orda står på rett plass.';
+            } else {
+                fb.className = 'text-sm font-semibold text-rose-800 animate-pop';
+                fb.innerHTML = `<i class="fa-solid fa-circle-info mr-1"></i> ${right} av 5 rett. Klikk på dei raude orda for å fjerna dei og prøva på nytt!`;
+            }
+        }
+
+        function resetCloze() {
+            slotValues = new Array(clozeCorrect.length).fill(null);
+            clozeEvaluated = false;
+            scores.task2 = 0;
+            updateTotalScore();
+            document.getElementById('cloze-feedback').textContent = '';
+            renderCloze();
+        }
+
+        // =========================================================
+        // DEL 2: LAGRING OG EKSPORT AV SNL-SVAR
+        // =========================================================
+        const snlFieldIds = ['snl-a1', 'snl-a2', 'snl-b1', 'snl-b2', 'snl-c1', 'snl-c2', 'snl-d1', 'snl-d2'];
+
+        function saveNotes() {
+            const data = {};
+            snlFieldIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) data[id] = el.value;
+            });
+            try {
+                localStorage.setItem('ww1_snl_answers_nn', JSON.stringify(data));
+            } catch (e) {
+                // Ignorer dersom localStorage er blokkert i iframe
+            }
+        }
+
+        function loadNotes() {
+            try {
+                const saved = localStorage.getItem('ww1_snl_answers_nn');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    snlFieldIds.forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el && data[id]) el.value = data[id];
+                    });
+                }
+            } catch (e) {
+                // Ignorer
+            }
+        }
+
+        function buildFormattedAnswersText() {
+            const v = id => (document.getElementById(id)?.value.trim() || '(Ikkje svart)');
+            return [
+                "KJELDEOPPGÅVER (SNL): POLITISKE KONSEKVENSAR AV DEN FØRSTE VERDSKRIGEN",
+                "========================================================================",
+                "",
+                "OPPGÅVE A: Woodrow Wilson og dei 14 punkta",
+                "1. Hovudtanken bak Wilson sine «14 punkt»:",
+                v('snl-a1'),
+                "",
+                "2. Kvifor USA ikkje vart medlem av Folkeforbundet:",
+                v('snl-a2'),
+                "",
+                "------------------------------------------------------------------------",
+                "OPPGÅVE B: Versaillestraktaten og «dolkestøtlegenden»",
+                "1. Tre område Tyskland måtte gi frå seg:",
+                v('snl-b1'),
+                "",
+                "2. Kva dolkestøtlegenden gjekk ut på og korleis ho vart brukt:",
+                v('snl-b2'),
+                "",
+                "------------------------------------------------------------------------",
+                "OPPGÅVE C: Det osmanske riket og Midtausten",
+                "1. Kva som skjedde med dei arabiske områda etter krigen:",
+                v('snl-c1'),
+                "",
+                "2. Korleis stormaktene la grunnlaget for seinare konfliktar i Midtausten:",
+                v('snl-c2'),
+                "",
+                "------------------------------------------------------------------------",
+                "OPPGÅVE D: Kvinner og arbeid etter krigen",
+                "1. Typar arbeid kvinner tok over under krigen:",
+                v('snl-d1'),
+                "",
+                "2. Tre europeiske land som innførte røysterett for kvinner (1918–1920):",
+                v('snl-d2'),
+                ""
+            ].join("\n");
+        }
+
+        function showExportStatus(msg) {
+            const box = document.getElementById('export-status');
+            const text = document.getElementById('export-status-text');
+            text.textContent = msg;
+            box.classList.remove('hidden');
+        }
+
+        function copyAllAnswers() {
+            const fullText = buildFormattedAnswersText();
+            const tempArea = document.createElement('textarea');
+            tempArea.value = fullText;
+            tempArea.style.position = 'fixed';
+            tempArea.style.left = '-9999px';
+            document.body.appendChild(tempArea);
+            tempArea.select();
+            try {
+                document.execCommand('copy');
+                showExportStatus('Alle svara dine er kopierte til utklippstavla! Du kan no lima dei rett inn i eit dokument eller ei innlevering.');
+            } catch (err) {
+                showExportStatus('Kunne ikkje kopiera automatisk – bruk knappen «Last ned (.txt)» i staden.');
+            }
+            document.body.removeChild(tempArea);
+        }
+
+        function downloadAnswersTxt() {
+            const fullText = buildFormattedAnswersText();
+            const blob = new Blob([fullText], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'SNL_svar_forste_verdskrig.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showExportStatus('Tekstfila «SNL_svar_forste_verdskrig.txt» er lasta ned!');
+        }
+
+        // Initialiser alle oppgåver ved oppstart
+        window.addEventListener('DOMContentLoaded', () => {
+            renderTask1();
+            initMatchGame();
+            renderRiddles();
+            renderCloze();
+            loadNotes();
+        });
+    </script>
+</body>
+</html>
