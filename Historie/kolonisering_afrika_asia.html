@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koloniseringa av Afrika og Asia (frå 1884) – Historie VG3</title>
+    <style>
+        :root {
+            --bg-color: #f4f1ea;
+            --card-bg: #ffffff;
+            --primary: #2b3a4a;
+            --secondary: #8c3b2b;
+            --accent: #c58b2a;
+            --text: #222222;
+            --muted: #5a626a;
+            --border: #dcd6c8;
+            --success: #2e6f40;
+            --error: #a62c2b;
+            --activity-bg: #f9f6ee;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a242f 100%);
+            color: #fff;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+        }
+
+        header h1 {
+            font-size: 2.1rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        header p {
+            font-size: 1.05rem;
+            color: #d8dee4;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        nav {
+            background-color: #1f2b37;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.7rem 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+        }
+
+        nav a {
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            padding: 0.4rem 0.85rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: #1a242f;
+        }
+
+        main {
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 0 1.25rem;
+        }
+
+        .info-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.85rem;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            scroll-margin-top: 70px;
+        }
+
+        .info-card h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.85rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.35rem;
+        }
+
+        .info-card h3 {
+            color: var(--secondary);
+            font-size: 1.15rem;
+            margin: 1.25rem 0 0.5rem 0;
+        }
+
+        .info-card p {
+            margin-bottom: 1rem;
+        }
+
+        .info-card ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card li {
+            margin-bottom: 0.4rem;
+        }
+
+        .fact-box {
+            background-color: #f4f1ea;
+            border-left: 4px solid var(--secondary);
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .fact-box strong {
+            color: var(--secondary);
+        }
+
+        .poem-quote {
+            background-color: #2b3a4a;
+            color: #f4f1ea;
+            padding: 1.25rem 1.5rem;
+            border-radius: 6px;
+            font-family: Georgia, serif;
+            font-style: italic;
+            margin: 1rem 0;
+            border-left: 5px solid var(--accent);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table th, .comparison-table td {
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #faf8f3;
+        }
+
+        .activity-block {
+            background-color: var(--activity-bg);
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.65rem;
+            margin-bottom: 2.75rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .activity-badge {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #1a242f;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            padding: 0.25rem 0.65rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-block h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .sub-task {
+            background-color: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.2rem;
+            margin-top: 1.1rem;
+        }
+
+        .sub-task h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 0.55rem 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: background 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: #1a242f;
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: #1a242f;
+        }
+
+        .btn-accent:hover {
+            background-color: #b07a20;
+        }
+
+        .sequence-list {
+            list-style: none;
+            margin: 0.75rem 0;
+        }
+
+        .sequence-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            background-color: #faf8f3;
+            border: 1px solid var(--border);
+            padding: 0.65rem 0.9rem;
+            margin-bottom: 0.45rem;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+
+        .sequence-item.correct {
+            background-color: #e6f3ea;
+            border-color: var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .sequence-item.wrong {
+            background-color: #fbeaea;
+            border-color: var(--error);
+        }
+
+        .seq-btns button {
+            background-color: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 0.25rem 0.55rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 0.2rem;
+        }
+
+        .seq-btns button:hover {
+            background-color: var(--accent);
+            color: #1a242f;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .memory-card {
+            background-color: var(--primary);
+            color: #fff;
+            min-height: 105px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0.65rem;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            user-select: none;
+            border: 2px solid #1a242f;
+            transition: background-color 0.2s;
+        }
+
+        .memory-card.flipped {
+            background-color: #fff;
+            color: var(--text);
+            border-color: var(--accent);
+        }
+
+        .memory-card.matched {
+            background-color: #e6f3ea;
+            color: var(--success);
+            border-color: var(--success);
+            cursor: default;
+        }
+
+        .sort-item-pool {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin: 0.75rem 0;
+            padding: 0.75rem;
+            background-color: #efeae0;
+            border-radius: 6px;
+            min-height: 52px;
+        }
+
+        .sort-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.9rem;
+        }
+
+        @media (max-width: 650px) {
+            .sort-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .sort-box {
+            background-color: #faf8f3;
+            border: 2px dashed var(--primary);
+            border-radius: 6px;
+            padding: 0.85rem;
+            min-height: 155px;
+            cursor: pointer;
+        }
+
+        .sort-box h5 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .sort-chip {
+            background-color: #fff;
+            border: 1px solid var(--primary);
+            padding: 0.45rem 0.7rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            transition: all 0.15s;
+        }
+
+        .sort-chip.selected {
+            background-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .sort-chip.correct {
+            background-color: #e6f3ea;
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .sort-chip.wrong {
+            background-color: #fbeaea;
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .match-row {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 0.75rem;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        @media (max-width: 650px) {
+            .match-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        select.ideology-select {
+            padding: 0.45rem;
+            border-radius: 4px;
+            border: 1px solid var(--primary);
+            font-size: 0.9rem;
+            background-color: #faf8f3;
+        }
+
+        .feedback-msg {
+            margin-top: 0.5rem;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        details.reflection {
+            margin-top: 0.85rem;
+            background-color: #f4f1ea;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            border-left: 3px solid var(--primary);
+        }
+
+        details.reflection summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        details.reflection .answer-guide {
+            margin-top: 0.5rem;
+            font-size: 0.92rem;
+            color: #333;
+        }
+
+
+        .resource-link {
+            display: inline-block;
+            margin: 0.35rem 0 0.85rem 0;
+            padding: 0.45rem 0.85rem;
+            background-color: #f4f1ea;
+            border: 1px solid var(--secondary);
+            border-radius: 5px;
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.93rem;
+            transition: all 0.2s;
+        }
+
+        .resource-link:hover {
+            background-color: var(--secondary);
+            color: #fff;
+        }
+
+        .answer-textarea {
+            width: 100%;
+            min-height: 115px;
+            padding: 0.75rem;
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: 0.6rem;
+            background-color: #fcfbf8;
+            resize: vertical;
+        }
+
+        .answer-textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background-color: #ffffff;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #6e2d20;
+        }
+
+        .export-box {
+            background-color: #ffffff;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 1.75rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .export-box h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.45rem;
+        }
+
+        .student-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 650px) {
+            .student-meta {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .student-meta label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .student-meta input {
+            width: 100%;
+            padding: 0.5rem 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .export-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        @media print {
+            nav, .activity-block .btn, .seq-btns, .export-actions, details.reflection {
+                display: none !important;
+            }
+            body {
+                background-color: #fff;
+            }
+            .info-card, .activity-block, .export-box {
+                box-shadow: none;
+                break-inside: avoid;
+            }
+        }
+
+        footer {
+            background-color: var(--primary);
+            color: #d8dee4;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Nyimperialismen: Koloniseringa av Afrika og Asia</h1>
+    <p>Les bolkane i rekkjefølgje og løys spela og oppgåvene undervegs for å festa stoffet.</p>
+</header>
+
+<nav>
+    <a href="#del1">1. India &amp; Sepoyopprøret</a>
+    <a href="#del2">2. Berlinkonferansen 1884</a>
+    <a href="#del3">3. Framhald og brot</a>
+    <a href="#del4">4. Raseideologi &amp; Kipling</a>
+    <a href="#eksport">Last ned svar (Word / PDF)</a>
+</nav>
+
+<main>
+
+    <!-- =================================================================== -->
+    <!-- INFOBLOKK 1: INDIA                                                  -->
+    <!-- =================================================================== -->
+    <article id="del1" class="info-card">
+        <h2>1. India, Sepoyopprøret og den industrielle revolusjonen</h2>
+        <p>Før år 1800 var både India og Kina på mange område økonomisk og teknologisk på høgd med Europa. India var ein storeksportør av bomullsklede av høg kvalitet og rekna som eit av verdas rikaste område. Tidleg på 1600-talet (1600/1602) hadde britane oppretta handelskompaniet <strong>British East India Company</strong>. Etter å ha blitt pressa ut av krydderhandelen i Indonesia av nederlendarane, etablerte kompaniet seg i India og skaffa seg gradvis militær og politisk kontroll over store delar av subkontinentet.</p>
+
+        <p>Gjennom dei såkalla <strong>Calico-lovane</strong> (<em>Calico Acts</em>, særleg lovvedtaka i <strong>1700</strong> og <strong>1721</strong>) avgrensa og forbød britiske styresmakter import og bruk av trykte og farga bomullstekstilar (<em>calico</em>) frå India for å verna eigne produsentar og ull- og silkeindustrien. Dette gav britiske aktørar vern og tid til å byggja opp eigen produksjon lenge før maskinell masseproduksjon og koloniherredømmet under krona tok over.</p>
+
+        <p>Med den industrielle revolusjonen i Storbritannia frå slutten av 1700-talet kunne britiske tekstilfabrikkar masseprodusera bomullsklede til låge prisar. For å sikra sin eigen industri gjorde britane to grep:</p>
+        <ul>
+            <li>Dei stengde ute indiske bomullsklede frå marknaden og slo ned på indisk tekstilproduksjon.</li>
+            <li>India blei tvinga inn i ei rolle som råvareleverandør som skulle selja billeg råbomull til fabrikkane i England, og deretter kjøpa ferdige klede tilbake frå Storbritannia.</li>
+        </ul>
+
+        <a class="resource-link" href="https://en.wikipedia.org/wiki/De-industrialisation_of_India" target="_blank" rel="noopener noreferrer">Les meir om deindustrialiseringa av India og Calico-lovane (Wikipedia) ↗</a>
+
+        <div class="fact-box">
+            <strong>Sepoyopprøret (1857–1858):</strong> Misnøya med britisk utbytting, høge skattar og kulturell og religiøs innblanding førte i 1857 til eit stort opprør blant indiske soldatar (<em>sepoyar</em>) i teneste for Det britiske austindiakompaniet. Opprøret blei slått brutalt ned. Konsekvensen var at den britiske staten oppløyste kompaniet i 1858 og la India direkte under den britiske krona (<em>British Raj</em>). Rundt 1900 var India blitt eit fattig land der store delar av kleda folk gjekk med var produserte i England.
+        </div>
+    </article>
+
+    <!-- AKTIVITETSBLOKK 1 (MELLOM DEL 1 OG 2) -->
+    <section class="activity-block" aria-label="Oppgåver til del 1">
+        <span class="activity-badge">Stopp og jobb med stoffet • Del 1</span>
+        <h3>Spel og oppgåver: Industrialiseringa og India</h3>
+
+        <div class="sub-task">
+            <h4>Spel 1: Sett årsakskjeda i rett historisk rekkjefølgje</h4>
+            <p style="font-size: 0.92rem;">Bruk pilene (↑ / ↓) til å ordna hendingane frå eldst (øvst) til nyast (nedst), slik at du viser korleis India gjekk frå rik tekstileksportør til fattig råvarekoloni.</p>
+            <ul class="sequence-list" id="seq-list"></ul>
+            <button class="btn" onclick="checkSequence()">Sjekk rekkjefølgje</button>
+            <button class="btn btn-accent" onclick="initSequence()">Bland på nytt</button>
+            <div class="feedback-msg" id="seq-feedback"></div>
+        </div>
+
+        <div class="sub-task">
+            <h4>Oppgåve 1: Forklar samanhengen (munnleg eller skriftleg)</h4>
+            <p id="q1-prompt" style="font-size: 0.95rem;">Korleis heng den industrielle revolusjonen i England saman med at India blei fattigare på 1800-talet, og kva blei den politiske konsekvensen av Sepoyopprøret i 1857?</p>
+            <textarea id="ans-1" class="answer-textarea" placeholder="Skriv svaret ditt på oppgåve 1 her..." oninput="saveAnswers()"></textarea>
+            <details class="reflection">
+                <summary>Vis løysingsforslag</summary>
+                <div class="answer-guide">
+                    Britiske tekstilfabrikkar trong billeg råbomull og ville bli kvitt konkurransen frå indiske vevarar. Difor stengde britane ute indiske klede og gjorde India til råvareleverandør og marknad for britiske industrivarer. Misnøya med denne politikken utløyste Sepoyopprøret i 1857. Då opprøret blei slått ned, tok den britiske staten over styret direkte frå handelskompaniet i 1858.
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- INFOBLOKK 2: BERLINKONFERANSEN                                      -->
+    <!-- =================================================================== -->
+    <article id="del2" class="info-card">
+        <h2>2. Berlinkonferansen (1884–1885) og kappløpet om Afrika</h2>
+        <p>Fram til 1870-åra hadde europearane berre kontrollert avgrensa kystområde og handelsstasjonar i Afrika, i tillegg til Sør-Afrika og Algerie. Rundt 1880 skaut konkurransen mellom dei europeiske stormaktene fart i det som blir kalla <strong>«kappløpet om Afrika»</strong>. Dei nye industrilanda trong sikre råvarekjelder (gummi, palmeolje, kopar, gull, diamantar), nye marknader og nasjonal prestisje.</p>
+
+        <p>For å hindra at rivaliseringa om afrikanske område skulle utløysa krig mellom stormaktene i Europa, kalla den tyske rikskanslaren <strong>Otto von Bismarck</strong> inn til <strong>Berlinkonferansen (november 1884 – februar 1885)</strong>. Fjorten statar deltok – mellom anna Storbritannia, Frankrike, Tyskland, Belgia, Portugal og USA – men <strong>ingen afrikanske leiarar var inviterte</strong>.</p>
+
+        <a class="resource-link" href="https://snl.no/Berlinkonferansen" target="_blank" rel="noopener noreferrer">Les meir om Berlinkonferansen på Store norske leksikon ↗</a>
+        <a class="resource-link" href="https://snl.no/Afrikas_historie" target="_blank" rel="noopener noreferrer">Les meir om Afrikas historie på Store norske leksikon ↗</a>
+
+        <h3>Hovudresultata frå Berlinkonferansen:</h3>
+        <ul>
+            <li><strong>Prinsippet om «effektiv okkupasjon»:</strong> Eit europeisk land kunne ikkje lenger berre gjera krav på eit område på papiret; det måtte visa at det faktisk hadde militær og administrativ kontroll på staden. Dette utløyste eit kappløp innover på kontinentet for å sikra seg land før konkurrentane.</li>
+            <li><strong>Kongofristaten:</strong> Kong Leopold II av Belgia fekk personleg anerkjenning som herskar over det enorme Kongo-bassenget, formelt som ein frihandelssone, men i røynda eit brutalt tvangsarbeidsregime.</li>
+            <li><strong>Kunstige grenser:</strong> Stormaktene trekte grenser med linjal på kartet utan omsyn til eksisterande rike, språk, kulturar eller folkegrupper. Fram mot 1914 var heile Afrika – med unntak av Etiopia og Liberia – delt mellom europeiske kolonimakter.</li>
+        </ul>
+    </article>
+
+    <!-- AKTIVITETSBLOKK 2 (MELLOM DEL 2 OG 3) -->
+    <section class="activity-block" aria-label="Oppgåver til del 2">
+        <span class="activity-badge">Stopp og jobb med stoffet • Del 2</span>
+        <h3>Spel og oppgåver: Berlinkonferansen 1884–1885</h3>
+
+        <div class="sub-task">
+            <h4>Spel 2: Finn para (Memory om Berlinkonferansen)</h4>
+            <p style="font-size: 0.92rem;">Klikk på to kort om gongen for å kopla saman person/omgrep og rett forklaring. (Par funne: <strong id="pairs-count">0</strong>/4)</p>
+            <div class="memory-grid" id="memory-grid"></div>
+            <button class="btn btn-accent" onclick="initMemoryGame()" style="margin-top: 0.75rem;">Start memory på nytt</button>
+        </div>
+
+        <div class="sub-task">
+            <h4>Oppgåve 2: Linjal-grenser og langtidskonsekvensar</h4>
+            <p id="q2-prompt" style="font-size: 0.95rem;">På Berlinkonferansen var ingen afrikanarar til stades, og grensene blei trekte på kartet i Berlin. Kva problem skapte dette for afrikanske samfunn både i kolonitida og etter at landa blei sjølvstendige på 1950- og 1960-talet?</p>
+            <textarea id="ans-2" class="answer-textarea" placeholder="Skriv svaret ditt på oppgåve 2 her..." oninput="saveAnswers()"></textarea>
+            <details class="reflection">
+                <summary>Vis løysingsforslag</summary>
+                <div class="answer-guide">
+                    Samanhengande folkegrupper, språk og tidlegare rike blei splitta på tvers av nye kolonigrenser, samtidig som grupper utan felles historie eller med gamle motsetningar blei tvinga inn i same stat. Då koloniane blei sjølvstendige statar med dei same grensene, førte dette til indre spenningar, politisk ustabilitet og borgarkrigar i fleire land.
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- INFOBLOKK 3: FRAMHALD OG BROT                                       -->
+    <!-- =================================================================== -->
+    <article id="del3" class="info-card">
+        <h2>3. Koloniseringa etter 1884: Framhald og brot med tidlegare kolonialisme</h2>
+        <p>Koloniseringa etter 1884 – ofte kalla <strong>nyimperialismen</strong> – bygde vidare på hundreår med europeisk ekspansjon, men skilde seg samtidig tydeleg frå den eldre kolonialismen (1500–1800).</p>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Dimensjon</th>
+                    <th>Eldre kolonialisme (ca. 1500–1870)</th>
+                    <th>Nyimperialismen (ca. 1880–1914)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Geografisk omfang i Afrika</strong></td>
+                    <td>Avgrensa til kystfort, handelsstasjonar og øyar (t.d. slavehandel og krydderhandel).</td>
+                    <td>Fullstendig territoriell erobring og direkte politisk styre over heile innlandet.</td>
+                </tr>
+                <tr>
+                    <td><strong>Drivkrefter i økonomien</strong></td>
+                    <td>Handelskapitalisme og merkantilisme: jakta på krydder, sølv, sukker, tobakk og slavar.</td>
+                    <td>Industrikapitalisme: behov for industrielle råvarer (gummi, mineral) og avsetningsmarknader.</td>
+                </tr>
+                <tr>
+                    <td><strong>Teknologisk styrkeforhold</strong></td>
+                    <td>Europearane hadde fordelar til sjøs, men var ofte jambyrdige eller underlegne på land i Asia og det indre Afrika.</td>
+                    <td>Total industriell og militær overmakt: dampskip, telegraf, kinin (mot malaria) og repetergevær/maskingevær (t.d. slaget ved Omdurman i 1898, der 11 000 sudanesarar fall mot 49 britar).</td>
+                </tr>
+                <tr>
+                    <td><strong>Aktørar og organisering</strong></td>
+                    <td>Ofte styrte av private handelskompani med kongeleg monopol (som East India Company).</td>
+                    <td>Direkte styre frå europeiske nasjonalstatar, drifta av nasjonalisme og stormaktsprestisje.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Kva var eit framhald?</strong> Utbyttinga av arbeidskraft og ressursar til fordel for Europa heldt fram. Sjølv om den transatlantiske slavehandelen var avskaffa, blei tvangsarbeid, brutale straffemetodar og rasisme vidareført inne i sjølve koloniane – særleg tydeleg i Kong Leopolds Kongo og i tysk Sørvest-Afrika.</p>
+    </article>
+
+    <!-- AKTIVITETSBLOKK 3 (MELLOM DEL 3 OG 4) -->
+    <section class="activity-block" aria-label="Oppgåver til del 3">
+        <span class="activity-badge">Stopp og jobb med stoffet • Del 3</span>
+        <h3>Spel og oppgåver: Før og etter 1884</h3>
+
+        <div class="sub-task">
+            <h4>Spel 3: Sorter kjenneteikna i rett epoke</h4>
+            <p style="font-size: 0.92rem;">Klikk på ein påstand i feltet under, og klikk deretter på den boksen han høyrer heime i.</p>
+            <div class="sort-item-pool" id="sort-pool"></div>
+            <div class="sort-container">
+                <div class="sort-box" onclick="placeChip('old')">
+                    <h5>Eldre kolonialisme (1500–1870)</h5>
+                    <div id="box-old"></div>
+                </div>
+                <div class="sort-box" onclick="placeChip('new')">
+                    <h5>Nyimperialisme (1880–1914)</h5>
+                    <div id="box-new"></div>
+                </div>
+            </div>
+            <button class="btn" onclick="checkSorting()">Sjekk svar</button>
+            <button class="btn btn-accent" onclick="initSortGame()">Nullstill</button>
+            <div class="feedback-msg" id="sort-feedback"></div>
+        </div>
+
+        <div class="sub-task">
+            <h4>Oppgåve 3: Teknologi og maktforhold</h4>
+            <p id="q3-prompt" style="font-size: 0.95rem;">Kva fortel slaget ved Omdurman i Sudan (1898) om kvifor europearane klarte å erobra det indre Afrika på slutten av 1800-talet, når dei ikkje hadde klart det 200 år tidlegare?</p>
+            <textarea id="ans-3" class="answer-textarea" placeholder="Skriv svaret ditt på oppgåve 3 her..." oninput="saveAnswers()"></textarea>
+            <details class="reflection">
+                <summary>Vis løysingsforslag</summary>
+                <div class="answer-guide">
+                    Før den industrielle revolusjonen var europeiske hærar på land ikkje teknologisk overlegne nok til å trengja inn i det indre Afrika, og troppane blei ramma av tropesjukdommar som malaria. På slutten av 1800-talet gav masseproduserte repetergevær og maskingevær (som Maxim-geværet i Omdurman, der 11 000 sudanesarar fall mot 49 britar), saman med dampskip, telegraf og malariamedisinen kinin, europearane ei total militær overmakt.
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- INFOBLOKK 4: RASEIDEOLOGI OG KIPLING                                -->
+    <!-- =================================================================== -->
+    <article id="del4" class="info-card">
+        <h2>4. Raseideologi: Frå «The White Man’s Burden» til Jim Crow og nazismen</h2>
+        <p>For å rettferdiggjera at demokratiske og kristne land i Europa underla seg millionar av menneske med vald, vaks det fram ein sterk <strong>rasistisk og paternalistisk ideologi</strong>. Paternalisme tyder å opptre som ein «far» som meiner han veit best for «barna» sine, og difor tek frå dei sjølvråderetten.</p>
+
+        <p>I 1899 gav den britiske forfattaren <strong>Rudyard Kipling</strong> ut diktet <em>«The White Man’s Burden»</em> («Den kvite manns byrde»), opphavleg skrive for å oppmoda USA til å ta kontroll over Filippinane. I diktet blir koloniseringa framstilt ikkje som grådigheit, men som eit tungt, edelt og utakknemleg pliktoppdrag der kvite europearar og amerikanarar må «sivilisera» og passa på folkeslag som blir skildra som «halvt djevel og halvt barn» (<em>«half-devil and half-child»</em>).</p>
+
+        <div class="poem-quote">
+            «Take up the White Man’s burden – / Send forth the best ye breed – / Go bind your sons to exile / To serve your captives’ need; / To wait in heavy harness, / On fluttered folk and wild – / Your new-caught, sullen peoples, / Half-devil and half-child.»
+            <br><small style="color: #d8dee4; font-style: normal;">— Rudyard Kipling, <em>The White Man’s Burden</em> (1899)</small>
+        </div>
+        <a class="resource-link" href="https://ndla.no/nn/r/engelsk-2/the-white-mans-burden-by-rudyard-kipling/b334717161" target="_blank" rel="noopener noreferrer">Les meir om diktet «The White Man’s Burden» på NDLA (opnar i ny fane) ↗</a>
+
+        <h3>Linjene vidare til USA og nazismen i Europa:</h3>
+        <ul>
+            <li><strong>Sosialdarwinisme og «vitskapleg» rasisme:</strong> På slutten av 1800-talet blei Charles Darwins utviklingslære misbrukt til å hevda at menneskerasar stod i ein naturleg kamp der den «sterkaste» og «mest siviliserte» rasen hadde rett til å herska over dei «svakare».</li>
+            <li><strong>Antisvart rasisme i USA (før og etter 1. verdskrig):</strong> I Sørstatane blei svarte amerikanarar haldne nede gjennom <em>Jim Crow</em>-lovene (raseskilje), valdsbruk og lynsjingar. Då svarte amerikanske soldatar kom heim etter å ha kjempa for «demokrati» i Europa under 1. verdskrig, møtte dei ein bølgje av rasistisk vald i USA (som under <em>Red Summer</em> i 1919). Dei same førestillingane om eit naturleg rasehierarki legitimerte både kolonialisme ute og raseskilje heime.</li>
+            <li><strong>Nazismen i Tyskland:</strong> Adolf Hitler og nazistane vidareførte og radikaliserte denne tenkinga. I <em>Mein Kampf</em> bygde Hitler vidare på idear om rasekamp, sosialdarwinisme og «livsrom» (<em>Lebensraum</em>). Nazistane overførte kolonialistiske metodar – folkeutrydding, tvangsarbeid og rasehierarki – direkte til Europa. Tyske kolonitroppar hadde allereie i 1904–1908 gjennomført det første folkemordet på 1900-talet mot herero- og namafolket i Tysk Sørvest-Afrika (Namibia), der konsentrasjonsleirar og raseteoriar blei tekne i bruk før første verdskrig.</li>
+        </ul>
+    </article>
+
+    <!-- AKTIVITETSBLOKK 4 (ETTER DEL 4) -->
+    <section class="activity-block" aria-label="Oppgåver til del 4">
+        <span class="activity-badge">Stopp og jobb med stoffet • Del 4</span>
+        <h3>Spel og drøftingsoppgåver: Raseideologi og historiske linjer</h3>
+
+        <div class="sub-task">
+            <h4>Spel 4: Kopla påstand/omgrep til rett ideologisk samanheng</h4>
+            <p style="font-size: 0.92rem;">Vel rett kategori i nedtrekksmenyen for kvar påstand.</p>
+
+            <div class="match-row">
+                <div>1. Kolonimaktene opptrer som streng «far» som må sivilisera «barnslege» folkeslag.</div>
+                <select class="ideology-select" id="m1">
+                    <option value="">-- Vel omgrep --</option>
+                    <option value="paternalisme">Paternalisme (Kipling)</option>
+                    <option value="jimcrow">Jim Crow og rasevald i USA</option>
+                    <option value="nazisme">Nazistisk rase- og livsromstenking</option>
+                </select>
+            </div>
+
+            <div class="match-row">
+                <div>2. Lovfesta raseskilje i Sørstatane og rasistiske angrep på heimkomne svarte soldatar etter 1918.</div>
+                <select class="ideology-select" id="m2">
+                    <option value="">-- Vel omgrep --</option>
+                    <option value="paternalisme">Paternalisme (Kipling)</option>
+                    <option value="jimcrow">Jim Crow og rasevald i USA</option>
+                    <option value="nazisme">Nazistisk rase- og livsromstenking</option>
+                </select>
+            </div>
+
+            <div class="match-row">
+                <div>3. Koloniale metodar som konsentrasjonsleirar, tvangsarbeid og utrydding overførte til Europa.</div>
+                <select class="ideology-select" id="m3">
+                    <option value="">-- Vel omgrep --</option>
+                    <option value="paternalisme">Paternalisme (Kipling)</option>
+                    <option value="jimcrow">Jim Crow og rasevald i USA</option>
+                    <option value="nazisme">Nazistisk rase- og livsromstenking</option>
+                </select>
+            </div>
+
+            <div class="match-row">
+                <div>4. Misbruk av Darwins utviklingslære til å hevda at «sterkare» rasar har rett til å dominera «svakare».</div>
+                <select class="ideology-select" id="m4">
+                    <option value="">-- Vel omgrep --</option>
+                    <option value="sosialdarwinisme">Sosialdarwinisme</option>
+                    <option value="paternalisme">Paternalisme (Kipling)</option>
+                    <option value="jimcrow">Jim Crow og rasevald i USA</option>
+                </select>
+            </div>
+
+            <button class="btn" onclick="checkIdeologyMatch()">Sjekk svar</button>
+            <div class="feedback-msg" id="match-feedback"></div>
+        </div>
+
+        <div class="sub-task">
+            <h4>Oppgåve 4: Kjeldeanalyse og drøfting (VGS-nivå)</h4>
+            <p id="q4-prompt" style="font-size: 0.95rem;"><strong>a)</strong> Korleis bruker Rudyard Kipling språket i <em>«The White Man’s Burden»</em> til å snu koloniseringa frå å vera eit overgrep til å bli ei «moralsk plikt»?<br>
+            <strong>b)</strong> Drøft likskapar og skilnader mellom den koloniale rasismen på slutten av 1800-talet og nazismens raseideologi på 1930- og 1940-talet.</p>
+            <a class="resource-link" href="https://ndla.no/nn/r/engelsk-2/the-white-mans-burden-by-rudyard-kipling/b334717161" target="_blank" rel="noopener noreferrer">Opna ressurs om «The White Man’s Burden» på NDLA ↗</a>
+            <textarea id="ans-4" class="answer-textarea" placeholder="Skriv svaret ditt på oppgåve 4 her..." oninput="saveAnswers()"></textarea>
+            <details class="reflection">
+                <summary>Vis løysingsforslag</summary>
+                <div class="answer-guide">
+                    <strong>a)</strong> Kipling kallar koloniseringa ei tung «byrde» og «eksil» for dei kvite sønene som skal «tena» fangane sine behov, medan dei koloniserte blir skildra som «ville» og «halvt djevel og halvt barn». Slik blir erobringa framstilt som oppofrelse og omsorg framfor økonomisk utbytting.<br>
+                    <strong>b)</strong> <em>Likskapar:</em> Begge bygde på sosialdarwinisme, rasehierarki og ideen om den kvite/ariske rasens rett til å dominera (inkludert bruk av konsentrasjonsleirar og folkemord, som mot herero- og namafolket i 1904–1908). <em>Skilnader:</em> Nyimperialismen var ofte grunngitt paternalistisk (å «oppdra» eller «sivilisera» andre folkeslag under europeisk leiing). Nazismen derimot såg på rasekampen som ein eksistensiell krig der andre folkegrupper (særleg jødar) ikkje skulle «siviliserast», men systematisk og industrielt utryddast for å gi «livsrom» til den ariske rasen.
+                </div>
+            </details>
+        </div>
+    </section>
+
+
+    <section id="eksport" class="export-box" aria-label="Last ned svar som Word eller PDF">
+        <h2>Last ned svara dine (Word eller PDF)</h2>
+        <p style="font-size: 0.95rem;">Svara du har skrive inn i oppgåve 1–4, blir lagra automatisk i nettlesaren. Fyll gjerne inn namn og klasse nedanfor og last ned som Word-dokument (.doc) eller PDF.</p>
+
+        <div class="student-meta">
+            <div>
+                <label for="student-name">Namn på elev</label>
+                <input type="text" id="student-name" placeholder="T.d. Ola Nordmann" oninput="saveAnswers()">
+            </div>
+            <div>
+                <label for="student-class">Klasse / fag</label>
+                <input type="text" id="student-class" placeholder="T.d. 3STA – Historie VG3" oninput="saveAnswers()">
+            </div>
+        </div>
+
+        <div class="export-actions">
+            <button class="btn btn-secondary" onclick="downloadWordDoc()">Last ned som Word-fil (.doc)</button>
+            <button class="btn btn-accent" onclick="downloadPdf()">Lagre / skriv ut som PDF</button>
+            <button class="btn" onclick="clearAllAnswers()">Tøm skrivefelta</button>
+        </div>
+        <div class="feedback-msg" id="export-feedback"></div>
+    </section>
+</main>
+
+
+<footer>
+    <p>Fagside for Historie VG3 • Kjelder: Store norske leksikon (<em>Berlinkonferansen</em>, <em>Afrikas historie</em>, <em>Indias historie</em>), Norsk Wikipedia (<em>The White Man's Burden</em>) og førelesingsmateriell om <em>Industri og europeisk kolonialisme</em>.</p>
+</footer>
+
+<script>
+    // --- SPEL 1: ÅRSAKSKJEDE (INDIA) ---
+    const correctSequence = [
+        "Før 1800 er India eit av verdas rikaste land og storeksportør av bomullsklede.",
+        "Den industrielle revolusjonen gjer at britiske fabrikkar masseproduserer billeg tekstil.",
+        "Britane stengjer ute indiske klede og tvingar India til å levera billeg råbomull.",
+        "Misnøye med britisk utbytting og innblanding utløyser Sepoyopprøret i 1857.",
+        "Den britiske staten oppløyser handelskompaniet i 1858 og tek direkte kontroll over India."
+    ];
+
+    let currentSequence = [];
+
+    function initSequence() {
+        currentSequence = [...correctSequence].sort(() => Math.random() - 0.5);
+        if (currentSequence.every((v, i) => v === correctSequence[i])) {
+            currentSequence.reverse();
+        }
+        document.getElementById('seq-feedback').textContent = '';
+        renderSequence();
+    }
+
+    function renderSequence(checked = false) {
+        const list = document.getElementById('seq-list');
+        list.innerHTML = '';
+        currentSequence.forEach((text, index) => {
+            const li = document.createElement('li');
+            li.className = 'sequence-item';
+            if (checked) {
+                li.classList.add(text === correctSequence[index] ? 'correct' : 'wrong');
+            }
+            li.innerHTML = `
+                <span><strong>${index + 1}.</strong> ${text}</span>
+                <span class="seq-btns">
+                    <button onclick="moveSeq(${index}, -1)" title="Flytt opp">↑</button>
+                    <button onclick="moveSeq(${index}, 1)" title="Flytt ned">↓</button>
+                </span>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function moveSeq(index, dir) {
+        const newIndex = index + dir;
+        if (newIndex < 0 || newIndex >= currentSequence.length) return;
+        const temp = currentSequence[index];
+        currentSequence[index] = currentSequence[newIndex];
+        currentSequence[newIndex] = temp;
+        document.getElementById('seq-feedback').textContent = '';
+        renderSequence(false);
+    }
+
+    function checkSequence() {
+        renderSequence(true);
+        const allCorrect = currentSequence.every((v, i) => v === correctSequence[i]);
+        const fb = document.getElementById('seq-feedback');
+        if (allCorrect) {
+            fb.textContent = "Heilt rett! Du har sett heile årsakskjeda i riktig rekkjefølgje.";
+            fb.style.color = "var(--success)";
+        } else {
+            fb.textContent = "Ikkje heilt i mål enno – sjå på dei raude punkta og prøv å flytta dei.";
+            fb.style.color = "var(--error)";
+        }
+    }
+
+    // --- SPEL 2: MEMORY (BERLINKONFERANSEN) ---
+    const memoryPairs = [
+        { id: 1, term: "Otto von Bismarck", def: "Tysk rikskanslar som kalla inn til Berlinkonferansen i 1884." },
+        { id: 2, term: "Effektiv okkupasjon", def: "Krav om faktisk militær og administrativ kontroll på staden." },
+        { id: 3, term: "Kong Leopold II", def: "Belgisk konge som fekk personleg kontroll over Kongofristaten." },
+        { id: 4, term: "Kunstige grenser", def: "Linjal-grenser trekte i Berlin utan afrikanske deltakarar til stades." }
+    ];
+
+    let flippedCards = [];
+    let matchedPairs = 0;
+    let lockBoard = false;
+
+    function initMemoryGame() {
+        const grid = document.getElementById('memory-grid');
+        grid.innerHTML = '';
+        flippedCards = [];
+        matchedPairs = 0;
+        lockBoard = false;
+        document.getElementById('pairs-count').textContent = matchedPairs;
+
+        let cards = [];
+        memoryPairs.forEach(pair => {
+            cards.push({ id: pair.id, text: pair.term });
+            cards.push({ id: pair.id, text: pair.def });
+        });
+        cards.sort(() => Math.random() - 0.5);
+
+        cards.forEach(cardData => {
+            const cardEl = document.createElement('div');
+            cardEl.className = 'memory-card';
+            cardEl.dataset.id = cardData.id;
+            cardEl.dataset.text = cardData.text;
+            cardEl.textContent = '?';
+            cardEl.onclick = () => flipCard(cardEl);
+            grid.appendChild(cardEl);
+        });
+    }
+
+    function flipCard(card) {
+        if (lockBoard || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+        card.classList.add('flipped');
+        card.textContent = card.dataset.text;
+        flippedCards.push(card);
+
+        if (flippedCards.length === 2) {
+            const [c1, c2] = flippedCards;
+            if (c1.dataset.id === c2.dataset.id) {
+                c1.classList.add('matched');
+                c2.classList.add('matched');
+                matchedPairs++;
+                document.getElementById('pairs-count').textContent = matchedPairs;
+                flippedCards = [];
+            } else {
+                lockBoard = true;
+                setTimeout(() => {
+                    c1.classList.remove('flipped');
+                    c2.classList.remove('flipped');
+                    c1.textContent = '?';
+                    c2.textContent = '?';
+                    flippedCards = [];
+                    lockBoard = false;
+                }, 1050);
+            }
+        }
+    }
+
+    // --- SPEL 3: SORTERING (FØR VS ETTER 1884) ---
+    const sortItems = [
+        { text: "Avgrensa til kystfort og handelsstasjonar i Afrika", cat: "old" },
+        { text: "Styrte av private handelskompani (t.d. East India Company)", cat: "old" },
+        { text: "Jakta på krydder, sølv og sukker", cat: "old" },
+        { text: "Fullstendig erobring av heile det indre Afrika", cat: "new" },
+        { text: "Behov for gummi, kopar og industrielle råvarer", cat: "new" },
+        { text: "Total våpenovermakt med maskingevær (som ved Omdurman)", cat: "new" }
+    ];
+
+    let selectedChip = null;
+
+    function initSortGame() {
+        const pool = document.getElementById('sort-pool');
+        document.getElementById('box-old').innerHTML = '';
+        document.getElementById('box-new').innerHTML = '';
+        document.getElementById('sort-feedback').textContent = '';
+        pool.innerHTML = '';
+        selectedChip = null;
+
+        [...sortItems].sort(() => Math.random() - 0.5).forEach(item => {
+            const chip = document.createElement('div');
+            chip.className = 'sort-chip';
+            chip.textContent = item.text;
+            chip.dataset.cat = item.cat;
+            chip.onclick = (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.sort-chip').forEach(c => c.classList.remove('selected'));
+                chip.classList.add('selected');
+                selectedChip = chip;
+            };
+            pool.appendChild(chip);
+        });
+    }
+
+    function placeChip(targetCat) {
+        if (!selectedChip) return;
+        selectedChip.classList.remove('selected', 'correct', 'wrong');
+        selectedChip.style.marginBottom = '0.4rem';
+        document.getElementById('box-' + targetCat).appendChild(selectedChip);
+        selectedChip = null;
+    }
+
+    function checkSorting() {
+        let correct = 0;
+        let totalPlaced = 0;
+        ['old', 'new'].forEach(cat => {
+            const chips = document.getElementById('box-' + cat).querySelectorAll('.sort-chip');
+            chips.forEach(chip => {
+                totalPlaced++;
+                chip.classList.remove('correct', 'wrong');
+                if (chip.dataset.cat === cat) {
+                    chip.classList.add('correct');
+                    correct++;
+                } else {
+                    chip.classList.add('wrong');
+                }
+            });
+        });
+
+        const fb = document.getElementById('sort-feedback');
+        if (totalPlaced < sortItems.length) {
+            fb.textContent = `Plasser alle ${sortItems.length} korta før du sjekkar (${totalPlaced}/${sortItems.length} plassert).`;
+            fb.style.color = 'var(--secondary)';
+        } else {
+            fb.textContent = `Du fekk ${correct} av ${sortItems.length} rette!`;
+            fb.style.color = correct === sortItems.length ? 'var(--success)' : 'var(--secondary)';
+        }
+    }
+
+    // --- SPEL 4: IDEOLOGI-KOBLING ---
+    function checkIdeologyMatch() {
+        const answers = {
+            m1: "paternalisme",
+            m2: "jimcrow",
+            m3: "nazisme",
+            m4: "sosialdarwinisme"
+        };
+        let score = 0;
+        Object.keys(answers).forEach(id => {
+            const sel = document.getElementById(id);
+            if (sel.value === answers[id]) {
+                score++;
+                sel.style.borderColor = "var(--success)";
+                sel.style.backgroundColor = "#e6f3ea";
+            } else {
+                sel.style.borderColor = "var(--error)";
+                sel.style.backgroundColor = "#fbeaea";
+            }
+        });
+        const fb = document.getElementById('match-feedback');
+        fb.textContent = `Du fekk ${score} av 4 rette!`;
+        fb.style.color = score === 4 ? "var(--success)" : "var(--secondary)";
+    }
+
+
+    // --- LAGRING OG EKSPORT AV SVAR ---
+    const STORAGE_KEY = "kolonisering_vg3_svar_v6";
+
+    function saveAnswers() {
+        const data = {
+            name: document.getElementById("student-name").value,
+            studentClass: document.getElementById("student-class").value,
+            ans1: document.getElementById("ans-1").value,
+            ans2: document.getElementById("ans-2").value,
+            ans3: document.getElementById("ans-3").value,
+            ans4: document.getElementById("ans-4").value
+        };
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        } catch (e) {}
+    }
+
+    function loadSavedAnswers() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            const data = JSON.parse(raw);
+            if (data.name) document.getElementById("student-name").value = data.name;
+            if (data.studentClass) document.getElementById("student-class").value = data.studentClass;
+            if (data.ans1) document.getElementById("ans-1").value = data.ans1;
+            if (data.ans2) document.getElementById("ans-2").value = data.ans2;
+            if (data.ans3) document.getElementById("ans-3").value = data.ans3;
+            if (data.ans4) document.getElementById("ans-4").value = data.ans4;
+        } catch (e) {}
+    }
+
+    function clearAllAnswers() {
+        if (!confirm("Er du sikker på at du vil tømma alle svara du har skrive inn?")) return;
+        ["ans-1", "ans-2", "ans-3", "ans-4"].forEach(id => {
+            document.getElementById(id).value = "";
+        });
+        saveAnswers();
+        document.getElementById("export-feedback").textContent = "Skrivefelta er tømde.";
+    }
+
+    function formatTextForDoc(str) {
+        const div = document.createElement("div");
+        div.textContent = str || "";
+        return div.innerHTML.split(String.fromCharCode(10)).join("<br>");
+    }
+
+    function downloadWordDoc() {
+        const name = document.getElementById("student-name").value.trim() || "Ikkje oppgitt";
+        const studentClass = document.getElementById("student-class").value.trim() || "Ikkje oppgitt";
+
+        const tasks = [
+            { title: "Oppgåve 1: Industrialiseringa og India", prompt: document.getElementById("q1-prompt").innerText, ans: document.getElementById("ans-1").value },
+            { title: "Oppgåve 2: Berlinkonferansen og grenser", prompt: document.getElementById("q2-prompt").innerText, ans: document.getElementById("ans-2").value },
+            { title: "Oppgåve 3: Teknologi og maktforhold", prompt: document.getElementById("q3-prompt").innerText, ans: document.getElementById("ans-3").value },
+            { title: "Oppgåve 4: Kjeldeanalyse og drøfting", prompt: document.getElementById("q4-prompt").innerText, ans: document.getElementById("ans-4").value }
+        ];
+
+        let bodyHtml = "<html><head><meta charset='utf-8'><title>Svar</title><style>body{font-family:Calibri,Arial,sans-serif;line-height:1.5;color:#222;}h1{color:#2b3a4a;border-bottom:2px solid #c58b2a;padding-bottom:6px;}.meta{background:#f4f1ea;padding:10px;margin-bottom:18px;border-left:4px solid #8c3b2b;}.task{margin-bottom:20px;}.prompt{font-weight:bold;color:#2b3a4a;margin-bottom:6px;}.answer{border:1px solid #ccc;padding:10px;background:#fafafa;min-height:60px;}</style></head><body>";
+        bodyHtml += "<h1>Nyimperialismen: Koloniseringa av Afrika og Asia – Oppgåvesvar</h1>";
+        bodyHtml += "<div class='meta'><strong>Namn:</strong> " + formatTextForDoc(name) + "<br><strong>Klasse / fag:</strong> " + formatTextForDoc(studentClass) + "</div>";
+
+        tasks.forEach(t => {
+            bodyHtml += "<div class='task'><h2>" + formatTextForDoc(t.title) + "</h2>";
+            bodyHtml += "<div class='prompt'>" + formatTextForDoc(t.prompt) + "</div>";
+            bodyHtml += "<div class='answer'>" + (t.ans.trim() ? formatTextForDoc(t.ans) : "<em>(Ikkje besvart)</em>") + "</div></div>";
+        });
+
+        bodyHtml += "</body></html>";
+
+        const blob = new Blob([bodyHtml], { type: "application/msword;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "svar_kolonisering_afrika_asia.doc";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        const fb = document.getElementById("export-feedback");
+        fb.textContent = "Word-fila (svar_kolonisering_afrika_asia.doc) er lasta ned.";
+        fb.style.color = "var(--success)";
+    }
+
+    function downloadPdf() {
+        const fb = document.getElementById("export-feedback");
+        fb.textContent = "Utskriftsvindauget opnar – vel «Lagre som PDF».";
+        fb.style.color = "var(--primary)";
+        window.print();
+    }
+
+    loadSavedAnswers();
+
+    // Initialiser alle spel
+    initSequence();
+    initMemoryGame();
+    initSortGame();
+</script>
+
+</body>
+</html>
