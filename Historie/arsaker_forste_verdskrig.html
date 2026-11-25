@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="nn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Årsaker til den første verdskrigen (1914–1918) – Historie Vg3</title>
+    <!-- Eksterne bibliotek for klient-side eksport til Word (.docx) og PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --primary-light: #334155;
+            --accent: #b91c1c;
+            --accent-hover: #991b1b;
+            --gold: #b45309;
+            --gold-bg: #fef3c7;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --success: #15803d;
+            --success-bg: #dcfce7;
+            --error: #b91c1c;
+            --error-bg: #fee2e2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.65;
+        }
+
+        /* Header & Navigasjon */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #450a0a 100%);
+            color: #ffffff;
+            padding: 3rem 1.5rem 2.5rem;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .container {
+            max-width: 1060px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #f8fafc;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        header h1 {
+            font-size: 2.3rem;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            font-weight: 800;
+        }
+
+        header p.subtitle {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            max-width: 780px;
+            margin-bottom: 1.5rem;
+        }
+
+        .source-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .source-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #ffffff;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 0.55rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .source-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            color: var(--accent);
+        }
+
+        nav.sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        nav.sticky-nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            max-width: 1060px;
+            margin: 0 auto;
+        }
+
+        nav.sticky-nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.92rem;
+            transition: color 0.15s;
+        }
+
+        nav.sticky-nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hovudinnhald */
+        main {
+            padding: 2.5rem 1.5rem 4rem;
+        }
+
+        section {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header {
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.75rem;
+            color: var(--primary);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Introboks: Underliggande vs utløysande */
+        .concept-banner {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .concept-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .concept-box.deep {
+            border-top: 4px solid var(--primary);
+        }
+
+        .concept-box.trigger {
+            border-top: 4px solid var(--accent);
+        }
+
+        .concept-box h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Artikkelkort */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .article-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .card-tag {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+        }
+
+        .article-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+
+        .article-card p {
+            font-size: 0.96rem;
+            color: var(--text-main);
+            margin-bottom: 0.9rem;
+        }
+
+        .article-card ul {
+            margin-left: 1.2rem;
+            margin-bottom: 1rem;
+            font-size: 0.93rem;
+            color: var(--text-muted);
+        }
+
+        .article-card ul li {
+            margin-bottom: 0.35rem;
+        }
+
+        .card-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 0.85rem;
+            margin-top: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            font-size: 0.84rem;
+        }
+
+        .card-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            background: #f1f5f9;
+            padding: 0.3rem 0.65rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .card-footer a:hover {
+            background: #e2e8f0;
+            color: var(--accent);
+        }
+
+        /* Utløysande årsak - Julikrisa */
+        .trigger-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 6px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.8rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .domino-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.9rem;
+            margin: 1.25rem 0;
+        }
+
+        .domino-item {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.9rem;
+        }
+
+        .domino-date {
+            font-weight: 800;
+            color: var(--accent);
+            font-size: 0.88rem;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Interaktive spel */
+        .game-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .game-box h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.4rem;
+            color: var(--primary);
+        }
+
+        .game-desc {
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            font-size: 0.96rem;
+        }
+
+        /* Spel 1: Koble omgrep / årsak */
+        .match-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 680px) {
+            .match-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .match-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .match-btn {
+            text-align: left;
+            padding: 0.85rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: #ffffff;
+            cursor: pointer;
+            font-size: 0.93rem;
+            font-family: inherit;
+            color: var(--text-main);
+            transition: all 0.15s;
+        }
+
+        .match-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: #f8fafc;
+        }
+
+        .match-btn.selected {
+            border-color: var(--gold);
+            background: var(--gold-bg);
+            font-weight: 600;
+        }
+
+        .match-btn.matched {
+            border-color: var(--success);
+            background: var(--success-bg);
+            color: #14532d;
+            cursor: default;
+            font-weight: 600;
+        }
+
+        .match-btn.wrong {
+            border-color: var(--error);
+            background: var(--error-bg);
+        }
+
+        /* Spel 2: Kronologi */
+        .chrono-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .chrono-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.85rem 1rem;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .chrono-controls {
+            display: flex;
+            gap: 0.35rem;
+        }
+
+        .btn-small {
+            padding: 0.35rem 0.65rem;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .btn-small:hover {
+            background: #e2e8f0;
+        }
+
+        /* Spel 3: Quiz */
+        .quiz-question {
+            margin-bottom: 1.4rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .quiz-question p.q-title {
+            font-weight: 700;
+            margin-bottom: 0.65rem;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.65rem 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            background: #ffffff;
+        }
+
+        .quiz-option:hover {
+            background: #f8fafc;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 0.7rem 1.35rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.4rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .feedback-msg {
+            margin-top: 0.9rem;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback-msg.show {
+            display: block;
+        }
+
+        .feedback-msg.ok {
+            background: var(--success-bg);
+            color: #14532d;
+            border: 1px solid #86efac;
+        }
+
+        .feedback-msg.err {
+            background: var(--error-bg);
+            color: #7f1d1d;
+            border: 1px solid #fca5a5;
+        }
+
+        /* Skriveoppgåver og opplasting/eksport */
+        .tasks-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .student-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .input-group input, .task-item textarea {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.96rem;
+        }
+
+        .input-group input:focus, .task-item textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.12);
+        }
+
+        .task-item {
+            margin-bottom: 1.75rem;
+        }
+
+        .task-item h4 {
+            font-size: 1.08rem;
+            color: var(--primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .task-hint {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+
+        .task-item textarea {
+            min-height: 115px;
+            resize: vertical;
+        }
+
+        /* Opplasting og nedlasting av Word / PDF nederst */
+        .submission-zone {
+            margin-top: 2rem;
+            padding: 1.75rem;
+            background: #f1f5f9;
+            border: 2px dashed #94a3b8;
+            border-radius: 12px;
+        }
+
+        .submission-zone h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1.25rem;
+        }
+
+        .file-upload-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--accent);
+            color: #ffffff;
+            padding: 0.8rem 1.4rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s;
+            box-shadow: 0 2px 5px rgba(185, 28, 28, 0.25);
+        }
+
+        .file-upload-label:hover {
+            background-color: var(--accent-hover);
+        }
+
+        #fileUploadInput {
+            display: none;
+        }
+
+        .uploaded-file-card {
+            margin-top: 1rem;
+            padding: 1rem 1.2rem;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-left: 5px solid var(--success);
+            border-radius: 8px;
+            display: none;
+        }
+
+        footer {
+            background: var(--primary);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <span class="badge">Historie Vg3 · Krig og konfliktar</span>
+        <h1>Årsaker til utbrotet av den første verdskrigen (1914–1918)</h1>
+        <p class="subtitle">
+            Kvifor eksploderte Europa i ein total storkrig sommaren 1914? Utforsk dei djuptliggande strukturelle årsakene,
+            konkrete konfliktar mellom stormaktene og den utløysande gneisten i Sarajevo.
+        </p>
+        <div class="source-links">
+            <a class="source-btn" href="https://snl.no/f%C3%B8rste_verdenskrig" target="_blank" rel="noopener noreferrer">
+                📖 Les hovudartikkelen på SNL.no
+            </a>
+            <a class="source-btn" href="https://ndla.no/nn/r/historie-vg3/bakgrunnen-for-forste-verdenskrig/33b66e8a35" target="_blank" rel="noopener noreferrer">
+                🎓 Utforsk NDLA: Bakgrunnen for første verdskrigen
+            </a>
+        </div>
+    </div>
+</header>
+
+<nav class="sticky-nav">
+    <ul>
+        <li><a href="#oversikt">1. Årsaksforklaringar</a></li>
+        <li><a href="#artiklar">2. Hovudårsaker</a></li>
+        <li><a href="#utloysande">3. Skota i Sarajevo</a></li>
+        <li><a href="#spel">4. Interaktive spel</a></li>
+        <li><a href="#oppgaver">5. Oppgåver &amp; Innlevering</a></li>
+    </ul>
+</nav>
+
+<main class="container">
+
+    <!-- SEKSJON 1: HISTORISK METODE -->
+    <section id="oversikt">
+        <div class="section-header">
+            <h2>Korleis forklarer historikarar krigsutbrotet?</h2>
+            <p>For å forstå kvifor Europa var som ei «kruttønne» i 1914, skil vi mellom langsiktige strukturar og utløysande hendingar.</p>
+        </div>
+
+        <div class="concept-banner">
+            <div class="concept-box deep">
+                <h3>🧱 Underliggande årsaker</h3>
+                <p>
+                    Utviklingstrekk som byggjer seg opp over fleire tiår og skaper sterke spenningar mellom statane.
+                    I tida etter 1871 vart den gamle europeiske maktbalansen frå Wienkongressen (1815) broten ned av
+                    <strong>stormaktsrivalisering, alliansar, våpenkappløp, imperialisme, nasjonalisme og klasseskilje</strong>.
+                </p>
+            </div>
+            <div class="concept-box trigger">
+                <h3>🔥 Utløysande årsak</h3>
+                <p>
+                    Den konkrete hendinga som får «kruttønna» til å gå i lufta. Den <strong>28. juni 1914</strong> vart den
+                    austerriksk-ungarske tronarvingen Franz Ferdinand skoten i Sarajevo. Gjennom julikrisa aktiverte dette
+                    det fastlåste alliansesystemet og drog stormaktene inn i krigen.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEKSJON 2: KORT OG OVERSIKTLEG FAGSTOFF -->
+    <section id="artiklar">
+        <div class="section-header">
+            <h2>Sju sentrale årsaker til den første verdskrigen</h2>
+            <p>Korte, oversiktlege gjennomgangar basert på fagstoff frå undervisinga, NDLA og Store norske leksikon.</p>
+        </div>
+
+        <div class="articles-grid">
+
+            <!-- 1. Stormaktsrivalisering -->
+            <article class="article-card">
+                <div>
+                    <div class="card-tag">Årsak 1 · Maktbalanse</div>
+                    <h3>Stormaktsrivalisering</h3>
+                    <p>
+                        Fem europeiske stormakter kjempa om innverknad og prestisje, ofte på kostnad av kvarandre:
+                        <strong>Storbritannia, Frankrike, Tyskland, Austerrike-Ungarn og Russland</strong>.
+                    </p>
+                    <ul>
+                        <li><strong>Samlinga av Tyskland (1871):</strong> Etter sigeren over Frankrike vart det tyske keisardømmet Europas sterkaste økonomiske og militære makt.</li>
+                        <li><strong>Keisar Vilhelm 2.:</strong> Førte ein meir aggressiv utanrikspolitikk enn Otto von Bismarck og kravde Tysklands «plass i sola».</li>
+                        <li><strong>Frankrikes revansjelyst:</strong> Ønskte å vinne tilbake grenseområda <em>Elsass-Lothringen (Alsace-Lorraine)</em> som dei tapte i 1871.</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="https://snl.no/f%C3%B8rste_verdenskrig#Krigens_%C3%A5rsaker" target="_blank" rel="noopener">SNL: Krigens årsaker ↗</a>
+                    <a href="https://ndla.no/nn/r/historie-vg3/bakgrunnen-for-forste-verdenskrig/33b66e8a35" target="_blank" rel="noopener">NDLA: Stormaktsrivalisering ↗</a>
+                </div>
+            </article>
+
+            <!-- 2. Industrialisering, råvarer og imperialisme -->
+            <article class="article-card">
+                <div>
+                    <div class="card-tag">Årsak 2 · Økonomi &amp; Koloniar</div>
+                    <h3>Industrialisering, råvarer og imperialisme</h3>
+                    <p>
+                        Den andre industrielle revolusjonen skapte eit enormt behov for råstoff til fabrikkane, nye marknader
+                        og kontroll over strategiske handels- og transportårer (som Suez-kanalen).
+                    </p>
+                    <ul>
+                        <li><strong>Kolonikappløpet (1870–1914):</strong> Storbritannia og Frankrike sat på dei største kolonirika i Afrika og Asia.</li>
+                        <li><strong>Tysk utfordring:</strong> Tyskland kom seint inn i kolonikappløpet og utfordra etablerte kolonimakter (t.d. under Marokko-krisene i 1905 og 1911).</li>
+                        <li><strong>Mistru:</strong> Kampen om koloniar og transportårer skjerpa motsetningane og gjorde diplomatiske kompromiss vanskelegare.</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="https://snl.no/f%C3%B8rste_verdenskrig" target="_blank" rel="noopener">SNL: Første verdenskrig ↗</a>
+                    <a href="https://ndla.no/nn/r/historie-vg3/bakgrunnen-for-forste-verdenskrig/33b66e8a35" target="_blank" rel="noopener">NDLA: Kolonisering og imperialisme ↗</a>
+                </div>
+            </article>
+
+            <!-- 3. Alliansepolitikken -->
+            <article class="article-card">
+                <div>
+                    <div class="card-tag">Årsak 3 · Blokkdanning</div>
+                    <h3>Alliansepolitikken</h3>
+                    <p>
+                        I staden for fleksible avtalar vart Europa delt inn i to fastlåste militære maktblokker som skulle avskrekke
+                        kvarandre, men som i praksis gjorde at ein lokal konflikt kunne trekkje alle inn i krig.
+                    </p>
+                    <ul>
+                        <li><strong>Trippelalliansen (1882):</strong> Tyskland, Austerrike-Ungarn og Italia. Tyskland ville hindre ein frykta tofrontskrig mot Frankrike og Russland.</li>
+                        <li><strong>Trippelententen (1907):</strong> Storbritannia, Frankrike og Russland gjekk saman av frykt for tysk dominans.</li>
+                        <li><strong>Småstatar med garantiar:</strong> Russland støtta Serbia, medan Storbritannia garanterte for Belgias nøytralitet.</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="https://snl.no/f%C3%B8rste_verdenskrig#Allianser" target="_blank" rel="noopener">SNL: Allianser ↗</a>
+                    <a href="https://ndla.no/nn/r/historie-vg3/bakgrunnen-for-forste-verdenskrig/33b66e8a35" target="_blank" rel="noopener">NDLA: Europa delt i to alliansar ↗</a>
+                </div>
+            </article>
+
+            <!-- 4. Våpenkappløp og teknologisk utvikling -->
+            <article class="article-card">
+                <div>
+                    <div class="card-tag">Årsak 4 · Militarisme</div>
+                    <h3>Våpenkappløp og ny teknologi</h3>
+                    <p>
+                        Frå Napoleonskrigane til 1914 hadde industrialiseringa revolusjonert våpenteknologien. Stormaktene konkurrerte
+                        om å ha dei største hærane og dei mest moderne våpna.
+                    </p>
+                    <ul>
+                        <li><strong>Flåtekappløpet:</strong> Tyskland bygde ut krigsflåten sin og utfordra Storbritannias herredømme på verdshava (<em>Dreadnought</em>-slagskip).</li>
+                        <li><strong>Masseproduksjon av våpen:</strong> Maskingevær, langtrekkjande artilleri, ubåtar og tidlege fly.</li>
+                        <li><strong>Militært press:</strong> Militærutgiftene steig med rundt 50 % i åra før 1914. Rigide mobiliseringsplanar (som den tyske Schlieffenplanen) gav politikarane lite tid til diplomati.</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="https://snl.no/f%C3%B8rste_verdenskrig" target="_blank" rel="noopener">SNL: Militarisme &amp; teknologi ↗</a>
+                    <a href="https://ndla.no/nn/r/historie-vg3/bakgrunnen-for-forste-verdenskrig/33b66e8a35" target="_blank" rel="noopener">NDLA: Våpenkappløp ↗</a>
+                </div>
+            </article>
+
+            <!-- 5. Nasjonalisme og kruttønna på Balkan -->
+            <article class="article-card">
+                <div>
+                    <div class="card-tag">Årsak 5 · Identitet &amp; Konflikt</div>
+                    <h3>Nasjonalisme og Balkan</h3>
+                    <p>
+                        Nasjonalismen fungerte både som ei samlande kraft innad i statane og som ei sprengkraft i multietniske rike.
+                    </p>
+                    <ul>
+                        <li><strong>Indre samling:</strong> Leiarar brukte nasjonalisme og ytre fiendebilete til å dempe demokratisk opposisjon og arbeidarrørsla heime.</li>
+                        <li><strong>Balkan-kruttønna:</strong> Det osmanske riket var svekt etter Balkankrigane (1912–1913). Serbia ønskte å samle sørslavarane i eit «Stor-Serbia» (støtta av russisk <em>panslavisme</em>).</li>
+                        <li><strong>Austerrike-Ungarn truga:</strong> Dobbeltmonarkiet styrte over mange slaviske folkegrupper og frykta oppløysing dersom serbisk nasjonalisme fekk vinne fram.</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="https://snl.no/f%C3%B8rste_verdenskrig" target="_blank" rel="noopener">SNL: Nasjonalisme og Balkan ↗</a>
+                    <a href="https://ndla.no/nn/r/historie-vg3/bakgrunnen-for-forste-verdenskrig/33b66e8a35" target="_blank" rel="noopener">NDLA: Balkankrigane ↗</a>
+                </div>
+            </article>
+
+            <!-- 6. Klassesamfunnet -->
+            <article class="article-card">
+                <div>
+                    <div class="card-tag">Årsak 6 · Sosial struktur</div>
+                    <h3>Klassesamfunnet og elitenes haldning</h3>
+                    <p>
+                        Europa før 1914 var prega av ekstreme klasseskilje mellom ein liten adelig/borgarleg elite og det breie laget
+                        av arbeidarar og bønder.
+                    </p>
+                    <ul>
+                        <li><strong>Avstand mellom topp og botn:</strong> Keisarar, adelsmenn og generalar levde himmelhøgt over vanlege folk og såg ofte ned på massane.</li>
+                        <li><strong>Avleiingsmanøver:</strong> Krig og nasjonal begeistring kunne flytte merksemda bort frå krav om røysterett, betre løn og sosiale reformer.</li>
+                        <li><strong>Offervilje på andres vegner:</strong> Generalane styrte frå slott bak fronten medan vanlege soldatar døydde i skyttergravene – ei utvikling som kosta rundt 8,5–9 millionar soldatar livet.</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="https://snl.no/f%C3%B8rste_verdenskrig" target="_blank" rel="noopener">SNL: Samfunn og tapstal ↗</a>
+                    <a href="https://ndla.no/nn/r/historie-vg3/bakgrunnen-for-forste-verdenskrig/33b66e8a35" target="_blank" rel="noopener">NDLA: Bakgrunnen ↗</a>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- 7. Konkrete konfliktområde + Utløysande årsak -->
+        <div id="utloysande" class="trigger-panel">
+            <div class="card-tag">Konkrete konfliktpunkt &amp; Utløysande årsak</div>
+            <h3>Frå konkrete konfliktar til skota i Sarajevo (28. juni 1914)</h3>
+            <p>
+                Før krigen braut ut fanst det fleire konkrete stridsspørsmål: <strong>Balkan</strong> (Russland mot Austerrike-Ungarn),
+                <strong>Austersjøen</strong> (Tyskland mot Russland), <strong>Elsass-Lothringen</strong> (Tyskland mot Frankrike)
+                og <strong>krigsflåten i Nordsjøen</strong> (Tyskland mot Storbritannia).
+            </p>
+            <p style="margin-top: 0.6rem;">
+                Då den bosnisk-serbiske nasjonalisten <strong>Gavrilo Princip</strong> (med band til <em>Den svarte handa</em>) skaut og drap
+                kronprins Franz Ferdinand og kona Sophie i Sarajevo 28. juni 1914, vart dominobrikkene sette i rørsle under <strong>julikrisa</strong>:
+            </p>
+
+            <div class="domino-steps">
+                <div class="domino-item">
+                    <span class="domino-date">1. 28. juni &amp; 23. juli</span>
+                    Attentatet i Sarajevo. Tyskland gir Austerrike-Ungarn «blankofullmakt», og Austerrike-Ungarn stiller eit strengt ultimatum til Serbia.
+                </div>
+                <div class="domino-item">
+                    <span class="domino-date">2. 28.–30. juli 1914</span>
+                    Austerrike-Ungarn erklærer Serbia krig. Russland mobiliserer hæren sin for å verne Serbia.
+                </div>
+                <div class="domino-item">
+                    <span class="domino-date">3. 1.–3. august 1914</span>
+                    Tyskland erklærer Russland krig, deretter Frankrike, og marsjerer inn i det nøytrale Belgia.
+                </div>
+                <div class="domino-item">
+                    <span class="domino-date">4. 4. august 1914</span>
+                    Storbritannia erklærer Tyskland krig for å forsvare Belgias nøytralitet. Storkrigen er eit faktum.
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <a href="https://snl.no/f%C3%B8rste_verdenskrig#Krigsutbruddet" target="_blank" rel="noopener">Les om krigsutbruddet på SNL ↗</a>
+                <a href="https://ndla.no/nn/r/historie-vg3/bakgrunnen-for-forste-verdenskrig/33b66e8a35" target="_blank" rel="noopener">Les om skota i Sarajevo på NDLA ↗</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEKSJON 3: INTERAKTIVE SPEL OG ØVINGAR -->
+    <section id="spel">
+        <div class="section-header">
+            <h2>Interaktive spel: Test og fest kunnskapen</h2>
+            <p>Bruk spela under til å øve på omgrep, årsakssamanhengar og tidslinja fram mot krigsutbrotet.</p>
+        </div>
+
+        <!-- SPEL 1: KOBLE BEGREP OG FORKLARING -->
+        <div class="game-box">
+            <h3>Spel 1: Koble årsak/omgrep med rett forklaring</h3>
+            <p class="game-desc">Klikk først på eit omgrep til venstre, og deretter på forklaringa som passar best til høgre.</p>
+
+            <div class="match-grid">
+                <div class="match-col" id="matchTerms"></div>
+                <div class="match-col" id="matchDefs"></div>
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: 0.75rem; align-items: center;">
+                <button type="button" class="btn-primary" onclick="initMatchGame()">Start på nytt</button>
+                <span id="matchScore" style="font-weight: 700; color: var(--primary);">Treff: 0 / 6</span>
+            </div>
+            <div id="matchFeedback" class="feedback-msg"></div>
+        </div>
+
+        <!-- SPEL 2: KRONOLOGI -->
+        <div class="game-box">
+            <h3>Spel 2: Set hendingane i rett rekkjefølgje</h3>
+            <p class="game-desc">Bruk pilene (↑ / ↓) til å sortere hendingane frå tidlegast (øvst) til seinast (nedst).</p>
+
+            <div class="chrono-list" id="chronoList"></div>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <button type="button" class="btn-primary" onclick="checkChrono()">Sjekk rekkjefølgja</button>
+                <button type="button" class="btn-small" onclick="initChronoGame()">Bland på nytt</button>
+            </div>
+            <div id="chronoFeedback" class="feedback-msg"></div>
+        </div>
+
+        <!-- SPEL 3: HURTIGQUIZ -->
+        <div class="game-box">
+            <h3>Spel 3: Vg3-hurtigquiz om årsakene</h3>
+            <p class="game-desc">Svar på dei fem spørsmåla og sjekk kor godt du har oversikt over pensum.</p>
+            <div id="quizContainer"></div>
+            <button type="button" class="btn-primary" onclick="gradeQuiz()">Rett quizen</button>
+            <div id="quizFeedback" class="feedback-msg"></div>
+        </div>
+    </section>
+
+    <!-- SEKSJON 4: OPPGÅVER OG OPPLASTING / EKSPORT -->
+    <section id="oppgaver">
+        <div class="section-header">
+            <h2>Refleksjons- og eksamensoppgåver (Vg3)</h2>
+            <p>Skriv svara dine rett i felta under, eller arbeid i eige dokument og last opp svaret ditt nederst på sida.</p>
+        </div>
+
+        <div class="tasks-container">
+            <div class="student-meta">
+                <div class="input-group">
+                    <label for="studentName">Namn på elev</label>
+                    <input type="text" id="studentName" placeholder="Skriv fullt namn...">
+                </div>
+                <div class="input-group">
+                    <label for="studentClass">Klasse / Fag</label>
+                    <input type="text" id="studentClass" value="Historie Vg3">
+                </div>
+            </div>
+
+            <div class="task-item">
+                <h4>Oppgåve 1: Underliggande vs. utløysande årsaker</h4>
+                <p class="task-hint">Forklar skilnaden mellom underliggande og utløysande årsaker til den første verdskrigen. Bruk skota i Sarajevo og alliansepolitikken som døme.</p>
+                <textarea id="ans1" placeholder="Skriv svaret ditt her..."></textarea>
+            </div>
+
+            <div class="task-item">
+                <h4>Oppgåve 2: Kvifor var Balkan Europas «kruttønne»?</h4>
+                <p class="task-hint">Gjer greie for korleis nasjonalisme, svekkinga av Det osmanske riket, Serbia og stormaktene Austerrike-Ungarn og Russland skapte ei farleg konflikt på Balkan.</p>
+                <textarea id="ans2" placeholder="Skriv svaret ditt her..."></textarea>
+            </div>
+
+            <div class="task-item">
+                <h4>Oppgåve 3: Industrialisering, klassesamfunn og teknologi</h4>
+                <p class="task-hint">Korleis hang industrialiseringa, kampen om råvarer/transportårer, våpenkappløpet og klasseskilja i samfunnet saman med utbrotet og omfanget av krigen?</p>
+                <textarea id="ans3" placeholder="Skriv svaret ditt her..."></textarea>
+            </div>
+
+            <div class="task-item">
+                <h4>Oppgåve 4: Drøfting (eksamensrelevant)</h4>
+                <p class="task-hint">«Utan skota i Sarajevo ville det ikkje vorte verdskrig i 1914.» Drøft denne påstanden ved å vege den utløysande årsaka opp mot dei langsiktige spenningane i Europa.</p>
+                <textarea id="ans4" placeholder="Skriv drøftinga di her..."></textarea>
+            </div>
+
+            <!-- NEDERST PÅ SIDA: LAST OPP WORD/PDF ELLER LAST NED SVAR -->
+            <div class="submission-zone">
+                <h3>📤 Innlevering: Last opp svar som Word eller PDF</h3>
+                <p style="font-size: 0.94rem; color: var(--text-muted);">
+                    Har du skrive oppgåvesvara dine i Microsoft Word (<strong>.doc / .docx</strong>) eller lagra dei som <strong>PDF (.pdf)</strong>?
+                    Bruk knappen under for å laste opp fila di for kontroll og stadfesting. Du kan òg lagre svara du har skrive over direkte til Word eller PDF.
+                </p>
+
+                <div class="action-row">
+                    <label for="fileUploadInput" class="file-upload-label">
+                        📎 Last opp svar (Word eller PDF)
+                    </label>
+                    <input type="file" id="fileUploadInput" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onchange="handleFileUpload(event)">
+
+                    <button type="button" class="btn-primary" onclick="exportToWord()">💾 Last ned svara over som Word (.docx)</button>
+                    <button type="button" class="btn-primary" onclick="exportToPDF()">📄 Last ned svara over som PDF</button>
+                </div>
+
+                <div id="uploadedFileCard" class="uploaded-file-card"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="container">
+        <p><strong>Historie Vg3 · Læringsressurs om årsakene til første verdskrigen</strong></p>
+        <p style="margin-top: 0.4rem;">
+            Faglege kjelder:
+            <a href="https://snl.no/f%C3%B8rste_verdenskrig" target="_blank" rel="noopener">Store norske leksikon (SNL)</a> ·
+            <a href="https://ndla.no/nn/r/historie-vg3/bakgrunnen-for-forste-verdenskrig/33b66e8a35" target="_blank" rel="noopener">NDLA Historie Vg3</a> ·
+            Undervisingspresentasjon
+        </p>
+    </div>
+</footer>
+
+<script>
+    /* ==========================================
+       SPEL 1: KOBLE OMGREP OG FORKLARING
+       ========================================== */
+    const matchPairs = [
+        { id: 1, term: "Trippelalliansen", def: "Militær forsvarsallianse mellom Tyskland, Austerrike-Ungarn og Italia." },
+        { id: 2, term: "Trippelententen", def: "Samarbeid mellom Storbritannia, Frankrike og Russland som motvekt mot Tyskland." },
+        { id: 3, term: "Blankofullmakta", def: "Tysklands lovnad om full støtte til Austerrike-Ungarn etter attentatet i Sarajevo." },
+        { id: 4, term: "Panslavisme", def: "Tanken om fellesskap mellom slaviske folk, brukt av Russland til å støtte Serbia." },
+        { id: 5, term: "Elsass-Lothringen", def: "Grenseområde Frankrike måtte avstå til Tyskland i 1871 og ønskte å vinne tilbake." },
+        { id: 6, term: "Flåtekappløpet", def: "Rivalisering mellom Tyskland og Storbritannia om å byggje dei sterkaste krigsskipa." }
+    ];
+
+    let selectedTerm = null;
+    let selectedDef = null;
+    let matchedCount = 0;
+
+    function shuffle(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function initMatchGame() {
+        selectedTerm = null;
+        selectedDef = null;
+        matchedCount = 0;
+        document.getElementById("matchScore").textContent = "Treff: 0 / 6";
+        const fb = document.getElementById("matchFeedback");
+        fb.className = "feedback-msg";
+        fb.textContent = "";
+
+        const termsCol = document.getElementById("matchTerms");
+        const defsCol = document.getElementById("matchDefs");
+        termsCol.innerHTML = "";
+        defsCol.innerHTML = "";
+
+        shuffle(matchPairs).forEach(item => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "match-btn";
+            btn.textContent = item.term;
+            btn.dataset.id = item.id;
+            btn.onclick = () => selectMatchItem("term", btn);
+            termsCol.appendChild(btn);
+        });
+
+        shuffle(matchPairs).forEach(item => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "match-btn";
+            btn.textContent = item.def;
+            btn.dataset.id = item.id;
+            btn.onclick = () => selectMatchItem("def", btn);
+            defsCol.appendChild(btn);
+        });
+    }
+
+    function selectMatchItem(type, btn) {
+        if (btn.classList.contains("matched")) return;
+
+        if (type === "term") {
+            document.querySelectorAll("#matchTerms .match-btn").forEach(b => b.classList.remove("selected", "wrong"));
+            btn.classList.add("selected");
+            selectedTerm = btn;
+        } else {
+            document.querySelectorAll("#matchDefs .match-btn").forEach(b => b.classList.remove("selected", "wrong"));
+            btn.classList.add("selected");
+            selectedDef = btn;
+        }
+
+        if (selectedTerm && selectedDef) {
+            if (selectedTerm.dataset.id === selectedDef.dataset.id) {
+                selectedTerm.classList.remove("selected");
+                selectedDef.classList.remove("selected");
+                selectedTerm.classList.add("matched");
+                selectedDef.classList.add("matched");
+                selectedTerm.disabled = true;
+                selectedDef.disabled = true;
+                matchedCount++;
+                document.getElementById("matchScore").textContent = `Treff: ${matchedCount} / 6`;
+                selectedTerm = null;
+                selectedDef = null;
+
+                if (matchedCount === matchPairs.length) {
+                    const fb = document.getElementById("matchFeedback");
+                    fb.textContent = "Flott jobba! Du har kobla alle omgrepa med rett forklaring.";
+                    fb.className = "feedback-msg show ok";
+                }
+            } else {
+                const t = selectedTerm;
+                const d = selectedDef;
+                t.classList.add("wrong");
+                d.classList.add("wrong");
+                setTimeout(() => {
+                    t.classList.remove("selected", "wrong");
+                    d.classList.remove("selected", "wrong");
+                }, 600);
+                selectedTerm = null;
+                selectedDef = null;
+            }
+        }
+    }
+
+    /* ==========================================
+       SPEL 2: KRONOLOGI
+       ========================================== */
+    const chronoEvents = [
+        { order: 1, text: "Tyskland blir samla til eitt keisardømme etter siger over Frankrike." },
+        { order: 2, text: "Austerrike-Ungarn innlemmar Bosnia og Hercegovina, noko som provoserer Serbia." },
+        { order: 3, text: "Gavrilo Princip skyt og drep tronfølgjar Franz Ferdinand i Sarajevo." },
+        { order: 4, text: "Austerrike-Ungarn erklærer Serbia krig, og Russland mobiliserer hæren sin." },
+        { order: 5, text: "Tyskland invaderer nøytrale Belgia, og Storbritannia erklærer Tyskland krig." }
+    ];
+
+    let currentChrono = [];
+
+    function initChronoGame() {
+        currentChrono = shuffle(chronoEvents);
+        const fb = document.getElementById("chronoFeedback");
+        fb.className = "feedback-msg";
+        renderChrono();
+    }
+
+    function renderChrono() {
+        const list = document.getElementById("chronoList");
+        list.innerHTML = "";
+        currentChrono.forEach((ev, idx) => {
+            const row = document.createElement("div");
+            row.className = "chrono-item";
+            row.innerHTML = `
+                <span><strong>${idx + 1}.</strong> ${ev.text}</span>
+                <div class="chrono-controls">
+                    <button type="button" class="btn-small" onclick="moveChrono(${idx}, -1)" ${idx === 0 ? "disabled" : ""}>↑</button>
+                    <button type="button" class="btn-small" onclick="moveChrono(${idx}, 1)" ${idx === currentChrono.length - 1 ? "disabled" : ""}>↓</button>
+                </div>
+            `;
+            list.appendChild(row);
+        });
+    }
+
+    function moveChrono(index, dir) {
+        const target = index + dir;
+        if (target < 0 || target >= currentChrono.length) return;
+        const temp = currentChrono[index];
+        currentChrono[index] = currentChrono[target];
+        currentChrono[target] = temp;
+        renderChrono();
+    }
+
+    function checkChrono() {
+        let correct = 0;
+        currentChrono.forEach((ev, idx) => {
+            if (ev.order === idx + 1) correct++;
+        });
+        const fb = document.getElementById("chronoFeedback");
+        if (correct === currentChrono.length) {
+            fb.textContent = "Heilt rett! Alle dei fem hendingane står i korrekt historisk rekkjefølgje.";
+            fb.className = "feedback-msg show ok";
+        } else {
+            fb.textContent = `Du har ${correct} av ${currentChrono.length} hendingar på rett plass. Prøv å justere rekkjefølgja!`;
+            fb.className = "feedback-msg show err";
+        }
+    }
+
+    /* ==========================================
+       SPEL 3: HURTIGQUIZ
+       ========================================== */
+    const quizData = [
+        {
+            q: "1. Kva prinsipp frå Wienkongressen (1815) vart gradvis brote ned etter at Tyskland vart samla i 1871?",
+            options: [
+                "Det europeiske maktbalanseprinsippet",
+                "Folkeforbundets kollektive tryggleik",
+                "Mercantilismen og frihandelsavtalane"
+            ],
+            answer: 0
+        },
+        {
+            q: "2. Kva gjorde at Storbritannia gjekk inn i krigen mot Tyskland 4. august 1914?",
+            options: [
+                "Tyskland bomba London frå luftskip",
+                "Tyskland braut Belgias nøytralitet ved å invadere landet på veg mot Frankrike",
+                "Storbritannia hadde ein skriftleg forsvarsallianse med Serbia"
+            ],
+            answer: 1
+        },
+        {
+            q: "3. Kvifor frykta Austerrike-Ungarn den serbiske nasjonalismen på Balkan?",
+            options: [
+                "Fordi Serbia hadde verdas største krigsflåte i Middelhavet",
+                "Fordi Austerrike-Ungarn var eit multietnisk rike som frykta oppløysing dersom slaviske folk kravde sjølvstende",
+                "Fordi Serbia ville gi Bosnia tilbake til Det osmanske riket"
+            ],
+            answer: 1
+        },
+        {
+            q: "4. Korleis hang industrialiseringa saman med stormaktsrivaliseringa før 1914?",
+            options: [
+                "Industrien skapte behov for råvarer, koloniar, kontroll over transportårer og masseproduksjon av moderne våpen",
+                "Industrialiseringa gjorde at stormaktene slutta å handle med kvarandre",
+                "Industrialiseringa førte til at alle europeiske land avskaffa verneplikta"
+            ],
+            answer: 0
+        },
+        {
+            q: "5. Kva rolle spelte klassesamfunnet i Europa før og under krigen?",
+            options: [
+                "Adelen og generalane kjempa alltid fremst i skyttergravene",
+                "Klasseskilja var borte i Europa etter 1900",
+                "Eliten levde fjernt frå vanlege folk, brukte nasjonalisme mot demokratiske krav og ofra millionar av vanlege soldatar"
+            ],
+            answer: 2
+        }
+    ];
+
+    function initQuiz() {
+        const container = document.getElementById("quizContainer");
+        container.innerHTML = "";
+        quizData.forEach((item, qIdx) => {
+            const qDiv = document.createElement("div");
+            qDiv.className = "quiz-question";
+            let optsHtml = "";
+            item.options.forEach((opt, oIdx) => {
+                optsHtml += `
+                    <label class="quiz-option">
+                        <input type="radio" name="q${qIdx}" value="${oIdx}">
+                        <span>${opt}</span>
+                    </label>
+                `;
+            });
+            qDiv.innerHTML = `<p class="q-title">${item.q}</p><div class="quiz-options">${optsHtml}</div>`;
+            container.appendChild(qDiv);
+        });
+    }
+
+    function gradeQuiz() {
+        let score = 0;
+        let answered = 0;
+        quizData.forEach((item, qIdx) => {
+            const checked = document.querySelector(`input[name="q${qIdx}"]:checked`);
+            if (checked) {
+                answered++;
+                if (parseInt(checked.value, 10) === item.answer) score++;
+            }
+        });
+
+        const fb = document.getElementById("quizFeedback");
+        if (answered < quizData.length) {
+            fb.textContent = "Svar på alle fem spørsmåla før du rettar quizen.";
+            fb.className = "feedback-msg show err";
+            return;
+        }
+        fb.textContent = `Resultat: Du fekk ${score} av ${quizData.length} rette!`;
+        fb.className = score >= 4 ? "feedback-msg show ok" : "feedback-msg show err";
+    }
+
+    /* ==========================================
+       OPPLASTING OG EKSPORT AV WORD / PDF
+       ========================================== */
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        const card = document.getElementById("uploadedFileCard");
+        if (!file) return;
+
+        const allowedExtensions = [".pdf", ".doc", ".docx"];
+        const fileNameLower = file.name.toLowerCase();
+        const isValid = allowedExtensions.some(ext => fileNameLower.endsWith(ext));
+
+        if (!isValid) {
+            card.style.display = "block";
+            card.style.borderLeftColor = "#b91c1c";
+            card.innerHTML = `<strong>❌ Ugyldig filformat:</strong> «${file.name}». Ver venleg og last opp ei Word-fil (.doc/.docx) eller ein PDF (.pdf).`;
+            return;
+        }
+
+        const sizeKB = (file.size / 1024).toFixed(1);
+        const now = new Date().toLocaleString("nn-NO");
+        const student = document.getElementById("studentName").value.trim() || "Ikkje oppgitt";
+
+        card.style.display = "block";
+        card.style.borderLeftColor = "#15803d";
+        card.innerHTML = `
+            <strong>✅ Fil lasta opp og klar for innlevering!</strong><br>
+            <span>Filnamn: <strong>${file.name}</strong> (${sizeKB} KB)</span><br>
+            <span>Elev: ${student} · Tidspunkt: ${now}</span>
+        `;
+    }
+
+    function collectAnswers() {
+        return {
+            name: document.getElementById("studentName").value.trim() || "Elev",
+            studentClass: document.getElementById("studentClass").value.trim() || "Historie Vg3",
+            q1: document.getElementById("ans1").value.trim() || "(Ikkje svara)",
+            q2: document.getElementById("ans2").value.trim() || "(Ikkje svara)",
+            q3: document.getElementById("ans3").value.trim() || "(Ikkje svara)",
+            q4: document.getElementById("ans4").value.trim() || "(Ikkje svara)"
+        };
+    }
+
+    async function exportToWord() {
+        const data = collectAnswers();
+        if (!window.docx) {
+            alert("Kunne ikkje laste Word-eksportbiblioteket. Sjekk internettilkoplinga.");
+            return;
+        }
+        const { Document, Packer, Paragraph, TextRun, HeadingLevel } = window.docx;
+
+        const doc = new Document({
+            sections: [{
+                properties: {},
+                children: [
+                    new Paragraph({ text: "Årsaker til den første verdskrigen – Oppgåvesvar", heading: HeadingLevel.HEADING_1 }),
+                    new Paragraph({
+                        children: [
+                            new TextRun({ text: `Namn: ${data.name}   |   Fag/Klasse: ${data.studentClass}`, bold: true })
+                        ]
+                    }),
+                    new Paragraph({ text: "" }),
+                    new Paragraph({ text: "Oppgåve 1: Underliggande vs. utløysande årsaker", heading: HeadingLevel.HEADING_2 }),
+                    new Paragraph({ text: data.q1 }),
+                    new Paragraph({ text: "" }),
+                    new Paragraph({ text: "Oppgåve 2: Kvifor var Balkan Europas «kruttønne»?", heading: HeadingLevel.HEADING_2 }),
+                    new Paragraph({ text: data.q2 }),
+                    new Paragraph({ text: "" }),
+                    new Paragraph({ text: "Oppgåve 3: Industrialisering, klassesamfunn og teknologi", heading: HeadingLevel.HEADING_2 }),
+                    new Paragraph({ text: data.q3 }),
+                    new Paragraph({ text: "" }),
+                    new Paragraph({ text: "Oppgåve 4: Drøfting – Skota i Sarajevo vs. langsiktige årsaker", heading: HeadingLevel.HEADING_2 }),
+                    new Paragraph({ text: data.q4 })
+                ]
+            }]
+        });
+
+        const blob = await Packer.toBlob(doc);
+        saveAs(blob, `Svar_Forste_Verdskrig_${data.name.replace(/\s+/g, "_")}.docx`);
+    }
+
+    function exportToPDF() {
+        const data = collectAnswers();
+        if (!window.jspdf) {
+            alert("Kunne ikkje laste PDF-biblioteket. Sjekk internettilkoplinga.");
+            return;
+        }
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        let y = 18;
+
+        const addWrapped = (title, body) => {
+            if (y > 265) { pdf.addPage(); y = 18; }
+            pdf.setFont("helvetica", "bold");
+            pdf.setFontSize(12);
+            pdf.text(title, 14, y);
+            y += 7;
+            pdf.setFont("helvetica", "normal");
+            pdf.setFontSize(10.5);
+            const lines = pdf.splitTextToSize(body, 180);
+            lines.forEach(line => {
+                if (y > 280) { pdf.addPage(); y = 18; }
+                pdf.text(line, 14, y);
+                y += 5.5;
+            });
+            y += 6;
+        };
+
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(16);
+        pdf.text("Årsaker til den første verdskrigen – Oppgåvesvar", 14, y);
+        y += 8;
+        pdf.setFontSize(10.5);
+        pdf.setFont("helvetica", "normal");
+        pdf.text(`Elev: ${data.name}   |   Klasse: ${data.studentClass}`, 14, y);
+        y += 12;
+
+        addWrapped("Oppgåve 1: Underliggande vs. utløysande årsaker", data.q1);
+        addWrapped("Oppgåve 2: Kvifor var Balkan Europas «kruttønne»?", data.q2);
+        addWrapped("Oppgåve 3: Industrialisering, klassesamfunn og teknologi", data.q3);
+        addWrapped("Oppgåve 4: Drøfting – Skota i Sarajevo vs. langsiktige årsaker", data.q4);
+
+        pdf.save(`Svar_Forste_Verdskrig_${data.name.replace(/\s+/g, "_")}.pdf`);
+    }
+
+    // Initialiser spel ved oppstart
+    initMatchGame();
+    initChronoGame();
+    initQuiz();
+</script>
+</body>
+</html>
