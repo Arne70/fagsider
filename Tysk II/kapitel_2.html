@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2 Die Jugend von heute!</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: #ffffff;
+      --text: #1c1d21;
+      --muted: #5c606a;
+      --border: #dfd9ce;
+      --accent: #23395d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1.25rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1.25rem;
+    }
+
+    h1 {
+      margin: 0 0 0.35rem;
+      font-size: 1.9rem;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .choice-btn {
+      display: block;
+      padding: 1.1rem 1.25rem;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid #c9c1b2;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .choice-btn:hover {
+      border-color: var(--accent);
+      background: #faf9f6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-link" href="index.html">← Tilbake til oversikta</a>
+
+    <header>
+      <h1>2 Die Jugend von heute!</h1>
+      <p class="subtitle">Wähle aus, womit du arbeiten möchtest</p>
+    </header>
+
+    <main class="menu-list">
+      <a class="choice-btn" href="die_19_shell_jugendstudie_interaktive_lernseite.html">
+        Die Shell-Jugendstudie
+      </a>
+
+      <a class="choice-btn" href="vokabeln_jugend_werte.html">
+        Vokabeln: Die Werte der Jugend
+      </a>
+    </main>
+  </div>
+</body>
+</html>

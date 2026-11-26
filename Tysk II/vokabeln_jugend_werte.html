@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vokabel-Arena | Deutsch ↔ Norwegisch (Nynorsk)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#151e32',
+                            900: '#0f172a',
+                            950: '#090d16',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom 3D Flashcard Flip & Animations */
+        body {
+            background-color: #090d16;
+            color: #f8fafc;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-inner {
+            transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); }
+            50% { transform: scale(1.04); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop {
+            animation: pop 0.25s ease-out;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950/60">
+
+    <!-- Top Navigation & Stats Header -->
+    <header class="sticky top-0 z-30 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <!-- Brand -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 font-extrabold text-white text-lg">
+                    DE
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-base sm:text-lg tracking-tight text-white flex items-center gap-2">
+                        Vokabel-Arena
+                        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Deutsch ↔ Norwegisch (Nynorsk)</span>
+                    </h1>
+                    <p class="text-xs text-slate-400 hidden sm:block">Thema: Jugend & Werte (31 Vokabeln und Ausdrücke)</p>
+                </div>
+            </div>
+
+            <!-- Live Gamification Stats -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Mastered Progress -->
+                <div class="flex items-center gap-2 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl" title="Gelernte Vokabeln">
+                    <span class="text-emerald-400 text-sm">★</span>
+                    <span class="text-xs sm:text-sm font-bold text-slate-200"><span id="stat-mastered">0</span>/31</span>
+                </div>
+
+                <!-- Streak -->
+                <div class="flex items-center gap-1.5 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl" title="Serie (Streak)">
+                    <span class="text-amber-400 text-sm">🔥</span>
+                    <span id="stat-streak" class="text-xs sm:text-sm font-bold text-amber-300">0</span>
+                </div>
+
+                <!-- XP Points -->
+                <div class="flex items-center gap-1.5 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-xl" title="Erfahrungspunkte (XP)">
+                    <span class="text-cyan-400 text-sm">⚡</span>
+                    <span id="stat-xp" class="text-xs sm:text-sm font-mono font-bold text-cyan-300">0 XP</span>
+                </div>
+
+                <!-- Sound Toggle -->
+                <button id="btn-sound" onclick="toggleSound()" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition" title="Soundeffekte ein/aus">
+                    <span id="sound-icon">🔊</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mode Selector Tabs -->
+        <nav class="max-w-6xl mx-auto px-4 pb-3 overflow-x-auto">
+            <div class="flex gap-2 min-w-max">
+                <button onclick="switchMode('cards')" id="tab-cards" class="mode-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-indigo-600 text-white shadow-lg shadow-indigo-600/25">
+                    <span>🗂️</span> Lernkarten
+                </button>
+                <button onclick="switchMode('quiz')" id="tab-quiz" class="mode-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800">
+                    <span>⚡</span> Blitz-Quiz
+                </button>
+                <button onclick="switchMode('memory')" id="tab-memory" class="mode-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800">
+                    <span>🧩</span> Memory-Spiel
+                </button>
+                <button onclick="switchMode('context')" id="tab-context" class="mode-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800">
+                    <span>💬</span> Satz-Baumeister
+                </button>
+                <button onclick="switchMode('type')" id="tab-type" class="mode-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800">
+                    <span>⌨️</span> Schreib-Trainer
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Toast Notification Banner (No alert() used) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300 bg-slate-800 border border-slate-700 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm font-medium">
+        <span id="toast-icon">✨</span>
+        <span id="toast-msg">Nachricht</span>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-6">
+
+        <!-- =========================================================
+             MODE 1: LERNKARTEN & WORTLISTE
+             ========================================================= -->
+        <section id="view-cards" class="mode-view space-y-6">
+            <!-- Sub-controls -->
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-900/70 border border-slate-800 p-3.5 rounded-2xl">
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleCardSubView('flash')" id="sub-flash" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
+                        Kartenansicht
+                    </button>
+                    <button onclick="toggleCardSubView('list')" id="sub-list" class="px-3 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white">
+                        Wortliste (31)
+                    </button>
+                </div>
+
+                <div id="flash-controls" class="flex items-center gap-2">
+                    <button onclick="toggleDirection()" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+                        Richtung: <span id="card-dir-label" class="text-cyan-400 font-bold">Deutsch → Norwegisch</span>
+                    </button>
+                    <button onclick="filterUnmasteredCards()" id="btn-filter-unmastered" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+                        Nur ungelernte
+                    </button>
+                </div>
+            </div>
+
+            <!-- Flashcard Player -->
+            <div id="flashcard-area" class="max-w-xl mx-auto space-y-5">
+                <div class="flex justify-between items-center text-xs text-slate-400 px-1">
+                    <span>Karte <strong id="card-index" class="text-white">1</strong> von <strong id="card-total" class="text-white">31</strong></span>
+                    <span id="card-status-badge" class="px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300">Noch nicht gelernt</span>
+                </div>
+
+                <!-- 3D Flip Card -->
+                <div class="perspective-1000 h-72 sm:h-80 cursor-pointer" onclick="flipCard()">
+                    <div id="flashcard-inner" class="flashcard-inner relative w-full h-full transform-style-3d">
+                        <!-- Front -->
+                        <div class="backface-hidden absolute inset-0 rounded-3xl bg-gradient-to-br from-slate-800/90 to-slate-900 border-2 border-slate-700/80 p-6 sm:p-8 flex flex-col items-center justify-center text-center shadow-2xl">
+                            <span id="card-front-lang" class="text-xs uppercase tracking-widest font-bold text-cyan-400 mb-4 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">DEUTSCH</span>
+                            <h2 id="card-front-text" class="text-2xl sm:text-4xl font-extrabold text-white leading-snug">der Wert</h2>
+                            <p id="card-front-hint" class="text-xs text-slate-400 mt-3 font-mono"></p>
+                            <span class="absolute bottom-5 text-xs text-slate-500 flex items-center gap-1.5">
+                                <span>👆</span> Klicken oder Leertaste drücken zum Umdrehen
+                            </span>
+                        </div>
+
+                        <!-- Back -->
+                        <div class="backface-hidden rotate-y-180 absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-900/90 to-slate-900 border-2 border-indigo-500/50 p-6 sm:p-8 flex flex-col items-center justify-center text-center shadow-2xl">
+                            <span id="card-back-lang" class="text-xs uppercase tracking-widest font-bold text-indigo-300 mb-4 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30">NORWEGISCH (NYNORSK)</span>
+                            <h2 id="card-back-text" class="text-2xl sm:text-4xl font-extrabold text-white leading-snug">verdi</h2>
+                            <p id="card-back-example" class="text-xs sm:text-sm text-indigo-200/80 mt-4 italic max-w-md"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="grid grid-cols-4 gap-2 sm:gap-3">
+                    <button onclick="prevCard()" class="py-3 px-3 rounded-2xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700 text-slate-300 font-bold text-sm transition flex items-center justify-center">
+                        ← Zurück
+                    </button>
+                    <button onclick="markCard(false)" class="py-3 px-3 rounded-2xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-amber-300 font-bold text-xs sm:text-sm transition flex items-center justify-center gap-1.5">
+                        <span>🔄</span> Weiter üben
+                    </button>
+                    <button onclick="markCard(true)" class="py-3 px-3 rounded-2xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 font-bold text-xs sm:text-sm transition flex items-center justify-center gap-1.5">
+                        <span>✅</span> Kann ich!
+                    </button>
+                    <button onclick="nextCard()" class="py-3 px-3 rounded-2xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700 text-slate-300 font-bold text-sm transition flex items-center justify-center">
+                        Weiter →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Full Vocabulary List View (Hidden initially) -->
+            <div id="vocab-list-area" class="hidden space-y-4">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="list-search" oninput="renderVocabList()" placeholder="Auf Deutsch oder Norwegisch suchen..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+                    <button onclick="resetProgress()" class="px-4 py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-bold transition">
+                        Fortschritt zurücksetzen
+                    </button>
+                </div>
+                <div id="vocab-list-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             MODE 2: BLITZ-QUIZ
+             ========================================================= -->
+        <section id="view-quiz" class="mode-view hidden max-w-2xl mx-auto space-y-5">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-5 sm:p-7 shadow-2xl space-y-6">
+                <!-- Top bar -->
+                <div class="flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30" id="quiz-direction-badge">DE → NO</span>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30" id="quiz-combo">Kombo x1</span>
+                    </div>
+                    <div class="text-xs font-mono text-slate-400">
+                        Runde: <span id="quiz-round" class="text-white font-bold">1</span>
+                    </div>
+                </div>
+
+                <!-- Timer Bar -->
+                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                    <div id="quiz-timer-bar" class="h-full bg-gradient-to-r from-cyan-400 to-indigo-500 transition-all duration-100" style="width: 100%;"></div>
+                </div>
+
+                <!-- Question -->
+                <div class="text-center py-4 space-y-2">
+                    <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold" id="quiz-prompt-label">Was bedeutet das auf Norwegisch?</p>
+                    <h2 id="quiz-question" class="text-2xl sm:text-3xl font-extrabold text-white">verantwortungsbewusst</h2>
+                </div>
+
+                <!-- 4 Options -->
+                <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- Buttons injected by JS -->
+                </div>
+
+                <!-- Feedback & Next -->
+                <div id="quiz-feedback" class="hidden rounded-2xl p-4 text-sm font-medium flex items-center justify-between gap-3">
+                    <span id="quiz-feedback-text"></span>
+                    <button onclick="nextQuizQuestion()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs shrink-0">
+                        Weiter →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             MODE 3: MEMORY-SPIEL
+             ========================================================= -->
+        <section id="view-memory" class="mode-view hidden space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-900/80 border border-slate-800 p-4 rounded-2xl">
+                <div>
+                    <h2 class="font-bold text-white text-base">Memory-Spiel (8 Paare pro Runde)</h2>
+                    <p class="text-xs text-slate-400">Finde jeweils das passende Paar aus deutschem Begriff und norwegischer Übersetzung.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="text-xs font-mono bg-slate-950 px-3 py-2 rounded-xl border border-slate-800">
+                        Zeit: <span id="mem-timer" class="text-cyan-400 font-bold">0.0s</span>
+                    </div>
+                    <div class="text-xs font-mono bg-slate-950 px-3 py-2 rounded-xl border border-slate-800">
+                        Züge: <span id="mem-moves" class="text-indigo-400 font-bold">0</span>
+                    </div>
+                    <button onclick="initMemoryGame()" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition shadow-lg shadow-indigo-600/20">
+                        Neues Spielfeld 🔄
+                    </button>
+                </div>
+            </div>
+
+            <div id="memory-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <!-- 16 Memory cards injected here -->
+            </div>
+        </section>
+
+        <!-- =========================================================
+             MODE 4: SATZ-BAUMEISTER (KONTEXT & LÜCKENTEXT)
+             ========================================================= -->
+        <section id="view-context" class="mode-view hidden max-w-2xl mx-auto space-y-5">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-5 sm:p-7 shadow-2xl space-y-6">
+                <div class="flex items-center justify-between">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                        📊 Jugendstudie im Kontext
+                    </span>
+                    <span class="text-xs text-slate-400">Aufgabe <span id="ctx-num" class="text-white font-bold">1</span> / <span id="ctx-total" class="text-white font-bold">16</span></span>
+                </div>
+
+                <!-- German Sentence with Gap -->
+                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-5 space-y-3">
+                    <p id="ctx-german" class="text-lg sm:text-xl font-bold text-white leading-relaxed">
+                        In Deutschland _____ alle vier Jahre eine große Jugendstudie _____.
+                    </p>
+                    <div class="pt-2 border-t border-slate-800/80 flex items-start gap-2 text-xs sm:text-sm text-slate-400">
+                        <span class="text-indigo-400 font-bold shrink-0">Übersetzungshilfe (Nynorsk):</span>
+                        <span id="ctx-nynorsk">I Tyskland blir det gjennomført ein stor ungdomsstudie kvart fjerde år.</span>
+                    </div>
+                </div>
+
+                <!-- Choices -->
+                <div id="ctx-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- Injected by JS -->
+                </div>
+
+                <div id="ctx-feedback" class="hidden rounded-2xl p-4 text-sm font-medium flex items-center justify-between gap-3">
+                    <span id="ctx-feedback-text"></span>
+                    <button onclick="nextContextQuestion()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs shrink-0">
+                        Nächster Satz →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             MODE 5: SCHREIB-TRAINER
+             ========================================================= -->
+        <section id="view-type" class="mode-view hidden max-w-2xl mx-auto space-y-5">
+            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-5 sm:p-7 shadow-2xl space-y-5">
+                <div class="flex items-center justify-between">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                        ✍️ Auf Deutsch schreiben (Artikel der/die/das beachten!)
+                    </span>
+                    <button onclick="giveTypeHint()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-bold border border-slate-700 transition">
+                        💡 Hinweis anzeigen
+                    </button>
+                </div>
+
+                <!-- Nynorsk Prompt -->
+                <div class="text-center py-3 space-y-2">
+                    <p class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Übersetze ins Deutsche:</p>
+                    <h2 id="type-prompt" class="text-2xl sm:text-3xl font-extrabold text-white">uavhengigheit</h2>
+                    <p id="type-hint-display" class="text-sm font-mono text-amber-300 h-5"></p>
+                </div>
+
+                <!-- Input Box -->
+                <form onsubmit="checkTypedAnswer(event)" class="space-y-3">
+                    <div class="relative">
+                        <input type="text" id="type-input" autocomplete="off" autocapitalize="off" spellcheck="false"
+                            placeholder="Deutsches Wort oder Ausdruck hier eingeben..."
+                            class="w-full bg-slate-950 border-2 border-slate-700 focus:border-indigo-500 rounded-2xl px-4 py-3.5 text-base sm:text-lg font-semibold text-white placeholder-slate-600 focus:outline-none transition">
+                    </div>
+
+                    <!-- German Special Characters Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-950/60 p-2.5 rounded-2xl border border-slate-800">
+                        <span class="text-xs text-slate-400 pl-1">Deutsche Sonderzeichen:</span>
+                        <div class="flex gap-1.5">
+                            <button type="button" onclick="insertChar('ä')" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-indigo-600 text-white font-mono font-bold text-sm transition">ä</button>
+                            <button type="button" onclick="insertChar('ö')" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-indigo-600 text-white font-mono font-bold text-sm transition">ö</button>
+                            <button type="button" onclick="insertChar('ü')" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-indigo-600 text-white font-mono font-bold text-sm transition">ü</button>
+                            <button type="button" onclick="insertChar('ß')" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-indigo-600 text-white font-mono font-bold text-sm transition">ß</button>
+                            <button type="button" onclick="insertChar('Ä')" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-indigo-600 text-white font-mono font-bold text-sm transition">Ä</button>
+                            <button type="button" onclick="insertChar('Ö')" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-indigo-600 text-white font-mono font-bold text-sm transition">Ö</button>
+                            <button type="button" onclick="insertChar('Ü')" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-indigo-600 text-white font-mono font-bold text-sm transition">Ü</button>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 pt-1">
+                        <button type="button" onclick="skipTypeWord()" class="px-4 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-sm transition">
+                            Überspringen
+                        </button>
+                        <button type="submit" id="type-submit-btn" class="flex-1 py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white font-extrabold text-sm sm:text-base shadow-lg shadow-indigo-600/25 transition">
+                            Antwort prüfen ✓
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Feedback Box -->
+                <div id="type-feedback" class="hidden rounded-2xl p-4 text-sm space-y-2">
+                    <div class="flex items-center justify-between gap-2">
+                        <p id="type-feedback-title" class="font-bold text-base"></p>
+                        <button onclick="nextTypeWord()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs">
+                            Nächste Vokabel →
+                        </button>
+                    </div>
+                    <p id="type-feedback-detail" class="text-xs opacity-90"></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-900">
+        Vokabeltrainer Deutsch ↔ Norwegisch (Nynorsk) • Alle 31 Vokabeln zum Thema «Jugend & Werte»
+    </footer>
+
+    <script>
+        /* ============================================================================
+           1. COMPLETE VOCABULARY DATASET (ALL 31 ITEMS FROM BOTH SLIDES)
+           ============================================================================ */
+        const VOCAB_DATA = [
+            { id: 1, de: "der Wert", nn: "verdi", pos: "Substantiv (m)", exampleDe: "Ehrlichkeit ist ein wichtiger Wert.", exampleNn: "Ærlegdom er ein viktig verdi." },
+            { id: 2, de: "von je 100 befragten Jugendlichen", nn: "av 100 ungdommar i spørjeundersøkinga", pos: "Ausdruck", exampleDe: "85 von je 100 befragten Jugendlichen finden Freunde wichtig.", exampleNn: "85 av 100 ungdommar i spørjeundersøkinga synest vener er viktig." },
+            { id: 3, de: "als besonders wichtig nennen", nn: "nemne som særleg viktig", pos: "Verb-Ausdruck", exampleDe: "Viele Jugendliche nennen Familie als besonders wichtig.", exampleNn: "Mange ungdommar nemner familie som særleg viktig." },
+            { id: 4, de: "Jugendliche von heute", nn: "dagens ungdom", pos: "Substantiv (Pl.)", exampleDe: "Jugendliche von heute sind sehr engagiert.", exampleNn: "Dagens ungdom er svært engasjerte." },
+            { id: 5, de: "verantwortungsbewusst", nn: "ansvarsbevisst", pos: "Adjektiv", exampleDe: "Die meisten jungen Leute handeln verantwortungsbewusst.", exampleNn: "Dei fleste unge handlar ansvarsbevisst." },
+            { id: 6, de: "sie wünschen sich", nn: "dei ønsker seg", pos: "Verb", exampleDe: "Sie wünschen sich eine sichere Zukunft.", exampleNn: "Dei ønsker seg ei trygg framtid." },
+            { id: 7, de: "soziale Beziehungen", nn: "sosiale relasjonar", pos: "Substantiv (Pl.)", exampleDe: "Gute soziale Beziehungen machen glücklich.", exampleNn: "Gode sosiale relasjonar gjer ein lukkeleg." },
+            { id: 8, de: "die Unabhängigkeit", nn: "uavhengigheit", pos: "Substantiv (f)", exampleDe: "Mit 18 Jahren ist die Unabhängigkeit sehr wichtig.", exampleNn: "Når ein er 18 år, er uavhengigheit svært viktig." },
+            { id: 9, de: "der Lebensgenuss", nn: "livsnyting", pos: "Substantiv (m)", exampleDe: "Neben der Arbeit gehört auch der Lebensgenuss dazu.", exampleNn: "Ved sida av arbeidet høyrer òg livsnyting med." },
+            { id: 10, de: "welche", nn: "hvilke", pos: "Pronomen", exampleDe: "Welche Werte sind dir am wichtigsten?", exampleNn: "Kva for (hvilke) verdiar er viktigast for deg?" },
+            { id: 11, de: "Diese Jugend von heute!", nn: "Huff, denne ungdommen i dag!", pos: "Ausruf", exampleDe: "Manche Erwachsene rufen: «Diese Jugend von heute!»", exampleNn: "Nokre vaksne ropar: «Huff, denne ungdommen i dag!»" },
+            { id: 12, de: "schimpfen", nn: "skjenne, kjefte", pos: "Verb", exampleDe: "Viele Ältere schimpfen über die junge Generation.", exampleNn: "Mange eldre kjefter på den unge generasjonen." },
+            { id: 13, de: "die Älteren", nn: "eldre menneske", pos: "Substantiv (Pl.)", exampleDe: "Die Älteren denken oft anders als die Jungen.", exampleNn: "Eldre menneske tenkjer ofte annleis enn dei unge." },
+            { id: 14, de: "ganz anders als", nn: "heilt annleis enn", pos: "Ausdruck", exampleDe: "Die Jugend ist ganz anders als ihr Ruf.", exampleNn: "Ungdommen er heilt annleis enn ryktet sitt." },
+            { id: 15, de: "die Studie", nn: "studie, undersøking", pos: "Substantiv (f)", exampleDe: "Die neue Studie zeigt interessante Ergebnisse.", exampleNn: "Den nye studien viser interessante resultat." },
+            { id: 16, de: "eine Frage beantworten", nn: "svare på eit spørsmål", pos: "Verb-Ausdruck", exampleDe: "Kannst du mir bitte eine Frage beantworten?", exampleNn: "Kan du vere så snill å svare på eit spørsmål?" },
+            { id: 17, de: "alle vier Jahre", nn: "kvart fjerde år", pos: "Zeitausdruck", exampleDe: "Die Shell-Jugendstudie erscheint alle vier Jahre.", exampleNn: "Shell-ungdomsstudien kjem ut kvart fjerde år." },
+            { id: 18, de: "wird durchgeführt", nn: "blir gjennomført", pos: "Verb (Passiv)", exampleDe: "Die Umfrage wird in ganz Deutschland durchgeführt.", exampleNn: "Undersøkinga blir gjennomført i heile Tyskland." },
+            { id: 19, de: "besonders wichtig", nn: "særleg viktig", pos: "Adjektiv", exampleDe: "Freundschaft ist für Jugendliche besonders wichtig.", exampleNn: "Venskap er særleg viktig for ungdommar." },
+            { id: 20, de: "am (aller)wichtigsten", nn: "(aller) viktigast", pos: "Superlativ", exampleDe: "Gesundheit ist mir am allerwichtigsten.", exampleNn: "Helse er aller viktigast for meg." },
+            { id: 21, de: "auf den Plätzen zwei und drei", nn: "på plassane to og tre", pos: "Ausdruck", exampleDe: "Auf den Plätzen zwei und drei liegen Freizeit und Familie.", exampleNn: "På plassane to og tre ligg fritid og familie." },
+            { id: 22, de: "das Familienleben", nn: "familieliv", pos: "Substantiv (n)", exampleDe: "Ein harmonisches Familienleben gibt Halt.", exampleNn: "Eit harmonisk familieliv gir støtte." },
+            { id: 23, de: "abhängig von anderen", nn: "avhengig av andre", pos: "Adjektiv-Ausdruck", exampleDe: "Niemand möchte gerne abhängig von anderen sein.", exampleNn: "Ingen ønsker å vere avhengig av andre." },
+            { id: 24, de: "eigenverantwortlich", nn: "sjølvråden, sjølvstendig", pos: "Adjektiv", exampleDe: "Junge Menschen wollen eigenverantwortlich leben.", exampleNn: "Unge menneske vil leve sjølvstendig." },
+            { id: 25, de: "Gesetz und Ordnung", nn: "lov og orden", pos: "Ausdruck", exampleDe: "Auch Gesetz und Ordnung spielen eine Rolle.", exampleNn: "Òg lov og orden spelar ei rolle." },
+            { id: 26, de: "gesundheitsbewusst", nn: "helsebevisst", pos: "Adjektiv", exampleDe: "Viele Teenager ernähren sich sehr gesundheitsbewusst.", exampleNn: "Mange tenåringar et svært helsebevisst." },
+            { id: 27, de: "genauso viele", nn: "like mange", pos: "Ausdruck", exampleDe: "Genauso viele Jungen wie Mädchen nahmen teil.", exampleNn: "Like mange gutar som jenter deltok." },
+            { id: 28, de: "Fleiß und Ehrgeiz", nn: "flid og ambisjonar", pos: "Ausdruck", exampleDe: "Mit Fleiß und Ehrgeiz erreicht man seine Ziele.", exampleNn: "Med flid og ambisjonar når ein måla sine." },
+            { id: 29, de: "nach Sicherheit streben", nn: "streve etter tryggleik", pos: "Verb-Ausdruck", exampleDe: "In unsicheren Zeiten streben viele nach Sicherheit.", exampleNn: "I usikre tider strevar mange etter tryggleik." },
+            { id: 30, de: "Aber nein!", nn: "Nei då!", pos: "Ausruf", exampleDe: "Sind Jugendliche faul? Aber nein!", exampleNn: "Er ungdommar late? Nei då!" },
+            { id: 31, de: "das Erlebnis", nn: "oppleving", pos: "Substantiv (n)", exampleDe: "Das Konzert war ein tolles Erlebnis.", exampleNn: "Konserten var ei flott oppleving." }
+        ];
+
+        /* Context / Cloze Sentences for Mode 4 (All answers grammatically inflected to fit the sentence) */
+        const CONTEXT_SENTENCES = [
+            {
+                de: "Manche Erwachsene verdrehen die Augen und rufen: «_____»",
+                ans: "Diese Jugend von heute!",
+                base: "Diese Jugend von heute!",
+                distractors: ["Aber nein!", "Jugendliche von heute", "Die Älteren!"],
+                nn: "Nokre vaksne rullar med auga og ropar: «Huff, denne ungdommen i dag!»"
+            },
+            {
+                de: "In Deutschland _____ eine bekannte Jugendstudie _____.",
+                ans: "wird ... durchgeführt",
+                parts: ["wird", "durchgeführt"],
+                base: "wird durchgeführt",
+                distractors: [
+                    { label: "wird ... beantwortet", parts: ["wird", "beantwortet"] },
+                    { label: "wird ... genannt", parts: ["wird", "genannt"] },
+                    { label: "wird ... geschimpft", parts: ["wird", "geschimpft"] }
+                ],
+                nn: "I Tyskland blir ein kjend ungdomsstudie gjennomført."
+            },
+            {
+                de: "Diese große Umfrage findet _____ statt.",
+                ans: "alle vier Jahre",
+                base: "alle vier Jahre",
+                distractors: ["genauso viele", "ganz anders als", "besonders wichtig"],
+                nn: "Denne store spørjeundersøkinga finn stad kvart fjerde år."
+            },
+            {
+                de: "90 _____ sagen, dass gute Freunde sehr wichtig sind.",
+                ans: "von je 100 befragten Jugendlichen",
+                base: "von je 100 befragten Jugendlichen",
+                distractors: ["auf den Plätzen zwei und drei", "Jugendliche von heute", "soziale Beziehungen"],
+                nn: "90 av 100 ungdommar i spørjeundersøkinga seier at gode vener er svært viktig."
+            },
+            {
+                de: "Für viele junge Leute stehen _____ ganz oben auf der Liste.",
+                ans: "soziale Beziehungen",
+                base: "soziale Beziehungen",
+                distractors: ["Fleiß und Ehrgeiz", "Gesetz und Ordnung", "die Älteren"],
+                nn: "For mange unge menneske står sosiale relasjonar heilt øvst på lista."
+            },
+            {
+                de: "Junge Erwachsene wollen nicht _____ sein, sondern ihr eigenes Geld verdienen.",
+                ans: "abhängig von anderen",
+                base: "abhängig von anderen",
+                distractors: ["besonders wichtig", "verantwortungsbewusst", "gesundheitsbewusst"],
+                nn: "Unge vaksne vil ikkje vere avhengige av andre, men tene sine eigne pengar."
+            },
+            {
+                de: "Sie möchten ein _____ Leben führen und selbst entscheiden.",
+                ans: "eigenverantwortliches",
+                base: "eigenverantwortlich",
+                distractors: ["gesundheitsbewusstes", "verantwortungsbewusstes", "besonders wichtiges"],
+                nn: "Dei ønsker å leve eit sjølvstendig liv og bestemme sjølve."
+            },
+            {
+                de: "Sind Jugendliche heute egoistisch? _____ Sie helfen oft anderen!",
+                ans: "Aber nein!",
+                base: "Aber nein!",
+                distractors: ["Diese Jugend von heute!", "Ganz anders als!", "Am allerwichtigsten!"],
+                nn: "Er ungdommar i dag egoistiske? Nei då! Dei hjelper ofte andre!"
+            },
+            {
+                de: "Viele Ältere _____ über die Jugend, obwohl sie sehr fleißig ist.",
+                ans: "schimpfen",
+                base: "schimpfen",
+                distractors: ["streben", "wünschen sich", "beantworten"],
+                nn: "Mange eldre kjefter på ungdommen, sjølv om han er svært flittig."
+            },
+            {
+                de: "Die Realität ist oft _____ die Vorurteile der Erwachsenen.",
+                ans: "ganz anders als",
+                base: "ganz anders als",
+                distractors: ["genauso viele wie", "besonders wichtig für", "abhängig von"],
+                nn: "Røyndomen er ofte heilt annleis enn fordommane til dei vaksne."
+            },
+            {
+                de: "Für Erfolg in der Schule und im Beruf braucht man _____.",
+                ans: "Fleiß und Ehrgeiz",
+                base: "Fleiß und Ehrgeiz",
+                distractors: ["Gesetz und Ordnung", "soziale Beziehungen", "das Familienleben"],
+                nn: "For suksess på skulen og i yrket treng ein flid og ambisjonar."
+            },
+            {
+                de: "In schwierigen Zeiten _____ viele junge Menschen _____.",
+                ans: "streben ... nach Sicherheit",
+                parts: ["streben", "nach Sicherheit"],
+                base: "nach Sicherheit streben",
+                distractors: [
+                    { label: "wünschen ... sich ein Erlebnis", parts: ["wünschen", "sich ein Erlebnis"] },
+                    { label: "schimpfen ... über die Ordnung", parts: ["schimpfen", "über die Ordnung"] },
+                    { label: "beantworten ... eine Frage", parts: ["beantworten", "eine Frage"] }
+                ],
+                nn: "I vanskelege tider strevar mange unge menneske etter tryggleik."
+            },
+            {
+                de: "Ein Festival mit Freunden ist ein unvergessliches _____.",
+                ans: "Erlebnis",
+                base: "das Erlebnis",
+                distractors: ["Familienleben", "Studium", "Wertgefühl"],
+                nn: "Ein festival med vener er ei uforgløymeleg oppleving."
+            },
+            {
+                de: "Ehrlichkeit ist für mich ein sehr wichtiger _____.",
+                ans: "Wert",
+                base: "der Wert",
+                distractors: ["Lebensgenuss", "Ehrgeiz", "Alltag"],
+                nn: "Ærlegdom er ein svært viktig verdi for meg."
+            },
+            {
+                de: "Viele Jugendliche treiben Sport und leben sehr _____.",
+                ans: "gesundheitsbewusst",
+                base: "gesundheitsbewusst",
+                distractors: ["abhängig von anderen", "ganz anders als", "am allerwichtigsten"],
+                nn: "Mange ungdommar driv med idrett og lever svært helsebevisst."
+            },
+            {
+                de: "_____ liegen Umweltbewusstsein und ein gutes Familienleben.",
+                ans: "Auf den Plätzen zwei und drei",
+                base: "auf den Plätzen zwei und drei",
+                distractors: ["Von je 100 befragten Jugendlichen", "Alle vier Jahre", "Nach Sicherheit strebend"],
+                nn: "På plassane to og tre ligg miljøbevisstheit og eit godt familieliv."
+            },
+            {
+                de: "Eine gute Ausbildung und ein sicherer Job sind für viele _____.",
+                ans: "am allerwichtigsten",
+                base: "am (aller)wichtigsten",
+                distractors: ["genauso viele", "ganz anders als", "alle vier Jahre"],
+                nn: "Ei god utdanning og ein trygg jobb er aller viktigast for mange."
+            },
+            {
+                de: "Die neue _____ zeigt, wie optimistisch junge Menschen in die Zukunft blicken.",
+                ans: "Studie",
+                base: "die Studie",
+                distractors: ["Unabhängigkeit", "Frage", "Ordnung"],
+                nn: "Den nye studien viser kor optimistisk unge menneske ser på framtida."
+            },
+            {
+                de: "Die Jugendlichen haben in dem Fragebogen jede _____ ehrlich _____.",
+                ans: "Frage ... beantwortet",
+                parts: ["Frage", "beantwortet"],
+                base: "eine Frage beantworten",
+                distractors: [
+                    { label: "Studie ... durchgeführt", parts: ["Studie", "durchgeführt"] },
+                    { label: "Sicherheit ... gestrebt", parts: ["Sicherheit", "gestrebt"] },
+                    { label: "Jugend ... geschimpft", parts: ["Jugend", "geschimpft"] }
+                ],
+                nn: "Ungdommane har svara ærleg på kvart spørsmål i spørjeskjemaet."
+            },
+            {
+                de: "Mit 18 Jahren beginnt für viele ein neuer Lebensabschnitt voller _____.",
+                ans: "Unabhängigkeit",
+                base: "die Unabhängigkeit",
+                distractors: ["Ordnung", "Sicherheit", "Studie"],
+                nn: "Når ein fyller 18 år, startar ein ny livsfase full av uavhengigheit."
+            },
+            {
+                de: "Ein gutes _____ ist für fast alle Befragten ein zentrales Ziel im Leben.",
+                ans: "Familienleben",
+                base: "das Familienleben",
+                distractors: ["Erlebnis", "Verhalten", "Beispiel"],
+                nn: "Eit godt familieliv er eit sentralt mål i livet for nesten alle dei spurde."
+            },
+            {
+                de: "Ein harmonisches Miteinander braucht klare Regeln sowie _____.",
+                ans: "Gesetz und Ordnung",
+                base: "Gesetz und Ordnung",
+                distractors: ["Fleiß und Ehrgeiz", "soziale Beziehungen", "Lebensgenuss"],
+                nn: "Eit harmonisk samhald treng tydelege reglar samt lov og orden."
+            },
+            {
+                de: "Neben Pflichten gehört auch ein bisschen _____ zu einem glücklichen Leben.",
+                ans: "Lebensgenuss",
+                base: "der Lebensgenuss",
+                distractors: ["Ehrgeiz", "Fleiß", "Wert"],
+                nn: "Ved sida av plikter høyrer òg litt livsnyting med til eit lukkeleg liv."
+            },
+            {
+                de: "In der Umfrage wollten Mädchen _____ Punkte erreichen wie Jungen.",
+                ans: "genauso viele",
+                base: "genauso viele",
+                distractors: ["besonders wichtig", "ganz anders als", "alle vier Jahre"],
+                nn: "I spørjeundersøkinga ville jenter oppnå like mange poeng som gutar."
+            }
+        ];
+
+        /* ============================================================================
+           2. APP STATE & STORAGE
+           ============================================================================ */
+        let state = {
+            xp: 0,
+            streak: 0,
+            masteredIds: [],
+            soundEnabled: true,
+            currentMode: 'cards',
+            cardDirection: 'de-nn', // 'de-nn' or 'nn-de'
+            filterUnmastered: false
+        };
+
+        try {
+            const saved = localStorage.getItem('vokabel_arena_de_nn_v1');
+            if (saved) {
+                state = { ...state, ...JSON.parse(saved) };
+            }
+        } catch (e) {
+            console.warn('LocalStorage nicht verfügbar:', e);
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem('vokabel_arena_de_nn_v1', JSON.stringify(state));
+            } catch (e) {}
+            updateHeaderStats();
+        }
+
+        function updateHeaderStats() {
+            document.getElementById('stat-mastered').textContent = state.masteredIds.length;
+            document.getElementById('stat-streak').textContent = state.streak;
+            document.getElementById('stat-xp').textContent = `${state.xp} XP`;
+            document.getElementById('sound-icon').textContent = state.soundEnabled ? '🔊' : '🔇';
+        }
+
+        function addXP(points) {
+            state.xp += points;
+            state.streak += 1;
+            saveState();
+        }
+
+        function resetStreak() {
+            state.streak = 0;
+            saveState();
+        }
+
+        function shuffleArray(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        /* ============================================================================
+           3. WEB AUDIO SYNTHESIZER (NO EXTERNAL AUDIO FILES)
+           ============================================================================ */
+        let audioCtx = null;
+
+        function playTone(type) {
+            if (!state.soundEnabled) return;
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+                if (type === 'correct') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.09);
+                    gain.gain.setValueAtTime(0.14, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+                    osc.start(now);
+                    osc.stop(now + 0.28);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(190, now);
+                    osc.frequency.linearRampToValueAtTime(135, now + 0.22);
+                    gain.gain.setValueAtTime(0.11, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+                    osc.start(now);
+                    osc.stop(now + 0.24);
+                } else if (type === 'flip') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(340, now);
+                    gain.gain.setValueAtTime(0.05, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } else if (type === 'win') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.1);
+                    osc.frequency.setValueAtTime(783.99, now + 0.2);
+                    osc.frequency.setValueAtTime(1046.5, now + 0.3);
+                    gain.gain.setValueAtTime(0.16, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+                    osc.start(now);
+                    osc.stop(now + 0.55);
+                }
+            } catch (e) {}
+        }
+
+        function toggleSound() {
+            state.soundEnabled = !state.soundEnabled;
+            saveState();
+            showToast(state.soundEnabled ? 'Soundeffekte aktiviert' : 'Soundeffekte stummgeschaltet', state.soundEnabled ? '🔊' : '🔇');
+        }
+
+        /* ============================================================================
+           4. TOAST & MODE NAVIGATION
+           ============================================================================ */
+        let toastTimeout = null;
+        function showToast(msg, icon = '✨') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            document.getElementById('toast-icon').textContent = icon;
+            toast.classList.remove('opacity-0', 'translate-y-3');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-3');
+            }, 2600);
+        }
+
+        function switchMode(mode) {
+            state.currentMode = mode;
+            if (quizTimerInterval) clearInterval(quizTimerInterval);
+            if (memTimerInterval) clearInterval(memTimerInterval);
+
+            document.querySelectorAll('.mode-view').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`view-${mode}`).classList.remove('hidden');
+
+            document.querySelectorAll('.mode-tab').forEach(btn => {
+                btn.className = 'mode-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-900/80 text-slate-300 hover:bg-slate-800 border border-slate-800';
+            });
+            const activeTab = document.getElementById(`tab-${mode}`);
+            activeTab.className = 'mode-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-indigo-600 text-white shadow-lg shadow-indigo-600/25';
+
+            if (mode === 'cards') renderFlashcard();
+            if (mode === 'quiz') startQuiz();
+            if (mode === 'memory') initMemoryGame();
+            if (mode === 'context') startContextGame();
+            if (mode === 'type') nextTypeWord();
+        }
+
+        /* ============================================================================
+           5. MODE 1: LERNKARTEN & WORTLISTE
+           ============================================================================ */
+        let cardDeck = [...VOCAB_DATA];
+        let cardIndex = 0;
+        let isFlipped = false;
+
+        function toggleCardSubView(sub) {
+            const flashArea = document.getElementById('flashcard-area');
+            const listArea = document.getElementById('vocab-list-area');
+            const flashControls = document.getElementById('flash-controls');
+            const btnFlash = document.getElementById('sub-flash');
+            const btnList = document.getElementById('sub-list');
+
+            if (sub === 'flash') {
+                flashArea.classList.remove('hidden');
+                flashControls.classList.remove('hidden');
+                listArea.classList.add('hidden');
+                btnFlash.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40';
+                btnList.className = 'px-3 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white';
+                renderFlashcard();
+            } else {
+                flashArea.classList.add('hidden');
+                flashControls.classList.add('hidden');
+                listArea.classList.remove('hidden');
+                btnList.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40';
+                btnFlash.className = 'px-3 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white';
+                renderVocabList();
+            }
+        }
+
+        function toggleDirection() {
+            state.cardDirection = state.cardDirection === 'de-nn' ? 'nn-de' : 'de-nn';
+            document.getElementById('card-dir-label').textContent =
+                state.cardDirection === 'de-nn' ? 'Deutsch → Norwegisch' : 'Norwegisch → Deutsch';
+            renderFlashcard();
+        }
+
+        function filterUnmasteredCards() {
+            state.filterUnmastered = !state.filterUnmastered;
+            const btn = document.getElementById('btn-filter-unmastered');
+            if (state.filterUnmastered) {
+                const unmastered = VOCAB_DATA.filter(v => !state.masteredIds.includes(v.id));
+                if (unmastered.length === 0) {
+                    state.filterUnmastered = false;
+                    showToast('Du hast schon alle 31 Vokabeln gelernt!', '🏆');
+                    return;
+                }
+                cardDeck = unmastered;
+                btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40 transition';
+            } else {
+                cardDeck = [...VOCAB_DATA];
+                btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition';
+            }
+            cardIndex = 0;
+            renderFlashcard();
+        }
+
+        function renderFlashcard() {
+            if (cardDeck.length === 0) cardDeck = [...VOCAB_DATA];
+            if (cardIndex >= cardDeck.length) cardIndex = 0;
+
+            isFlipped = false;
+            document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+
+            const item = cardDeck[cardIndex];
+            const isDeToNn = state.cardDirection === 'de-nn';
+            const mastered = state.masteredIds.includes(item.id);
+
+            document.getElementById('card-index').textContent = cardIndex + 1;
+            document.getElementById('card-total').textContent = cardDeck.length;
+
+            const badge = document.getElementById('card-status-badge');
+            if (mastered) {
+                badge.textContent = '★ Gelernt';
+                badge.className = 'px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold';
+            } else {
+                badge.textContent = 'Noch nicht gelernt';
+                badge.className = 'px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300';
+            }
+
+            document.getElementById('card-front-lang').textContent = isDeToNn ? 'DEUTSCH' : 'NORWEGISCH (NYNORSK)';
+            document.getElementById('card-front-text').textContent = isDeToNn ? item.de : item.nn;
+            document.getElementById('card-front-hint').textContent = isDeToNn ? item.pos : '';
+
+            document.getElementById('card-back-lang').textContent = isDeToNn ? 'NORWEGISCH (NYNORSK)' : 'DEUTSCH';
+            document.getElementById('card-back-text').textContent = isDeToNn ? item.nn : item.de;
+            document.getElementById('card-back-example').textContent = `«${item.exampleDe}» — ${item.exampleNn}`;
+        }
+
+        function flipCard() {
+            isFlipped = !isFlipped;
+            playTone('flip');
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180', isFlipped);
+        }
+
+        function nextCard() {
+            cardIndex = (cardIndex + 1) % cardDeck.length;
+            renderFlashcard();
+        }
+
+        function prevCard() {
+            cardIndex = (cardIndex - 1 + cardDeck.length) % cardDeck.length;
+            renderFlashcard();
+        }
+
+        function markCard(learned) {
+            const item = cardDeck[cardIndex];
+            if (learned) {
+                if (!state.masteredIds.includes(item.id)) {
+                    state.masteredIds.push(item.id);
+                    addXP(10);
+                }
+                playTone('correct');
+                showToast(`«${item.de}» als gelernt markiert!`, '✅');
+            } else {
+                state.masteredIds = state.masteredIds.filter(id => id !== item.id);
+                saveState();
+                showToast('Bleibt in deiner Übungsliste', '🔄');
+            }
+
+            if (state.filterUnmastered) {
+                cardDeck = VOCAB_DATA.filter(v => !state.masteredIds.includes(v.id));
+                if (cardDeck.length === 0) {
+                    state.filterUnmastered = false;
+                    cardDeck = [...VOCAB_DATA];
+                    document.getElementById('btn-filter-unmastered').className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition';
+                    showToast('Alle 31 Vokabeln geschafft!', '🎉');
+                }
+                cardIndex = cardIndex % cardDeck.length;
+                renderFlashcard();
+            } else {
+                nextCard();
+            }
+        }
+
+        function renderVocabList() {
+            const query = document.getElementById('list-search').value.toLowerCase().trim();
+            const grid = document.getElementById('vocab-list-grid');
+            const filtered = VOCAB_DATA.filter(v =>
+                v.de.toLowerCase().includes(query) || v.nn.toLowerCase().includes(query)
+            );
+
+            grid.innerHTML = filtered.map(v => {
+                const isDone = state.masteredIds.includes(v.id);
+                return `
+                    <div class="p-4 rounded-2xl bg-slate-900/90 border ${isDone ? 'border-emerald-500/40' : 'border-slate-800'} flex items-start justify-between gap-3">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-white text-sm sm:text-base">${v.de}</span>
+                                <span class="text-[11px] px-2 py-0.5 rounded-md bg-slate-800 text-slate-400">${v.pos}</span>
+                            </div>
+                            <p class="text-sm text-cyan-300 font-medium">${v.nn}</p>
+                            <p class="text-xs text-slate-500 italic pt-1">${v.exampleDe}</p>
+                        </div>
+                        <button onclick="toggleMasteredFromList(${v.id})" class="px-2.5 py-1.5 rounded-xl text-xs font-bold transition shrink-0 ${isDone ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-slate-800 text-slate-400 hover:text-white'}">
+                            ${isDone ? '★ Gelernt' : '☆ Offen'}
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleMasteredFromList(id) {
+            if (state.masteredIds.includes(id)) {
+                state.masteredIds = state.masteredIds.filter(x => x !== id);
+            } else {
+                state.masteredIds.push(id);
+                addXP(5);
+                playTone('correct');
+            }
+            saveState();
+            renderVocabList();
+        }
+
+        function resetProgress() {
+            state.masteredIds = [];
+            state.xp = 0;
+            state.streak = 0;
+            saveState();
+            renderVocabList();
+            showToast('Lernfortschritt wurde zurückgesetzt.', '🔄');
+        }
+
+        /* ============================================================================
+           6. MODE 2: BLITZ-QUIZ
+           ============================================================================ */
+        let quizRound = 1;
+        let quizCombo = 1;
+        let quizCurrent = null;
+        let quizAnswered = false;
+        let quizTimerInterval = null;
+        let quizTimeLeft = 100;
+
+        function startQuiz() {
+            quizRound = 1;
+            quizCombo = 1;
+            nextQuizQuestion();
+        }
+
+        function nextQuizQuestion() {
+            if (quizTimerInterval) clearInterval(quizTimerInterval);
+            quizAnswered = false;
+            quizTimeLeft = 100;
+
+            const isDeToNn = Math.random() > 0.45;
+            quizCurrent = {
+                item: VOCAB_DATA[Math.floor(Math.random() * VOCAB_DATA.length)],
+                isDeToNn
+            };
+
+            document.getElementById('quiz-round').textContent = quizRound;
+            document.getElementById('quiz-combo').textContent = `Kombo x${quizCombo}`;
+            document.getElementById('quiz-direction-badge').textContent = isDeToNn ? 'DE → NO' : 'NO → DE';
+            document.getElementById('quiz-prompt-label').textContent = isDeToNn
+                ? 'Was bedeutet das auf Norwegisch (Nynorsk)?'
+                : 'Wie heißt das auf Deutsch?';
+            document.getElementById('quiz-question').textContent = isDeToNn
+                ? quizCurrent.item.de
+                : quizCurrent.item.nn;
+            document.getElementById('quiz-feedback').classList.add('hidden');
+
+            const others = shuffleArray(VOCAB_DATA.filter(v => v.id !== quizCurrent.item.id)).slice(0, 3);
+            const options = shuffleArray([quizCurrent.item, ...others]);
+
+            const optionsEl = document.getElementById('quiz-options');
+            optionsEl.innerHTML = options.map(opt => {
+                const label = isDeToNn ? opt.nn : opt.de;
+                return `
+                    <button onclick="selectQuizOption(${opt.id}, this)"
+                        class="quiz-opt-btn p-4 rounded-2xl bg-slate-800/90 hover:bg-slate-800 border-2 border-slate-700 hover:border-indigo-500 text-left font-bold text-sm sm:text-base text-white transition">
+                        ${label}
+                    </button>
+                `;
+            }).join('');
+
+            const bar = document.getElementById('quiz-timer-bar');
+            bar.style.width = '100%';
+            quizTimerInterval = setInterval(() => {
+                quizTimeLeft -= 1.25;
+                bar.style.width = `${Math.max(0, quizTimeLeft)}%`;
+                if (quizTimeLeft <= 0) {
+                    clearInterval(quizTimerInterval);
+                    handleQuizTimeout();
+                }
+            }, 100);
+        }
+
+        function selectQuizOption(selectedId, btnEl) {
+            if (quizAnswered) return;
+            quizAnswered = true;
+            clearInterval(quizTimerInterval);
+
+            const isCorrect = selectedId === quizCurrent.item.id;
+            const correctAnswer = quizCurrent.isDeToNn ? quizCurrent.item.nn : quizCurrent.item.de;
+            const fb = document.getElementById('quiz-feedback');
+            const fbText = document.getElementById('quiz-feedback-text');
+
+            document.querySelectorAll('.quiz-opt-btn').forEach(b => b.disabled = true);
+
+            if (isCorrect) {
+                const gained = 10 * quizCombo;
+                addXP(gained);
+                quizCombo = Math.min(4, quizCombo + 1);
+                playTone('correct');
+                btnEl.className = 'p-4 rounded-2xl bg-emerald-500/25 border-2 border-emerald-400 text-left font-bold text-sm sm:text-base text-emerald-200 animate-pop';
+                fb.className = 'rounded-2xl p-4 text-sm font-medium flex items-center justify-between gap-3 bg-emerald-950/60 border border-emerald-500/40 text-emerald-200';
+                fbText.textContent = `Richtig! +${gained} XP`;
+            } else {
+                quizCombo = 1;
+                resetStreak();
+                playTone('wrong');
+                btnEl.className = 'p-4 rounded-2xl bg-rose-500/25 border-2 border-rose-500 text-left font-bold text-sm sm:text-base text-rose-200 animate-shake';
+                fb.className = 'rounded-2xl p-4 text-sm font-medium flex items-center justify-between gap-3 bg-rose-950/60 border border-rose-500/40 text-rose-200';
+                fbText.textContent = `Leider falsch! Richtig wäre: «${correctAnswer}»`;
+            }
+
+            quizRound++;
+            fb.classList.remove('hidden');
+        }
+
+        function handleQuizTimeout() {
+            if (quizAnswered) return;
+            quizAnswered = true;
+            quizCombo = 1;
+            resetStreak();
+            playTone('wrong');
+            document.querySelectorAll('.quiz-opt-btn').forEach(b => b.disabled = true);
+
+            const correctAnswer = quizCurrent.isDeToNn ? quizCurrent.item.nn : quizCurrent.item.de;
+            const fb = document.getElementById('quiz-feedback');
+            fb.className = 'rounded-2xl p-4 text-sm font-medium flex items-center justify-between gap-3 bg-amber-950/60 border border-amber-500/40 text-amber-200';
+            document.getElementById('quiz-feedback-text').textContent = `Zeit abgelaufen! Lösung: «${correctAnswer}»`;
+            quizRound++;
+            fb.classList.remove('hidden');
+        }
+
+        /* ============================================================================
+           7. MODE 3: MEMORY-SPIEL
+           ============================================================================ */
+        let memCards = [];
+        let memSelected = [];
+        let memMatchedCount = 0;
+        let memMoves = 0;
+        let memSeconds = 0;
+        let memTimerInterval = null;
+        let memLocked = false;
+
+        function initMemoryGame() {
+            if (memTimerInterval) clearInterval(memTimerInterval);
+            memSelected = [];
+            memMatchedCount = 0;
+            memMoves = 0;
+            memSeconds = 0;
+            memLocked = false;
+
+            document.getElementById('mem-moves').textContent = '0';
+            document.getElementById('mem-timer').textContent = '0.0s';
+
+            const sample = shuffleArray(VOCAB_DATA).slice(0, 8);
+            const deck = [];
+            sample.forEach(item => {
+                deck.push({ pairId: item.id, lang: 'DE', text: item.de });
+                deck.push({ pairId: item.id, lang: 'NO', text: item.nn });
+            });
+            memCards = shuffleArray(deck);
+
+            const grid = document.getElementById('memory-grid');
+            grid.innerHTML = memCards.map((c, idx) => `
+                <button onclick="selectMemoryCard(${idx}, this)" id="mem-card-${idx}"
+                    class="min-h-[96px] sm:min-h-[110px] p-3 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border-2 border-slate-800 hover:border-indigo-500/60 flex flex-col items-center justify-center text-center transition">
+                    <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full mb-1.5 ${c.lang === 'DE' ? 'bg-cyan-500/15 text-cyan-300' : 'bg-indigo-500/20 text-indigo-300'}">${c.lang}</span>
+                    <span class="text-xs sm:text-sm font-bold text-white leading-snug">${c.text}</span>
+                </button>
+            `).join('');
+
+            memTimerInterval = setInterval(() => {
+                memSeconds += 0.1;
+                document.getElementById('mem-timer').textContent = `${memSeconds.toFixed(1)}s`;
+            }, 100);
+        }
+
+        function selectMemoryCard(idx, btnEl) {
+            if (memLocked || btnEl.dataset.matched === 'true') return;
+            if (memSelected.some(s => s.idx === idx)) return;
+
+            playTone('flip');
+            btnEl.className = 'min-h-[96px] sm:min-h-[110px] p-3 rounded-2xl bg-indigo-600/30 border-2 border-indigo-400 flex flex-col items-center justify-center text-center transition scale-[1.02]';
+            memSelected.push({ idx, card: memCards[idx], el: btnEl });
+
+            if (memSelected.length === 2) {
+                memMoves++;
+                document.getElementById('mem-moves').textContent = memMoves;
+                const [first, second] = memSelected;
+
+                if (first.card.pairId === second.card.pairId && first.card.lang !== second.card.lang) {
+                    playTone('correct');
+                    addXP(15);
+                    [first.el, second.el].forEach(el => {
+                        el.dataset.matched = 'true';
+                        el.className = 'min-h-[96px] sm:min-h-[110px] p-3 rounded-2xl bg-emerald-500/20 border-2 border-emerald-500/50 flex flex-col items-center justify-center text-center opacity-75 cursor-default';
+                    });
+                    memSelected = [];
+                    memMatchedCount++;
+
+                    if (memMatchedCount === 8) {
+                        clearInterval(memTimerInterval);
+                        playTone('win');
+                        addXP(40);
+                        showToast(`Alle 8 Paare in ${memSeconds.toFixed(1)}s gefunden! +40 Bonus-XP`, '🏆');
+                    }
+                } else {
+                    memLocked = true;
+                    playTone('wrong');
+                    [first.el, second.el].forEach(el => {
+                        el.className = 'min-h-[96px] sm:min-h-[110px] p-3 rounded-2xl bg-rose-500/25 border-2 border-rose-500 flex flex-col items-center justify-center text-center animate-shake';
+                    });
+                    setTimeout(() => {
+                        [first.el, second.el].forEach(el => {
+                            el.className = 'min-h-[96px] sm:min-h-[110px] p-3 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border-2 border-slate-800 hover:border-indigo-500/60 flex flex-col items-center justify-center text-center transition';
+                        });
+                        memSelected = [];
+                        memLocked = false;
+                    }, 650);
+                }
+            }
+        }
+
+        /* ============================================================================
+           8. MODE 4: SATZ-BAUMEISTER (KONTEXT & LÜCKENTEXT)
+           ============================================================================ */
+        let ctxDeck = [];
+        let ctxIndex = 0;
+        let ctxAnswered = false;
+
+        function startContextGame() {
+            ctxDeck = shuffleArray(CONTEXT_SENTENCES);
+            ctxIndex = 0;
+            document.getElementById('ctx-total').textContent = ctxDeck.length;
+            renderContextQuestion();
+        }
+
+        function formatSentenceGaps(template, filledParts = null, isCorrectHighlight = false) {
+            let gapIdx = 0;
+            return template.replace(/_____/g, () => {
+                const word = filledParts && filledParts[gapIdx] ? filledParts[gapIdx] : '_______';
+                gapIdx++;
+                if (filledParts) {
+                    return isCorrectHighlight
+                        ? `<span class="text-emerald-300 underline decoration-emerald-400">${word}</span>`
+                        : `<span class="inline-block px-2.5 py-0.5 mx-1 rounded-lg bg-indigo-500/35 border border-cyan-400 text-cyan-200 font-semibold">${word}</span>`;
+                }
+                return `<span class="inline-block px-3 py-0.5 mx-1 rounded-lg bg-indigo-500/25 border border-indigo-400/50 text-cyan-300 font-mono">_______</span>`;
+            });
+        }
+
+        function renderContextQuestion() {
+            ctxAnswered = false;
+            const item = ctxDeck[ctxIndex];
+            document.getElementById('ctx-num').textContent = ctxIndex + 1;
+            document.getElementById('ctx-feedback').classList.add('hidden');
+
+            // Format one or multiple gaps nicely
+            document.getElementById('ctx-german').innerHTML = formatSentenceGaps(item.de);
+            document.getElementById('ctx-nynorsk').textContent = item.nn;
+
+            // Normalize options so single-gap and split-gap sentences both work cleanly
+            const correctOption = {
+                label: item.ans,
+                parts: item.parts || [item.ans],
+                isCorrect: true
+            };
+            const distractorOptions = item.distractors.map(d =>
+                typeof d === 'string'
+                    ? { label: d, parts: [d], isCorrect: false }
+                    : { label: d.label, parts: d.parts, isCorrect: false }
+            );
+            const choices = shuffleArray([correctOption, ...distractorOptions]);
+
+            const box = document.getElementById('ctx-options');
+            box.innerHTML = choices.map((choice, i) => `
+                <button onclick="checkContextAnswer(${i}, this)"
+                    data-correct="${choice.isCorrect}"
+                    data-parts='${JSON.stringify(choice.parts).replace(/'/g, "&#39;")}'
+                    class="ctx-btn p-3.5 rounded-2xl bg-slate-800/90 hover:bg-slate-800 border-2 border-slate-700 hover:border-cyan-500 text-left font-bold text-sm text-white transition">
+                    ${choice.label}
+                </button>
+            `).join('');
+        }
+
+        function checkContextAnswer(choiceIdx, btnEl) {
+            if (ctxAnswered) return;
+            ctxAnswered = true;
+            const item = ctxDeck[ctxIndex];
+            const isCorrect = btnEl.dataset.correct === 'true';
+            const chosenParts = JSON.parse(btnEl.dataset.parts);
+            const correctParts = item.parts || [item.ans];
+            const fb = document.getElementById('ctx-feedback');
+            const fbText = document.getElementById('ctx-feedback-text');
+
+            document.querySelectorAll('.ctx-btn').forEach(b => b.disabled = true);
+
+            // Show base form note if the inflected answer differs from the vocabulary list entry
+            const baseNote = (item.base && item.base !== item.ans) ? ` (Grundform: ${item.base})` : '';
+
+            if (isCorrect) {
+                addXP(20);
+                playTone('correct');
+                btnEl.className = 'p-3.5 rounded-2xl bg-emerald-500/25 border-2 border-emerald-400 text-left font-bold text-sm text-emerald-200 animate-pop';
+                document.getElementById('ctx-german').innerHTML = formatSentenceGaps(item.de, correctParts, true);
+                fb.className = 'rounded-2xl p-4 text-sm font-medium flex items-center justify-between gap-3 bg-emerald-950/60 border border-emerald-500/40 text-emerald-200';
+                fbText.textContent = `Richtig!${baseNote} +20 XP`;
+            } else {
+                resetStreak();
+                playTone('wrong');
+                btnEl.className = 'p-3.5 rounded-2xl bg-rose-500/25 border-2 border-rose-500 text-left font-bold text-sm text-rose-200 animate-shake';
+                document.getElementById('ctx-german').innerHTML = formatSentenceGaps(item.de, correctParts, true);
+                fb.className = 'rounded-2xl p-4 text-sm font-medium flex items-center justify-between gap-3 bg-rose-950/60 border border-rose-500/40 text-rose-200';
+                fbText.textContent = `Nicht ganz. Richtig ist: «${item.ans}»${baseNote}`;
+            }
+            fb.classList.remove('hidden');
+        }
+
+        function nextContextQuestion() {
+            ctxIndex = (ctxIndex + 1) % ctxDeck.length;
+            renderContextQuestion();
+        }
+
+        /* ============================================================================
+           9. MODE 5: SCHREIB-TRAINER (TYPING + UMLAUT KEYBOARD)
+           ============================================================================ */
+        let typeCurrent = null;
+        let typeHintLevel = 0;
+        let typeChecked = false;
+
+        function nextTypeWord() {
+            typeChecked = false;
+            typeHintLevel = 0;
+            typeCurrent = VOCAB_DATA[Math.floor(Math.random() * VOCAB_DATA.length)];
+
+            document.getElementById('type-prompt').textContent = typeCurrent.nn;
+            document.getElementById('type-hint-display').textContent = '';
+            const input = document.getElementById('type-input');
+            input.value = '';
+            input.disabled = false;
+            input.focus();
+
+            document.getElementById('type-submit-btn').classList.remove('hidden');
+            document.getElementById('type-feedback').classList.add('hidden');
+        }
+
+        function insertChar(char) {
+            const input = document.getElementById('type-input');
+            if (input.disabled) return;
+            const start = input.selectionStart;
+            const end = input.selectionEnd;
+            const val = input.value;
+            input.value = val.substring(0, start) + char + val.substring(end);
+            input.selectionStart = input.selectionEnd = start + 1;
+            input.focus();
+        }
+
+        function giveTypeHint() {
+            if (!typeCurrent) return;
+            typeHintLevel++;
+            const target = typeCurrent.de;
+            const revealLen = Math.min(target.length, typeHintLevel * 3);
+            const masked = target.split('').map((ch, i) => (i < revealLen || ch === ' ') ? ch : '_').join('');
+            document.getElementById('type-hint-display').textContent = `Hinweis: ${masked} (${typeCurrent.pos})`;
+        }
+
+        function checkTypedAnswer(e) {
+            e.preventDefault();
+            if (typeChecked) {
+                nextTypeWord();
+                return;
+            }
+            const input = document.getElementById('type-input');
+            const userVal = input.value.trim();
+            if (!userVal) return;
+
+            typeChecked = true;
+            input.disabled = true;
+            document.getElementById('type-submit-btn').classList.add('hidden');
+
+            const target = typeCurrent.de;
+            // Normalize punctuation for flexible comparison, but check exact case too
+            const cleanUser = userVal.replace(/[!?.()]/g, '').replace(/\s+/g, ' ').trim();
+            const cleanTarget = target.replace(/[!?.()]/g, '').replace(/\s+/g, ' ').trim();
+
+            const fb = document.getElementById('type-feedback');
+            const title = document.getElementById('type-feedback-title');
+            const detail = document.getElementById('type-feedback-detail');
+
+            if (cleanUser === cleanTarget) {
+                addXP(25);
+                playTone('correct');
+                fb.className = 'rounded-2xl p-4 text-sm space-y-1 bg-emerald-950/60 border border-emerald-500/40 text-emerald-200 animate-pop';
+                title.textContent = '🌟 Perfekt! Rechtschreibung und Groß-/Kleinschreibung stimmen!';
+                detail.textContent = `Lösung: ${target} (+25 XP)`;
+            } else if (cleanUser.toLowerCase() === cleanTarget.toLowerCase()) {
+                addXP(15);
+                playTone('correct');
+                fb.className = 'rounded-2xl p-4 text-sm space-y-1 bg-amber-950/60 border border-amber-500/40 text-amber-200';
+                title.textContent = '👍 Fast perfekt! Denke an die Großschreibung deutscher Substantive.';
+                detail.textContent = `Deine Eingabe: «${userVal}» → Lösung: «${target}» (+15 XP)`;
+            } else {
+                resetStreak();
+                playTone('wrong');
+                fb.className = 'rounded-2xl p-4 text-sm space-y-1 bg-rose-950/60 border border-rose-500/40 text-rose-200 animate-shake';
+                title.textContent = '❌ Diesmal leider nicht ganz richtig.';
+                detail.textContent = `Deine Eingabe: «${userVal}» → Lösung: «${target}»`;
+            }
+            fb.classList.remove('hidden');
+        }
+
+        function skipTypeWord() {
+            resetStreak();
+            showToast(`Die Lösung war: ${typeCurrent.de}`, '⏭️');
+            nextTypeWord();
+        }
+
+        /* ============================================================================
+           10. KEYBOARD SHORTCUTS & INIT
+           ============================================================================ */
+        document.addEventListener('keydown', (e) => {
+            if (state.currentMode === 'cards' && !document.getElementById('flashcard-area').classList.contains('hidden')) {
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    flipCard();
+                } else if (e.code === 'ArrowRight') {
+                    nextCard();
+                } else if (e.code === 'ArrowLeft') {
+                    prevCard();
+                }
+            }
+        });
+
+        // Boot app
+        window.onload = function () {
+            updateHeaderStats();
+            renderFlashcard();
+        };
+    </script>
+</body>
+</html>
